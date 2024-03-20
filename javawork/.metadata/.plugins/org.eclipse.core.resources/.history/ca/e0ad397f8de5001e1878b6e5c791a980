@@ -1,0 +1,25 @@
+package day0319;
+
+public class Ex3_FindingXY {
+
+	public static void main(String[] args)
+	{
+		int i, j;
+		int temp;
+		
+		//부르트 포스
+		for(i = 1; i <= 9; i++)
+		{
+			for(j = 1; j <= 9; j++)
+			{
+				temp = (i * 10 + j) + (j * 10 + i);
+				if(temp == 121)
+				{
+					System.out.printf("x = %d, y = %d\n", i, j);
+					System.out.printf("%d%d + %d%d = temp\n", i,j,j,i);
+				}
+			}
+		}
+	}
+
+}

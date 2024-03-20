@@ -1,0 +1,28 @@
+package day0319;
+
+import java.util.Date;
+
+public class Ex9_DateCalendar {
+
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+		//Date 클래스를 이용해서 년, 원, 일, 시, 분, 초를 얻기(jdk 1.1이후 deprecate되어
+		//calendar를 권장하나 여전히 많이 사용중
+		
+		//util로 임포트 해야함
+		Date date = new Date();
+		int year = date.getYear();
+		int month = date.getMonth();
+		int day = date.getDate();
+		int week = date.getDay();//요일 (0 : 일, 1 : 월, .... 6 : 토)
+		
+		System.out.println("현재년도 : " + year);
+		System.out.println("현재년도 : " + month);
+		System.out.println("현재년도 : " + day);
+		System.out.println("현재년도 : " + week);
+		
+		
+	}
+
+}

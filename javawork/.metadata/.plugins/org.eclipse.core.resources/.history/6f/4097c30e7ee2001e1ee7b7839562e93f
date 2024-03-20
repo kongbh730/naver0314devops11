@@ -1,0 +1,13 @@
+package day0315;
+
+public class Ex4_MainArgs 
+{
+
+	public static void main(String[] args)//args : 배열 
+	{
+		// TODO Auto-generated method stub
+		System.out.println(args[0]);
+		
+	}
+
+}

@@ -1,0 +1,41 @@
+처음에 한번만 이메일과 유저명 확인 
+git config --global user.name "kongbh730"
+git config --global user.email "kongbh730@gmail.com"
+
+해당 폴더를 git과 연결하기 위한 명령어
+git init  :  해당 폴더를 깃하고 연결하기 위해서 초기화 (.git이 생성됨)
+git branch -M main : (기본이 master 이므로 main 브랜치 생성)
+git remote add origin https://github.com/kongbh730/naver0314devops11.git
+|| 
+git remote set-url origin https://github.com/kongbh730/naver0314devops11.git
+
+git 의 README 때문에 바로  push하면 오류 발생
+먼저 pull로 가져온 후 push를 해야함.
+
+git pull origin main 
+ls로 목록 확인하기
+
+로칼 영역에 변경된 코드 저장하기
+git add .(파일 추가)
+git commit -m "first commit"
+
+로컬영역 원격으로 보내기 
+git push origin main
+git push origin +main
+
+==========================최초 설정======================
+
+이후 수정, 추가된 git에 push하는 방법
+git add .
+git commit -m "메시지, 설명"
+git push origin main
+
+git의 내용 그대로 가져오기
+1. zip파일 다운받은 후 압축 풀기
+2. 명령어로 가져오기 
+	git clone https://github.com/kongbh730/naver0314devops11.git
+
+
+===========================
+이거만 바뀌어도 전체가 다 바뀌나?
+===========================

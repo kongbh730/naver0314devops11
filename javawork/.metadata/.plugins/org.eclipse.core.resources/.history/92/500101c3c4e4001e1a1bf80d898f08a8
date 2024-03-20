@@ -1,0 +1,39 @@
+package day0318;
+
+import java.util.Scanner;
+
+public class Ex1_Munje {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		/*
+		 * 점수(score)를 입력 후 점수가 
+		 * 90이상이면 "A"
+		 * 80이상이면 "B"
+		 * 70이상이면 "C"
+		 * 60이상이면 "D"
+		 * 나머지는 "F"를 출력
+		 * 
+		 * (예)
+		 * 점수?
+		 * 89
+		 * 
+		 * 89점은 B학점입니다.
+		 */
+		
+		//1. 조건연산자를 이용해서 구하기
+		Scanner sc = new Scanner(System.in);
+		int score;
+		char grade;
+		
+		System.out.println("점수?");
+		score = sc.nextInt();
+		grade = score >= 90 ? 'A' : score >= 80 ? 'B' : score >= 70 ? 'C' : score >= 60 ? 'D' : 'F';
+		System.out.printf("\n%d점은 %c학점입니다.\n", score, grade);
+		
+		
+		
+		sc.close();
+		}
+
+}
