@@ -75,7 +75,7 @@ public class Ex9_Array2DimensionBingo {
 			}
 			else
 			{
-				System.out.println("빙고 : " + bingo + "개");
+				System.out.println("빙고 : " + bingo);
 			}
 			
 			
