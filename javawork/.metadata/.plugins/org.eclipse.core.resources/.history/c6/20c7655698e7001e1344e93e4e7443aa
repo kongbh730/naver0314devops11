@@ -18,30 +18,40 @@ public class Ex7_701Study
 		//2차원 배열에 5명씩 총 6조
 		String [][]team = new String[6][5];
 		int [] list = new int[30];
-		int i, j;
+		int i, j, temp;
+		
 		
 		//다시 풀어보기
-		Loop:
-		for(i = 0; i <list.length; i++)
+		for(i = 0; i < members.length; i++)
 		{
-			list[i] = (int)(Math.random()*30);
+			temp = (int)(Math.random() * 30);
+			Loop:
 			for(j = 0; j < i; j++)
 			{
-				if(list[j] == list[i])
+				if(temp == list[j])
 				{
 					i--;
-					continue Loop;
+					break Loop;
 				}
 			}
+			list[i] = temp;
+			team[i/5][i%5] = members[temp];	//[0~5][0~4]
 		}
-		int index = 0;
-		for(i = 0; i < team.length; i++)
-		{
-			for(j = 0; j < team[0].length; j++)
-			{
-				team[i][j] = members[list[index++]];
-			}
-		}
+//		for(i = 0; i < members.length; i++)
+//		{
+//			//중복없는 난수 0부터 29까지 30개
+//			temp = (int)(Math.random() * 30);
+//			list[i] = temp;
+//			for(j = 0; j < i; j++)
+//			{
+//				if(temp == list[j])
+//				{
+//					i--;
+//					break;
+//				}
+//			}
+//			team[i/5][i%5] = members[temp];
+//		}
 		
 		for(i = 0; i < team.length; i++)
 		{
@@ -55,30 +65,30 @@ public class Ex7_701Study
 
 		//====================================================
 		//강사님 풀이
-//		int i, j;
-//		int []rnd = new int[30];
-//		String [][]team = new String[6][5];
-//		Loop:
-//			for(i = 0; i < members.length; i++)
-//			{
-//				rnd[i] = (int)(Math.random()*30);
-//				for(j = 0; j < i; j++)
-//				{
-//					if(rnd[i] == rnd[j])
-//					{
-//						i--;
-//						continue Loop;
-//					}
-//				}
-//			}
-//		int index = 0;
-//		for(i = 0; i < team.length;i++)
-//		{
-//			for(j = 0; j < team[i].length; j++)
-//			{
-//				team[i][j] = members[rnd[index++]];
-//			}
-//		}
+		//int i, j;
+		int []rnd = new int[30];
+		//String [][]team = new String[6][5];
+		Loop:
+			for(i = 0; i < members.length; i++)
+			{
+				rnd[i] = (int)(Math.random()*30);
+				for(j = 0; j < i; j++)
+				{
+					if(rnd[i] == rnd[j])
+					{
+						i--;
+						continue Loop;
+					}
+				}
+			}
+		int index = 0;
+		for(i = 0; i < team.length;i++)
+		{
+			for(j = 0; j < team[i].length; j++)
+			{
+				team[i][j] = members[rnd[index++]];
+			}
+		}
 		//====================================================
 		
 		System.out.println("\t\t현재 날짜");
