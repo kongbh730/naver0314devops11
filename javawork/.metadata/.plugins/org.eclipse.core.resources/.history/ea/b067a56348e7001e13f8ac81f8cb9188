@@ -18,11 +18,6 @@ public class Ex9_Array2DimensionBingo {
 			bingo = 0;
 			String ans = sc.nextLine();
 			
-			if(ans.equalsIgnoreCase("X"))
-			{
-				System.out.println("빙고게임을 종료합니다.");
-				break;
-			}
 			//2차원 배열에 1~3의 값을 임의로 발생
 			for(int i = 0; i < arr.length; i++)
 			{
@@ -41,45 +36,20 @@ public class Ex9_Array2DimensionBingo {
 				}
 				System.out.println("\n");
 			}
-			
 			//빙고 갯수나 꽝 출력
-			//가로 빙고 개수
-			for(int i = 0; i < arr.length; i++)
-			{
-				if(arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2])
-				{
-					bingo++;
-				}
-			}
+			//빙고 갯수가 몇갠지 어케 알아
 			
-			//세로 빙고 개수
-			for(int i = 0; i < arr[0].length; i++)
-			{
-				if(arr[0][i] == arr[1][i] && arr[1][i] == arr[2][i])
-				{
-					bingo++;
-				}
-			}
-			
-			//대각선 빙고 개수
-			if(arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2])
-			{
-				bingo++;
-			}
-			if(arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0])
-			{
-				bingo++;
-			}
 			
 			System.out.println("=".repeat(12));
-			if(bingo == 0)
+			
+				
+			if(ans.equalsIgnoreCase("X"))
 			{
-				System.out.println("꽝!");
+				System.out.println("빙고게임을 종료합니다.");
+				break;
 			}
-			else
-			{
-				System.out.println("빙고 : " + bingo);
-			}
+			
+			
 			
 			
 		}

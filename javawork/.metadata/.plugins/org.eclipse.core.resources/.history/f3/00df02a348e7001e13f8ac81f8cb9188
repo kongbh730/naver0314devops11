@@ -41,7 +41,6 @@ public class Ex9_Array2DimensionBingo {
 				}
 				System.out.println("\n");
 			}
-			
 			//빙고 갯수나 꽝 출력
 			//가로 빙고 개수
 			for(int i = 0; i < arr.length; i++)
@@ -53,7 +52,7 @@ public class Ex9_Array2DimensionBingo {
 			}
 			
 			//세로 빙고 개수
-			for(int i = 0; i < arr[0].length; i++)
+			for(int i = 0; i < arr[i].length; i++)
 			{
 				if(arr[0][i] == arr[1][i] && arr[1][i] == arr[2][i])
 				{
