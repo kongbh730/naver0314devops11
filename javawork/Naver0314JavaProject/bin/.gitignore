@@ -143,4 +143,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+<<<<<<< HEAD
 /day0321/
+=======
+>>>>>>> 0c5156c78674a1ba973122b76ac37c7f7ef02027
