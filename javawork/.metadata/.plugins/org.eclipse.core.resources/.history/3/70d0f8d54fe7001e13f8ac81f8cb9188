@@ -67,8 +67,8 @@ public class Ex7_701Study
 		System.out.println("\t\t현재 날짜");
 		Date date = new Date();
 		//SimpleDateFormat sdf1 = new SimpleDateFormat("\tyyyy-MM-dd HH:mm:ss EEE");//EEE는 화, EEEE는 화요일
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy년  MM월  dd일");
-		System.out.println(sdf1.format(date) + "\t 701 스터디 팀");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("\tyyyy년  MM월  dd일");
+		System.out.println(sdf1.format(date) + "701스터디 팀");
 
 		for(i = 0; i < team.length; i++)
 		{
