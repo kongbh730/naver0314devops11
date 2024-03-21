@@ -1,0 +1,56 @@
+package day0321;
+
+import java.util.Scanner;
+
+public class Book199_9 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int option;
+		int student_num = 0;
+		int []scores = new int[student_num];
+		int i, j;
+		
+		while(true)
+		{
+			System.out.println("-".repeat(50));
+			System.out.println(" 1.학생수 | 2.점수입력 | 3.점수리스트 | 4.분석 | 5.종료");
+			System.out.println("-".repeat(50));
+			
+			System.out.print("선택 > ");
+			option = Integer.parseInt(sc.nextLine());
+			switch (option) 
+			{
+			case 1:
+				System.out.print("학생수 > ");
+				student_num = Integer.parseInt(sc.nextLine());
+				scores = new int[student_num];
+				break;
+			case 2: 
+				for(i = 0; i < scores.length; i++)
+				{
+					System.out.printf("scores[%d] > ", i);
+					scores[i] = Integer.parseInt(sc.nextLine());
+				}
+				break;
+			case 3: 	
+				for(i = 0; i < scores.length; i++)
+				{
+					System.out.printf("scores[%d] : %d\n", i, scores[i]);
+				}
+				break;
+			case 4: 			
+				System.out.println("최고점수 : ");
+				System.out.println("평균점수 : ");
+				break;
+			default:
+			}
+			if(option == 5)
+			{
+				break;
+			}
+		}
+		System.out.println("프로그램 종료");
+		
+		sc.close();
+	}
+}

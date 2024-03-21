@@ -20,12 +20,10 @@ public class Ex7_701Study
 		int [] list = new int[30];
 		int i, j, temp;
 		
-		
-		//다시 풀어보기
+		Loop:
 		for(i = 0; i < members.length; i++)
 		{
 			temp = (int)(Math.random() * 30);
-			Loop:
 			for(j = 0; j < i; j++)
 			{
 				if(temp == list[j])

@@ -1,0 +1,43 @@
+package day0321;
+
+public class Ex10_Array2Dimension {
+	public static void main(String[] args) {
+		
+		//자바는 각 행의 열 갯수를 각각 다르게 줄 수 있다.
+		int arr[][];
+		arr = new int[][] {
+				{3, 4, 5},			//0번행
+				{10, 20, 30, 40},	//1번행
+				{1, 5, 7, 9, 11}	//2번행
+		};
+		
+		System.out.println("행의 갯수 : " + arr.length);
+		System.out.println("0행의 열 갯수 : " + arr[0].length);
+		System.out.println("1행의 열 갯수 : " + arr[1].length);
+		System.out.println("2행의 열 갯수 : " + arr[2].length);
+		
+		int i, j;
+		for(i = 0; i < arr.length; i++)
+		{
+			for(j = 0; j < arr[i].length; j++)
+			{
+				System.out.print(arr[i][j] + "\t");
+			}
+			System.out.println();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}

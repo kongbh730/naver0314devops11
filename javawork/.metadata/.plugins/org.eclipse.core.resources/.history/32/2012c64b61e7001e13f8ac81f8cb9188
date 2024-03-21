@@ -21,7 +21,6 @@ public class Ex7_701Study
 		int i, j, temp;
 		
 		
-		//다시 풀어보기
 		for(i = 0; i < members.length; i++)
 		{
 			temp = (int)(Math.random() * 30);

@@ -20,38 +20,21 @@ public class Ex7_701Study
 		int [] list = new int[30];
 		int i, j, temp;
 		
-		
-		//다시 풀어보기
 		for(i = 0; i < members.length; i++)
 		{
+			//중복없는 난수 0부터 29까지 30개
 			temp = (int)(Math.random() * 30);
-			Loop:
+			list[i] = temp;
 			for(j = 0; j < i; j++)
 			{
 				if(temp == list[j])
 				{
 					i--;
-					break Loop;
+					break;
 				}
 			}
-			list[i] = temp;
-			team[i/5][i%5] = members[temp];	//[0~5][0~4]
+			team[i/5][i%5] = members[temp];
 		}
-//		for(i = 0; i < members.length; i++)
-//		{
-//			//중복없는 난수 0부터 29까지 30개
-//			temp = (int)(Math.random() * 30);
-//			list[i] = temp;
-//			for(j = 0; j < i; j++)
-//			{
-//				if(temp == list[j])
-//				{
-//					i--;
-//					break;
-//				}
-//			}
-//			team[i/5][i%5] = members[temp];
-//		}
 		
 		for(i = 0; i < team.length; i++)
 		{
@@ -61,7 +44,6 @@ public class Ex7_701Study
 			}
 			System.out.println();
 		}
-		System.out.println();
 
 		//====================================================
 		//강사님 풀이

@@ -15,28 +15,11 @@ public class Ex7_701Study
 				"정환용","최시현","허승필","황재웅", "꽝!!"
 		};
 		
-		//2차원 배열에 5명씩 총 6조
-		String [][]team = new String[6][5];
-		int [] list = new int[30];
-		int i, j, temp;
-		
-		
-		//다시 풀어보기
-		for(i = 0; i < members.length; i++)
-		{
-			temp = (int)(Math.random() * 30);
-			Loop:
-			for(j = 0; j < i; j++)
-			{
-				if(temp == list[j])
-				{
-					i--;
-					break Loop;
-				}
-			}
-			list[i] = temp;
-			team[i/5][i%5] = members[temp];	//[0~5][0~4]
-		}
+//		//2차원 배열에 5명씩 총 6조
+//		String [][]team = new String[6][5];
+//		int [] list = new int[30];
+//		int i, j, temp;
+//		
 //		for(i = 0; i < members.length; i++)
 //		{
 //			//중복없는 난수 0부터 29까지 30개
@@ -49,25 +32,15 @@ public class Ex7_701Study
 //					i--;
 //					break;
 //				}
+//				team[i/5][i%5] = members[temp];
 //			}
-//			team[i/5][i%5] = members[temp];
 //		}
 		
-		for(i = 0; i < team.length; i++)
-		{
-			for(j = 0; j < team[0].length; j++)
-			{
-				System.out.print(team[i][j] + "\t");
-			}
-			System.out.println();
-		}
-		System.out.println();
 
 		//====================================================
-		//강사님 풀이
-		//int i, j;
+		int i, j;
 		int []rnd = new int[30];
-		//String [][]team = new String[6][5];
+		String [][]team = new String[6][5];
 		Loop:
 			for(i = 0; i < members.length; i++)
 			{
