@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="start"/>
+		<item key="selection" value="charAt"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="charAt"/>
 			<item value="start"/>
 			<item value="&#x09;&#x09;for(i = 1; i &lt;= 9; i++)"/>
 			<item value="System.out.println(&quot;메세지를 입력하세요&quot;);"/>
