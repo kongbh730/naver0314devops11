@@ -5,7 +5,6 @@ public class Sawon
 	private String name;
 	private int gibon;
 	private int sudang;
-	
 
 	//메서드가 public이면 패키지 외부에서 접근이 가능
 	//setter method

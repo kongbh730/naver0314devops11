@@ -5,6 +5,9 @@ import java.util.Scanner;
 //call By Reference
 public class Ex7_ClassSawonArray
 {
+	//생성이 필요하다? 생성자?
+
+
 	//입력 메서드
 	static public void inputSawonArray(Sawon []sa)//객체 배열
 	{
