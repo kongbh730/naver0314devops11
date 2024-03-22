@@ -1,0 +1,14 @@
+package day0322;
+
+public class Ex5_CallBy {
+	public static void changeNum(int n)
+	{
+		n = 10;
+	}
+	public static void main(String[] args)
+	{
+		int n = 50;
+		changeNum (n);//값만 전달//call by value;
+		System.out.println("n = " + n);//50
+	}
+}
