@@ -49,30 +49,28 @@ public class Book199_9 {
 				case 4: 			
 					max = 0;
 					avg = 0;
-					sum = 0;
 					for(i = 0; i < scores.length; i++)
 					{
 						if(max < scores[i])
 						{
 							max = scores[i];
 						}
-						sum += scores[i];
+						sum +=(double)scores[i];
 					}
 					avg = (double)sum / scores.length;
 					//최고점수
 					System.out.println("최고점수 : " + max);
 					//평균점수
-					//System.out.println("평균점수 : " + avg);
-					System.out.printf("평균 : %5.2f\n", avg);
+					System.out.println("평균점수 : " + avg);
 					break;
 				default:
 					//break;
-					break Exit;//강사님 추가//이렇게 하면 5가 아니어도 종료됨...
+					break Exit;//강사님 추가
 				}
-//				if(option == 5)
-//				{
-//					break;
-//				}
+				//			if(option == 5)
+				//			{
+				//				break;
+				//			}
 			}
 		System.out.println("프로그램 종료");
 

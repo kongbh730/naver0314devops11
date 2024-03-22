@@ -22,7 +22,46 @@ public class Ex7_701Study
 		
 		
 		//다시 풀어보기
-		//어제 푼게 날라감...
+		for(i = 0; i < members.length; i++)
+		{
+			temp = (int)(Math.random() * 30);
+			Loop:
+			for(j = 0; j < i; j++)
+			{
+				if(temp == list[j])
+				{
+					i--;
+					break Loop;
+				}
+			}
+			list[i] = temp;
+			team[i/5][i%5] = members[temp];	//[0~5][0~4]
+		}
+//		for(i = 0; i < members.length; i++)
+//		{
+//			//중복없는 난수 0부터 29까지 30개
+//			temp = (int)(Math.random() * 30);
+//			list[i] = temp;
+//			for(j = 0; j < i; j++)
+//			{
+//				if(temp == list[j])
+//				{
+//					i--;
+//					break;
+//				}
+//			}
+//			team[i/5][i%5] = members[temp];
+//		}
+		
+		for(i = 0; i < team.length; i++)
+		{
+			for(j = 0; j < team[0].length; j++)
+			{
+				System.out.print(team[i][j] + "\t");
+			}
+			System.out.println();
+		}
+		System.out.println();
 
 		//====================================================
 		//강사님 풀이

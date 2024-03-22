@@ -62,8 +62,7 @@ public class Book199_9 {
 					//최고점수
 					System.out.println("최고점수 : " + max);
 					//평균점수
-					//System.out.println("평균점수 : " + avg);
-					System.out.printf("평균 : %5.2f\n", avg);
+					System.out.println("평균점수 : " + avg);
 					break;
 				default:
 					//break;
