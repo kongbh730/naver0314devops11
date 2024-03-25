@@ -5,7 +5,7 @@ public class Ex3_ClassEmployee
 	public static void showTitle()
 	{
 		System.out.println("\t\t\t** 사원정보 **");
-		System.out.println("번호\t이름\t직급\t나이\t기본급\t수당\t실수령액");
+		System.out.println("번호\t이름\t직급\t나이\t기본급\t수당\t월급");
 		System.out.println("=".repeat(55));
 	}
 
