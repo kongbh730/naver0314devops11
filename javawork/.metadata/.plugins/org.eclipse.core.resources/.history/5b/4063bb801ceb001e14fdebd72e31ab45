@@ -50,14 +50,13 @@ class MyFrame extends JFrame
 		{
 			// TODO Auto-generated method stub
 			System.out.println("윈도우 아이콘");
-			//최소화하기
 		}
 
 		@Override
 		public void windowDeiconified(WindowEvent e) 
 		{
 			// TODO Auto-generated method stub
-			System.out.println("윈도우 디아이콘");
+			
 		}
 
 		@Override

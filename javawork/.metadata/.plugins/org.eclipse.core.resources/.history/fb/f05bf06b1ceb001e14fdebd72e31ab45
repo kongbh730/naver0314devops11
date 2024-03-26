@@ -26,10 +26,9 @@ class MyFrame extends JFrame
 		public void windowOpened(WindowEvent e) 
 		{
 			// TODO Auto-generated method stub
-			System.out.println("윈도우 열기");
+			
 		}
 
-		//x버튼 클릭시 호출되는 메서드
 		@Override
 		public void windowClosing(WindowEvent e) 
 		{
@@ -49,15 +48,14 @@ class MyFrame extends JFrame
 		public void windowIconified(WindowEvent e) 
 		{
 			// TODO Auto-generated method stub
-			System.out.println("윈도우 아이콘");
-			//최소화하기
+			
 		}
 
 		@Override
 		public void windowDeiconified(WindowEvent e) 
 		{
 			// TODO Auto-generated method stub
-			System.out.println("윈도우 디아이콘");
+			
 		}
 
 		@Override
