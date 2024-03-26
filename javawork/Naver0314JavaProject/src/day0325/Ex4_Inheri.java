@@ -22,7 +22,7 @@ class BB extends AA
 //	}
 	BB(String msg)
 	{
-		super(msg);
+		super(msg);//만약 AA가 디폴트 생성자가 없다면, AA의 매개변수 생성자와 동일하게 호출해야 한다.
 		System.out.println(msg + "를 받는 생성자(BB)");
 	}
 }
