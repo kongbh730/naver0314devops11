@@ -37,8 +37,7 @@ class MyPlay implements PlayInter
 	}
 }
 
-public class Ex7_Interface
-{
+public class Ex7_Interface {
 	public static void study(StudyInter s)
 	{
 		s.javaStudy();
