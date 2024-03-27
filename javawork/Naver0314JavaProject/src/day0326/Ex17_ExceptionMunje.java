@@ -17,7 +17,6 @@ import java.text.NumberFormat;
  * ....
  */
 
-
 public class Ex17_ExceptionMunje 
 {
 	static final String SCORE = "c:/naver0314/score.txt";

@@ -9,7 +9,7 @@ import java.util.Vector;
  * 파일저장 or 데이터베이스
  */
 
-public class Ex7_Vector 
+public class Ex7_Vector
 {
 	static Scanner sc = new Scanner(System.in);
 	List<String> list = new Vector<String>();
@@ -61,7 +61,24 @@ public class Ex7_Vector
 	
 	public void searchPerson()
 	{
-		
+		//이름을 입력하면 "강호동님은 2번째 (1번 인덱스)에 있습니다." || "강호동님은 멤버명단에 없습니다."
+		String name = sc.nextLine();
+		boolean find = false;
+
+		System.out.println("검색할 이름을 입력해주세요");
+		for(int i = 0; i < list.size(); i++)
+		{
+			if(name.equals(list.get(i)))//찾았다면
+			{
+				find = true;
+				System.out.println(name + "님은 " + (i + 1) + "번째에 있습니다.");
+				break;
+			}
+		}
+		if(find == false)//못 찾았다면
+		{
+			System.out.println(name + "님은 멤버명단에 없습니다.");
+		}
 	}
 	
 	public static void main(String[] args) 
