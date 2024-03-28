@@ -97,23 +97,26 @@ public class StudentDto
 	//나머지는 * 반환하는 메서드 getGrade()
 	public String getGrade()
 	{
+		int star;
 		double grade = getAvg();
 		
 		if(grade >= 90)
 		{
-			return "*****";
+			star = 5;
 		}
 		else if(grade >= 80)
 		{
-			return "****";
+			star = 4;
 		}
 		else if(grade >= 70)
 		{
-			return "***";
+			star = 3;
 		}
 		else
 		{
-			return "*";
+			star = 1;
 		}
+		
+		return "*".repeat(star);
 	}
 }

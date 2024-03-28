@@ -5,29 +5,25 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
 /*
- * 1. 학생정보 추가 : 이름 나이 3과목 점수 입력
- * 2. 학생정보 삭제 : 이름으로 찾아서 삭제 : 없으면 메세지 출력
- * 3. 전체 출력 : 번호, 이름, Java, Spring, Html, 총점, 평균, 등급 출력
- * 4. 평균으로 검색 : 평균값을 입력하면 그 평균값 이상의 학생들만 출력//90입력하면 90이상만 출력
- * 5. 이름으로 검색 : 입력한 이름을 포함하고 있으면 출력 : (contains)는 true, false로 반환됨
- * 6. 저장 후 종료
+ * 강사님 풀이참고
  */
 
-public class Ex9_VectorMunje 
+public class Ex9_VectorMunje2
 {
 	static Scanner sc = new Scanner(System.in);
-	Vector<StudentDto> info = new Vector<>();//StudentDto객체를 담을 벡터
+	List<StudentDto> info = new Vector<>();//StudentDto객체를 담을 벡터
 	static final String FILENAME = "c:/naver0314/studentsInfo.txt";
 
 	//디폴트 생성자 //생성과 동시에 파일을 연다.
-	public Ex9_VectorMunje() 
+	public Ex9_VectorMunje2() 
 	{
 		//파일오픈
-		readFile();
+		readFile();//처음 객체 생성시 무조건 파일 읽어서 list에 담기
 	}
 
 	public int getMenu()
@@ -43,7 +39,10 @@ public class Ex9_VectorMunje
 		} 
 		catch (NumberFormatException e) //숫자만 입력받아야 하는데 문자열로 입력된 경우 예외
 		{
-			System.out.println("숫자로 입력하세요");
+			//System.out.println("숫자로 입력하세요");
+
+			//만약 문자가 입력되면 무조건 전체출력을 해보기
+			menu = 3;
 		}
 
 		return menu;
@@ -52,57 +51,63 @@ public class Ex9_VectorMunje
 	//파일 읽어오기
 	public void readFile()
 	{
-		FileReader fr = null;
-		BufferedReader br = null;
+		FileReader fr = null;//파일 읽기
+		BufferedReader br = null;//줄단위로 읽기
 
 		try 
 		{
 			fr = new FileReader(FILENAME);
 			br = new BufferedReader(fr);
-
+			//읽어올 학생정보가 존재할 때 
 			while(true)
 			{
-				String str = br.readLine();//한 줄씩 읽기
+				String str = br.readLine();//한 줄씩 읽기//readLine에서 예외 발생 가능 => catch
 				if(str == null)//더 이상 읽을 문자열이 없을 경우
 				{
 					break;
 				}
 				//한줄씩 읽어오기
-				String []a = str.split(",");
+				String []data = str.split(",");
 				StudentDto dto = new StudentDto();
-				dto.setName(a[0]);
-				dto.setAge(Integer.parseInt(a[1]));
-				dto.setJava(Integer.parseInt(a[2]));
-				dto.setSpring(Integer.parseInt(a[3]));
-				dto.setHtml(Integer.parseInt(a[4]));
+				dto.setName(data[0]);
+				dto.setAge(Integer.parseInt(data[1]));
+				dto.setJava(Integer.parseInt(data[2]));
+				dto.setSpring(Integer.parseInt(data[3]));
+				dto.setHtml(Integer.parseInt(data[4]));
+
+				//info에 추가 //static vector
 				info.add(dto);
 			}
 			System.out.println("총 " + info.size() + "명의 정보를 읽어왔어요!!");
 		} 
 		catch(FileNotFoundException e)//파일이 없을 경우
 		{
+			System.out.println("읽어올 학생 정보가 없습니다.");
 			System.out.println("존재하지 않는 파일 혹은 파일경로입니다.");
-		}
-		catch (IOException e) //파일은 있는데 읽어들이는데 예외발생
+		} 
+		catch (IOException e) 
 		{
 			e.printStackTrace();
 		}
 		finally
 		{
 			//어쨌건 닫을거임
+			//if로 처리하던가, try_catch하던가
 			try 
 			{
 				br.close();
 				fr.close();
 			} 
-			catch (NullPointerException e)//열리지 않아서 닫을것도 없음
+			catch (NullPointerException | IOException e)//열리지 않아서 닫을것도 없음
 			{
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
+			/*
 			catch (IOException e)//닫기전에 예외 발생 
 			{
 				e.printStackTrace();
 			}
+			 */
 		}
 	}
 
@@ -150,18 +155,51 @@ public class Ex9_VectorMunje
 		int spring;
 		int html;
 
-		System.out.print("이름을 입력하세요 > ");
+		System.out.print("학생 이름을 입력하세요 > ");
 		name = sc.nextLine();
 		System.out.print("나이를 입력하세요 > ");
-		age = Integer.parseInt(sc.nextLine());
+		try 
+		{
+			age = Integer.parseInt(sc.nextLine());
+		} 
+		catch (NumberFormatException e) 
+		{
+			//만약 문자가 입력시 무조건 나이는 0으로 주기
+			age = 0;
+		}
+
 		System.out.print("java 성적을 입력하세요 > ");
-		java = Integer.parseInt(sc.nextLine());
+		try 
+		{
+			java = Integer.parseInt(sc.nextLine());
+		} 
+		catch (NumberFormatException e) 
+		{
+			//만약 문자가 입력시 무조건 나이는 0으로 주기
+			java = 0;
+		}
 		System.out.print("spring 성적을 입력하세요 > ");
-		spring = Integer.parseInt(sc.nextLine());
+		try 
+		{
+			spring = Integer.parseInt(sc.nextLine());
+		} 
+		catch (NumberFormatException e) 
+		{
+			//만약 문자가 입력시 무조건 나이는 0으로 주기
+			spring = 0;
+		}
 		System.out.print("html 성적을 입력하세요 > ");
-		html = Integer.parseInt(sc.nextLine());
+		try 
+		{
+			html = Integer.parseInt(sc.nextLine());
+		} 
+		catch (NumberFormatException e) 
+		{
+			//만약 문자가 입력시 무조건 나이는 0으로 주기
+			html = 0;
+		}
 		//입력된 정보를 바탕으로 새로운 객체를 생성
-		StudentDto dto = new StudentDto(name, age, java, spring, html);//
+		StudentDto dto = new StudentDto(name, age, java, spring, html);
 		info.add(dto);
 		System.out.println(info.size() + "번째 학생의 정보를 추가하였습니다.");
 		System.out.println("=".repeat(80));
@@ -199,7 +237,7 @@ public class Ex9_VectorMunje
 	}
 
 	//전체출력
-	public void printAllStudent()
+	public void printAllStudent()//writeStudent()
 	{
 		int i;
 
@@ -209,18 +247,18 @@ public class Ex9_VectorMunje
 		for(i = 0; i < info.size(); i++)
 		{
 			StudentDto dto = info.get(i);
-			System.out.printf("%d\t%s\t%d\t%d\t%d\t%d\t%d\t%.2f\t%s\n", 
-					(i + 1), dto.getName(), dto.getAge(), dto.getJava(), 
-					dto.getSpring(), dto.getHtml(), dto.getTotal(), dto.getAvg(), dto.getGrade());
-			//			System.out.println((i + 1) + "\t" + 
-			//					dto.getName() + "\t" +
-			//					dto.getAge() + "\t" +
-			//					dto.getJava() + "\t"+
-			//					dto.getSpring() + "\t" + 
-			//					dto.getHtml() + "\t" + 
-			//					dto.getTotal() + "\t" + 
-			//					dto.getAvg() + "\t" +
-			//					dto.getGrade());
+//			System.out.printf("%d\t%s\t%d\t%d\t%d\t%d\t%d\t%.2f\t%s\n", 
+//					(i + 1), dto.getName(), dto.getAge(), dto.getJava(), 
+//					dto.getSpring(), dto.getHtml(), dto.getTotal(), dto.getAvg(), dto.getGrade());
+			System.out.println((i + 1) + "\t" + 
+					dto.getName() + "\t" +
+					dto.getAge() + "\t" +
+					dto.getJava() + "\t"+
+					dto.getSpring() + "\t" + 
+					dto.getHtml() + "\t" + 
+					dto.getTotal() + "\t" + 
+					dto.getAvg() + "\t" +
+					dto.getGrade());
 		}
 		System.out.println("=".repeat(80));
 
@@ -293,39 +331,37 @@ public class Ex9_VectorMunje
 
 	public static void main(String[] args) 
 	{
-		Ex9_VectorMunje ex = new Ex9_VectorMunje();
+		Ex9_VectorMunje2 ex = new Ex9_VectorMunje2();
 		int selection;
 
-		Loop:
-			while(true)
+		while(true)
+		{
+			selection = ex.getMenu();
+			switch(selection)
 			{
-				selection = ex.getMenu();
-				switch(selection)
-				{
-				case 1: //학생정보 추가
-					ex.addStudent();
-					break;
-				case 2: //학생정보 삭제
-					ex.deleteStudent();
-					break;
-				case 3: //전체 출력
-					ex.printAllStudent();
-					break;
-				case 4: //평균으로 검색
-					ex.searchWithAvg();
-					break;
-				case 5://이름으로 검색
-					ex.searchWithName();
-					break;
-				case 6://저장 후 종료
-					ex.saveFile();
-					break Loop;
-				default:
-					System.out.println("없는 메뉴입니다.");
-				}
+			case 1: //학생정보 추가
+				ex.addStudent();
+				break;
+			case 2: //학생정보 삭제
+				ex.deleteStudent();
+				break;
+			case 3: //전체 출력
+				ex.printAllStudent();
+				break;
+			case 4: //평균으로 검색
+				ex.searchWithAvg();
+				break;
+			case 5://이름으로 검색
+				ex.searchWithName();
+				break;
+			case 6://저장 후 종료
+				ex.saveFile();
+				sc.close();
+				System.out.println("프로그램을 저장 후 종료합니다.");
+				System.exit(0);
+			default:
+				System.out.println("없는 메뉴입니다.");
 			}
-
-		System.out.println("프로그램을 저장 후 종료합니다.");
-		sc.close();
+		}
 	}
 }

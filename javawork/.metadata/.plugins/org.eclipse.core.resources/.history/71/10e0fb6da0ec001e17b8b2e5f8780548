@@ -5,29 +5,25 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
 /*
- * 1. 학생정보 추가 : 이름 나이 3과목 점수 입력
- * 2. 학생정보 삭제 : 이름으로 찾아서 삭제 : 없으면 메세지 출력
- * 3. 전체 출력 : 번호, 이름, Java, Spring, Html, 총점, 평균, 등급 출력
- * 4. 평균으로 검색 : 평균값을 입력하면 그 평균값 이상의 학생들만 출력//90입력하면 90이상만 출력
- * 5. 이름으로 검색 : 입력한 이름을 포함하고 있으면 출력 : (contains)는 true, false로 반환됨
- * 6. 저장 후 종료
+ * 강사님 풀이참고
  */
 
-public class Ex9_VectorMunje 
+public class Ex9_VectorMunje2
 {
 	static Scanner sc = new Scanner(System.in);
-	Vector<StudentDto> info = new Vector<>();//StudentDto객체를 담을 벡터
+	List<StudentDto> info = new Vector<>();//StudentDto객체를 담을 벡터
 	static final String FILENAME = "c:/naver0314/studentsInfo.txt";
 
 	//디폴트 생성자 //생성과 동시에 파일을 연다.
-	public Ex9_VectorMunje() 
+	public Ex9_VectorMunje2() 
 	{
 		//파일오픈
-		readFile();
+		readFile();//처음 객체 생성시 무조건 파일 읽어서 list에 담기
 	}
 
 	public int getMenu()
@@ -43,7 +39,10 @@ public class Ex9_VectorMunje
 		} 
 		catch (NumberFormatException e) //숫자만 입력받아야 하는데 문자열로 입력된 경우 예외
 		{
-			System.out.println("숫자로 입력하세요");
+			//System.out.println("숫자로 입력하세요");
+
+			//만약 문자가 입력되면 무조건 전체출력을 해보기
+			menu = 3;
 		}
 
 		return menu;
@@ -212,15 +211,6 @@ public class Ex9_VectorMunje
 			System.out.printf("%d\t%s\t%d\t%d\t%d\t%d\t%d\t%.2f\t%s\n", 
 					(i + 1), dto.getName(), dto.getAge(), dto.getJava(), 
 					dto.getSpring(), dto.getHtml(), dto.getTotal(), dto.getAvg(), dto.getGrade());
-			//			System.out.println((i + 1) + "\t" + 
-			//					dto.getName() + "\t" +
-			//					dto.getAge() + "\t" +
-			//					dto.getJava() + "\t"+
-			//					dto.getSpring() + "\t" + 
-			//					dto.getHtml() + "\t" + 
-			//					dto.getTotal() + "\t" + 
-			//					dto.getAvg() + "\t" +
-			//					dto.getGrade());
 		}
 		System.out.println("=".repeat(80));
 
@@ -293,39 +283,37 @@ public class Ex9_VectorMunje
 
 	public static void main(String[] args) 
 	{
-		Ex9_VectorMunje ex = new Ex9_VectorMunje();
+		Ex9_VectorMunje2 ex = new Ex9_VectorMunje2();
 		int selection;
 
-		Loop:
-			while(true)
+		while(true)
+		{
+			selection = ex.getMenu();
+			switch(selection)
 			{
-				selection = ex.getMenu();
-				switch(selection)
-				{
-				case 1: //학생정보 추가
-					ex.addStudent();
-					break;
-				case 2: //학생정보 삭제
-					ex.deleteStudent();
-					break;
-				case 3: //전체 출력
-					ex.printAllStudent();
-					break;
-				case 4: //평균으로 검색
-					ex.searchWithAvg();
-					break;
-				case 5://이름으로 검색
-					ex.searchWithName();
-					break;
-				case 6://저장 후 종료
-					ex.saveFile();
-					break Loop;
-				default:
-					System.out.println("없는 메뉴입니다.");
-				}
+			case 1: //학생정보 추가
+				ex.addStudent();
+				break;
+			case 2: //학생정보 삭제
+				ex.deleteStudent();
+				break;
+			case 3: //전체 출력
+				ex.printAllStudent();
+				break;
+			case 4: //평균으로 검색
+				ex.searchWithAvg();
+				break;
+			case 5://이름으로 검색
+				ex.searchWithName();
+				break;
+			case 6://저장 후 종료
+				ex.saveFile();
+				sc.close();
+				System.out.println("프로그램을 저장 후 종료합니다.");
+				System.exit(0);
+			default:
+				System.out.println("없는 메뉴입니다.");
 			}
-
-		System.out.println("프로그램을 저장 후 종료합니다.");
-		sc.close();
+		}
 	}
 }

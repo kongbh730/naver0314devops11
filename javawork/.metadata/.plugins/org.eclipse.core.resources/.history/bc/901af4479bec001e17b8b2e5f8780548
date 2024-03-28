@@ -34,7 +34,7 @@ public class Ex9_VectorMunje
 	{
 		int menu = 0;
 		System.out.println("1. 학생정보 추가\n2. 학생정보 삭제\n3. 전체 출력\n4. 평균으로 검색\n5. 이름으로 검색\n6. 저장 후 종료");
-		System.out.println("=".repeat(80));
+		System.out.println("=".repeat(60));
 		System.out.print("메뉴 입력 > ");
 
 		try 
