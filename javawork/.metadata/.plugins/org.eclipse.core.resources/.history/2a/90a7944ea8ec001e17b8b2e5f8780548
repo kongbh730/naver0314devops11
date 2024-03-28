@@ -1,0 +1,29 @@
+package day0328;
+
+class GenericType<T>
+{
+	T []v;
+	
+	public void set(T[] n)//T[]를 받아서
+	{
+		v = n;
+	}
+	
+	public void print()
+	{
+		for(T s:v)
+		{
+			System.out.print(s + "  ");
+		}
+		System.out.println();
+	}
+}
+
+public class Ex1_Type {
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}

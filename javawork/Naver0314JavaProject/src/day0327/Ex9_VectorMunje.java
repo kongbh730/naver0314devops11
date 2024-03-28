@@ -175,12 +175,14 @@ public class Ex9_VectorMunje
 		boolean f = false;
 		System.out.print("삭제할 학생의 이름을 입력해주세요 > ");
 		String name = sc.nextLine();
+		
 		for(int i = 0; i < info.size(); i++)
 		{
 			StudentDto dto = info.get(i);
 			if(dto.getName().equals(name))
 			{
 				f = true;
+				//삭제
 				info.remove(i);
 				break;
 			}

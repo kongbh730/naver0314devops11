@@ -136,14 +136,18 @@ public class Ex9_VectorMunje2
 		}
 		finally
 		{
-			try
+			if(fw != null)
 			{
-				fw.close();
+				try 
+				{
+					fw.close();
+				} 
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
 			}
-			catch(IOException | NullPointerException e)
-			{
-				e.printStackTrace();
-			}
+			
 		}
 	}
 
@@ -214,6 +218,8 @@ public class Ex9_VectorMunje2
 		boolean f = false;
 		System.out.print("삭제할 학생의 이름을 입력해주세요 > ");
 		String name = sc.nextLine();
+		
+		//한명 이상을 삭제할 경우 size가 바뀌기 때문에 while 또는 마지막부터 인덱스부터 시작해야 한다.
 		for(int i = 0; i < info.size(); i++)
 		{
 			StudentDto dto = info.get(i);
@@ -278,20 +284,34 @@ public class Ex9_VectorMunje2
 		boolean f = false;
 
 		System.out.print("평균점수를 입력하세요 > ");
-		double avg = Integer.parseInt(sc.nextLine());
+		double avg = Double.parseDouble(sc.nextLine());
+		
 		System.out.println(avg + "점 이상인 멤버 명단 출력");
 		System.out.println("번호\t이름\t나이\tjava\tspring\thtml\t총점\t평균\t등급");
 		System.out.println("=".repeat(80));
+		
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(1);//소숫점 아래 1자리
+		
 		for(i = 0; i < info.size(); i++)
 		{
 			StudentDto dto = info.get(i);
 			if(avg <= dto.getAvg())
 			{
 				f = true;
-				System.out.printf("%d\t%s\t%d\t%d\t%d\t%d\t%d\t%.2f\t%s\n", 
-						(i + 1), dto.getName(), dto.getAge(),
-						dto.getJava(), dto.getSpring(), dto.getHtml(), 
-						dto.getTotal(), dto.getAvg(), dto.getGrade());
+//				System.out.printf("%d\t%s\t%d\t%d\t%d\t%d\t%d\t%.2f\t%s\n", 
+//						(i + 1), dto.getName(), dto.getAge(),
+//						dto.getJava(), dto.getSpring(), dto.getHtml(), 
+//						dto.getTotal(), dto.getAvg(), dto.getGrade());
+				System.out.println((i + 1) + "\t" + 
+						dto.getName() + "\t" +
+						dto.getAge() + "\t" +
+						dto.getJava() + "\t"+
+						dto.getSpring() + "\t" + 
+						dto.getHtml() + "\t" + 
+						dto.getTotal() + "\t" + 
+						nf.format(dto.getAvg()) + "\t" +
+						dto.getGrade());
 			}
 		}
 		if(!f)
@@ -314,6 +334,8 @@ public class Ex9_VectorMunje2
 		System.out.println(partialName + "이 이름에 포함된 멤버 명단 출력");
 		System.out.println("번호\t이름\t나이\tjava\tspring\thtml\t총점\t평균\t등급");
 		System.out.println("=".repeat(80));
+		
+		//NumberFormat 안쓰고 출력해보기
 		for(i = 0; i < info.size(); i++)
 		{
 			StudentDto dto = info.get(i);
