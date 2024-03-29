@@ -1,8 +1,0 @@
-package day0321;
-
-public class Ex6_LottoExample 
-{
-	public static void main(String[] args) {
-		
-	}
-}
