@@ -2,6 +2,8 @@ package day0329;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,6 +40,7 @@ public class Ex4_SwingTable extends JFrame
 		};
 
 		table = new JTable(data, title);
+		//상단에 제목출력
 		this.add("North", new JLabel("701 멤버 현황", JLabel.CENTER));
 		//이대로 출력하면 title이 안보인다.	
 //		this.add("Center", table);
@@ -50,6 +53,30 @@ public class Ex4_SwingTable extends JFrame
 		lblMessage.setFont(new Font("", Font.BOLD, 20));
 		this.add("South", lblMessage);
 
+		//테이블 이벤트
+		table.addMouseListener(new MouseAdapter() {
+			//인터페이스가 아니라서 전부 오버라이드 필요 없음
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				super.mouseClicked(e);
+				
+				//선택한 행번호
+				//row == 행, column == 열
+				int rowIndex = table.getSelectedRow();
+				System.out.println(rowIndex);
+				
+				//클릭한 곳에서 이름, 나이, 주소정도만 얻어서 메세지에 출력해보자
+				String name = table.getValueAt(rowIndex, 0).toString();
+				String age = table.getValueAt(rowIndex, 1).toString();
+				String addr = table.getValueAt(rowIndex, 4).toString();
+				
+				String m = name + "님은 " + age + " 이며 " + addr + "에 살고 있어요";
+				lblMessage.setText(m);
+
+			}
+		});
+		
 	}
 
 	public static void main(String[] args) 

@@ -1,0 +1,55 @@
+package day0329;
+
+import java.awt.Color;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+public class Ex6_SwingTableShop extends JFrame
+{
+	JTable table;
+	DefaultTableModel tableModel;
+	JButton btnAdd, btnDelete;
+	JTextField tfSang, tfSu, tfDan;
+	
+	public Ex6_SwingTableShop(String title)
+	{
+		super(title);
+		this.setLocation(100, 100);//시작위치
+		this.setSize(400, 400);//창크기
+		//this.getContentPane().setBackground(new Color(255, 255, 0));//RGB순서 맞음
+		//this.getContentPane().setBackground(Color.CYAN);//Color의 상수도 가능
+		//유일하게 color의 클래스만 pane을 얻어야 가능함
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 종료
+		this.initDesign();//각종 컴포넌트 생성
+		this.setVisible(true);
+	}
+	
+	public void initDesign()
+	{
+		//상단에는 추가, 삭제 버튼
+		JPanel pTop = new JPanel();
+		btnAdd = new JButton("상품정보추가");
+		btnDelete = new JButton("상품정보삭제");
+		pTop.add(btnAdd);
+		pTop.add(btnDelete);
+		this.add("North", pTop);
+		
+		//중단에는 테이블 추가
+		String []title = {"번호", "상품명", "수량", "단가", "총금액"};
+		tableModel = new DefaultTableModel(title, 0);
+		table = new JTable(tableModel);
+		this.add("Center", new JScrollPane(table));
+		
+	}
+	
+	public static void main(String[] args) 
+	{
+		Ex6_SwingTableShop a = new Ex6_SwingTableShop("상품등록 및 삭제");
+	}
+}
