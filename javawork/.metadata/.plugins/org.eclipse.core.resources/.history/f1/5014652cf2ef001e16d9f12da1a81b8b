@@ -94,8 +94,6 @@ public class Ex5_ServerChat extends JFrame implements Runnable{
 			{
 				try {
 					String msg = br.readLine();
-					area.append(msg+"\n");
-					autoScroll();
 					//  |로 분리
 					//처음 접속시 1|닉네임
 					//메세지 전송시 2|메세지

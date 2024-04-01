@@ -46,15 +46,6 @@ public class Ex5_ServerChat extends JFrame implements Runnable{
 				Socket socket = serverSocket.accept();
 				area.append("접속한 IP : " + socket.getInetAddress().getHostAddress() + "\n");
 				this.autoScroll();
-
-				//클라이언트 내부 클래스 생성
-				ClientMember cm = new ClientMember(socket);
-
-				// 벡터에 저장
-				list.add(cm);
-
-				//각 클라이언트가 가진 run 메소드 호출
-				cm.start();
 			}
 		} catch (IOException e) {
 			area.append("서버 소켓 생성 오류:"+e.getMessage()+"\n");
@@ -87,55 +78,10 @@ public class Ex5_ServerChat extends JFrame implements Runnable{
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			//super.run();
-
-			//클라이언트가 보내는 메세지를 언제든지 읽어서 보내줄 수 있도록 한다.
-			while(true)
-			{
-				try {
-					String msg = br.readLine();
-					area.append(msg+"\n");
-					autoScroll();
-					//  |로 분리
-					//처음 접속시 1|닉네임
-					//메세지 전송시 2|메세지
-					String []m = msg.split("\\|");// |를 인식하지 못할경우 \\|로 기입함
-					switch(m[0])
-					{
-					case "1":
-					{
-						String sendMessage = m[1] + "님이 입장하였습니다.\n";
-						nickName = m[1];
-						for(ClientMember cm :list)
-						{
-							cm.pw.write(sendMessage + "\n");
-							cm.pw.flush();
-						}
-						break;
-					}
-					case "2":
-					{
-						String sendMessage = nickName + " >> " + m[1] + "\n";
-						//이 메세지를 서버에 연결된 모든 클라이언트들한테 보낸다.
-						for(ClientMember cm : list)
-						{
-							cm.pw.write(sendMessage + "\n");
-							cm.pw.flush();
-						}
-					}
-					}
-
-
-				} catch (IOException e) 
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
+			super.run();
 		}
 	}
-
+	
 	public void autoScroll()
 	{
 		int n = area.getDocument().getLength();//총 라인수
@@ -146,7 +92,7 @@ public class Ex5_ServerChat extends JFrame implements Runnable{
 	{
 		area=new JTextArea();
 		this.add(area);
-
+		
 		JScrollPane pane = new JScrollPane(area);
 		pane.setBounds(10, 40, 470, 350);
 		this.add(pane);

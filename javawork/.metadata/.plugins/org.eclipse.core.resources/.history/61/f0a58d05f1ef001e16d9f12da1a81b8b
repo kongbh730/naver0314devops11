@@ -71,7 +71,7 @@ public class Ex5_ClientChat extends JFrame implements ActionListener, Runnable
 		if(ob == tfMessage || ob == btnConnect);
 		{
 			pw.write("2|"+tfMessage.getText() + "\n");
-			pw.flush();//입력창의 데이터 지우고 커서보내기
+			pw.flush();
 			tfMessage.setText("");//입력창의 데이터 지우고  
 			tfMessage.requestFocus();//커서보내기
 		}
