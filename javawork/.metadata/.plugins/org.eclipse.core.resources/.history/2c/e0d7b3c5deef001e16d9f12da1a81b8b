@@ -10,7 +10,6 @@ import java.net.Socket;
 import java.util.Vector;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class Ex5_ServerChat extends JFrame implements Runnable{
@@ -45,7 +44,6 @@ public class Ex5_ServerChat extends JFrame implements Runnable{
 				//접속한 클라이언트를 허용하고 소켓을 생성한다.
 				Socket socket = serverSocket.accept();
 				area.append("접속한 IP : " + socket.getInetAddress().getHostAddress() + "\n");
-				this.autoScroll();
 			}
 		} catch (IOException e) {
 			area.append("서버 소켓 생성 오류:"+e.getMessage()+"\n");
@@ -81,21 +79,11 @@ public class Ex5_ServerChat extends JFrame implements Runnable{
 			super.run();
 		}
 	}
-	
-	public void autoScroll()
-	{
-		int n = area.getDocument().getLength();//총 라인수
-		area.setCaretPosition(n);//마지막줄로 이동후 출력
-	}
 
 	public void initDesign()
 	{
 		area=new JTextArea();
 		this.add(area);
-		
-		JScrollPane pane = new JScrollPane(area);
-		pane.setBounds(10, 40, 470, 350);
-		this.add(pane);
 	}
 
 	public static void main(String[] args) {

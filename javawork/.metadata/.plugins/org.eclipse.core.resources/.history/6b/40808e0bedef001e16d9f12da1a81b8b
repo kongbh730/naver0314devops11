@@ -49,17 +49,6 @@ public class Ex5_ClientChat extends JFrame implements ActionListener, Runnable
 		// TODO Auto-generated method stub
 		System.out.println("클라이언트의 run()");
 		
-		while(true)
-		{
-			try {
-				String msg=br.readLine();
-				area.append(msg+"\n");
-				this.autoScroll();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 
 	//메세지 전송 텍스트필드와 전송버튼을 동시에 처리하기 위한 메서드
@@ -67,14 +56,7 @@ public class Ex5_ClientChat extends JFrame implements ActionListener, Runnable
 	public void actionPerformed(ActionEvent e) 
 	{
 		// TODO Auto-generated method stub
-		Object ob = e.getSource();
-		if(ob == tfMessage || ob == btnConnect);
-		{
-			pw.write("2|"+tfMessage.getText() + "\n");
-			pw.flush();
-			tfMessage.setText("");//입력창의 데이터 지우고  
-			tfMessage.requestFocus();//커서보내기
-		}
+		
 	}
 	
 	public void autoScroll()
@@ -108,10 +90,6 @@ public class Ex5_ClientChat extends JFrame implements ActionListener, Runnable
 		btnSend.setBounds(370, 410, 100, 30);
 		this.add(btnSend);
 		
-		//현재 클래스 내에 구현한 메서드 호출
-		tfMessage.addActionListener(this);
-		btnSend.addActionListener(this);
-		
 		//서버 접속 이벤트
 		btnConnect.addActionListener(new ActionListener() {
 			
@@ -135,10 +113,6 @@ public class Ex5_ClientChat extends JFrame implements ActionListener, Runnable
 					//접속하는 순간 스레드 열기
 					Thread th = new Thread(Ex5_ClientChat.this);
 					th.start();//run 메서드 호출
-					
-					// 서버로 "1|닉네임" 이 형태로 보내기
-					pw.write("1|" + nickName + "\n");
-					pw.flush(); //flush를 해야 비로소 서버로 전송이 된다.
 					
 					
 				}
