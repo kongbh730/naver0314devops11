@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 public class Ex3_ThreadSwingCanvas extends JFrame implements Runnable
 {
 	JButton btnStart, btnStop;
-	MyDraw draw = new MyDraw();
+	//MyDraw draw = new MyDraw();
 	
 	public Ex3_ThreadSwingCanvas(String title)
 	{
@@ -47,7 +47,6 @@ public class Ex3_ThreadSwingCanvas extends JFrame implements Runnable
 			//super.paint(g);
 			System.out.println("paint");
 			
-			//랜덤색상 생성
 			int red = (int)(Math.random() * 256);
 			int green = (int)(Math.random() * 256);
 			int blue = (int)(Math.random() * 256);
@@ -70,8 +69,8 @@ public class Ex3_ThreadSwingCanvas extends JFrame implements Runnable
 	public static void main(String[] args)
 	{
 		Ex3_ThreadSwingCanvas a = new Ex3_ThreadSwingCanvas("쓰레드 예제");
-		//Thread th = new Thread(a);
-		//th.start();
+		Thread th = new Thread(a);
+		th.start();
 		
 		
 		

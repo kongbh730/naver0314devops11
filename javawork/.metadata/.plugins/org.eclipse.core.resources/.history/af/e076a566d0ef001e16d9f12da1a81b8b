@@ -22,21 +22,21 @@ public class Ex3_ThreadSwingCanvas extends JFrame implements Runnable
 		this.setVisible(true);
 	}
 	
-	@Override
-	public void run() 
-	{
-		// TODO Auto-generated method stub
-		System.out.println("원그리기");
-		if(draw == null)
-		{
-			return;
-		}
-//		while(true)
+//	@Override
+//	public void run() 
+//	{
+//		// TODO Auto-generated method stub
+//		System.out.println("원그리기");
+//		if(draw == null)
 //		{
-//			draw.repaint();
-//			//draw.paint(getGraphics());
+//			return;
 //		}
-	}
+////		while(true)
+////		{
+////			draw.repaint();
+////			//draw.paint(getGraphics());
+////		}
+//	}
 	
 	class MyDraw extends Canvas
 	{

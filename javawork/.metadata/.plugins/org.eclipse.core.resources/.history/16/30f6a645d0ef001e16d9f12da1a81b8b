@@ -70,8 +70,8 @@ public class Ex3_ThreadSwingCanvas extends JFrame implements Runnable
 	public static void main(String[] args)
 	{
 		Ex3_ThreadSwingCanvas a = new Ex3_ThreadSwingCanvas("쓰레드 예제");
-		//Thread th = new Thread(a);
-		//th.start();
+		Thread th = new Thread(a);
+		th.start();
 		
 		
 		
