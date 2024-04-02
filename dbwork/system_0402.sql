@@ -16,4 +16,15 @@
  --angel 계정 재생성(비번 a1234)
  create user angel identified by a1234;
  
+ --angle 계정에 기본권한 부여(connect(연결), resource(테이블생성))
+ grant connect,resource to angel;
+ 
+ --scott/tiger 계정에 비번 tiger
+ create user scott identified by tiger;
+ grant connect,resource to scott;
+ 
+ --생성한 각 계정에 tablespace 지정하기
+ alter user angel default tablespace users quota unlimited on users;
+ alter user scott default tablespace users quota unlimited on users;
+ 
  
