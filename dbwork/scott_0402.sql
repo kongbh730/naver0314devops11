@@ -6,3 +6,28 @@
 select *from tab; -- 생성된 테이블 확인
 select *from emp; --emp테이블의 연습용 데이터 확인
 commit; --추가된 데이터 커밋, 커밋 안할 시 추가된 데이타가 취소됨
+
+--emp테이블의 구조 확인
+desc emp;
+
+--전체 컬럼으로 emp 테이블 조회
+select * from emp;
+--ename, job 컬럼만 조회
+select ename,job from emp;
+
+--ename, job 컬럼만 조회, ename은 오름차순 또는 내림차순으로 조회
+select ename,job from emp order by ename asc; -- asc는 생략가능
+select ename,job from emp order by ename desc; --ename의 내림차순
+
+select ename,job from emp order by job asc; 
+select ename,job from emp order by job desc; 
+
+
+
+
+
+
+
+
+
+
