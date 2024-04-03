@@ -56,25 +56,22 @@ public class ArrayCreateByNewExample
 			System.out.print("arr3[" + i + "] : " + arr3[i] + ", ");//arr3[0], arr3[1], arr3[2] 출력
 		}
 		//출력결과 : arr3[0] : null, arr3[1] : null, arr3[2] : null
-		//수 타입의 배열은 초기값이 0, 0.0 등으로 지정되지만, 문자열, 문자 타입의 배열은 null로 초기화된다.
-		//null로 초기화 되기 때문에 문자타입은 출력하면 공백문자 ' '가 출력된다.
-		//문자열은 null이 출력된다.
-		System.out.println();//줄넘김
+		//수 타입은 초기값이 0, 0.0 등으로 지정되지만, 문자열, 문자 타입은 null로 초기화된다.
+		System.out.println();
 		
-//		char []c = new char[3];
-//		System.out.println(c[1]);
-//		String []s = new String[3];
-//		System.out.println(s[1]);
-
-		arr3[0] = "1월";//arr3[0]에 "1월" 저장
-		arr3[1] = "2월";//arr3[1]에 "2월" 저장
-		arr3[2] = "3월";//arr3[2]에 "3월" 저장
+		String s;
+		char c;
+		System.out.println(s);
 		
-		for(int i = 0; i < 3; i++)// i = 0부터 0,1,2순으로 i를 1씩 증가시키며 반복수행
+		arr3[0] = "1월";
+		arr3[1] = "2월";
+		arr3[2] = "3월";
+		
+		for(int i = 0; i < 3; i++)
 		{
-			System.out.print("arr3[" + i + "] : " + arr3[i] + ", "); //arr3[0], arr3[1], arr3[2] 출력
+			System.out.print("arr3[" + i + "] : " + arr3[i] + ", ");
 		}
-		//출력결과 : arr3[0] : 1월, arr3[1] : 2월, arr3[2] : 3월, 
+		
 	}
 
 }

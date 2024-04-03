@@ -72,9 +72,9 @@ public class ArrayCreateByNewExample
 		
 		for(int i = 0; i < 3; i++)// i = 0부터 0,1,2순으로 i를 1씩 증가시키며 반복수행
 		{
-			System.out.print("arr3[" + i + "] : " + arr3[i] + ", "); //arr3[0], arr3[1], arr3[2] 출력
+			System.out.print("arr3[" + i + "] : " + arr3[i] + ", ");
 		}
-		//출력결과 : arr3[0] : 1월, arr3[1] : 2월, arr3[2] : 3월, 
+		
 	}
 
 }

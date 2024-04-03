@@ -28,7 +28,7 @@ select job from emp; --job을 전부 출력 : 중복 발생
 --job을 조회하는데 같은 직업은 한번만 나오게
 select distinct job from emp;
 select distinct job from emp order by job asc;
-select distinct job from emp order by 1; --컬럼번호는 1번부터, 위와 같다
+SELECT distinct job from emp order by 1; --컬럼번호는 1번부터, 위와 같다
 
 --ename 이 smith인 사람 조회
 select * from emp where ename='SMITH';--원소값은 대소문자 구분
