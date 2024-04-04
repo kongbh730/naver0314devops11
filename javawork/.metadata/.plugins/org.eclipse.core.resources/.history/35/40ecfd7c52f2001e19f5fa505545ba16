@@ -1,0 +1,27 @@
+package day0404db;
+
+public class Ex2OraclePerson 
+{
+	static final String ORACLE_DRIVER="oracle.jdbc.OracleDriver";
+
+	
+	public Ex2OraclePerson()
+	{
+		try
+		{
+			Class.forName(ORACLE_DRIVER);
+			System.out.println("오라클 드라이버 성공!");
+		} 
+		catch (ClassNotFoundException e) 
+		{
+			System.out.println("오라클 드라이버 실패 : " + e.getMessage());
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		Ex2OraclePerson ex2 = new Ex2OraclePerson();
+		
+	}
+
+}

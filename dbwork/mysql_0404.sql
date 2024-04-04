@@ -255,7 +255,7 @@ drop table shop;
 drop table cart;
 
 -- join 1
--- select * from 
+select * from shop,cart where shop.shopnum=cart.shopnum;
 
 -- join2
 select
@@ -267,4 +267,14 @@ on shop.shopnum = cart.shopnum;
 -- shop에서 1번 블라우스를 삭제해보자
 delete from shop where shopnum = 1;
 
+-- 다시 조인
+select
+	username, sangpum, price, color, guipday
+from shop
+inner join cart
+on shop.shopnum=cart.shopnum;
 
+-- 문제: 아래의 결과를 자바파일로 실행해서 출력되도록 하세요
+select buseo,count(*) inwon, max(score) maxscore, ceiling(avg(score)) avgscore
+from sawon
+group by buseo;

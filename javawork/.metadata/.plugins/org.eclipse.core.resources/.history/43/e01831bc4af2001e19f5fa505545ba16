@@ -1,0 +1,11 @@
+package day0404db;
+
+public class Ex2OraclePerson 
+{
+
+	public static void main(String[] args) 
+	{
+		
+	}
+
+}
