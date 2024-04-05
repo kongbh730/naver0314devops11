@@ -1,0 +1,27 @@
+package day0405;
+
+public class Ex11OraclePerson {	
+	static final String ORACLE_DRIVER="oracle.jdbc.OracleDriver";
+	static final String ORACLE_URL="jdbc:oracle:thin:@localhost:1521/xe";//본인
+	//static final String ORACLE_URL="jdbc:oracle:thin:@192.168.0.59:1521/xe";//강사PC오라클
+	static final String USERNAME="angel";
+	static final String PASSWORD="a1234";
+	
+	public Ex11OraclePerson()
+	{
+		try
+		{
+			Class.forName(ORACLE_DRIVER);
+			System.out.println("오라클 드라이버 성공!");
+		} 
+		catch (ClassNotFoundException e) 
+		{
+			System.out.println("오라클 드라이버 실패 : " + e.getMessage());
+		}
+	}
+	
+	public static void main(String[] args) {
+		Ex11OraclePerson ex11 = new Ex11OraclePerson();
+	}
+	
+}

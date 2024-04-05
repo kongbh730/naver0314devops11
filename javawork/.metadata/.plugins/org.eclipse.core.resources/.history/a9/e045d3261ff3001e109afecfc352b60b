@@ -1,0 +1,84 @@
+package day0405;
+
+import java.util.Scanner;
+
+public class Ex12Student 
+{
+	static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
+	static final String MYSQL_URL = "jdbc:mysql://localhost:3306/bit701?serverTimezone=Asia/Seoul";
+	static final String USERNAME = "root";
+	static final String PASSWORD = "1234";
+
+	public Ex12Student()
+	{
+		try 
+		{
+			Class.forName(MYSQL_DRIVER);
+			//System.out.println("Mysql8 드라이버 성공!");
+		} 
+		catch (ClassNotFoundException e) 
+		{
+			System.out.println("Mysql8 드라이버 오류 : " + e.getMessage());
+		}
+	}
+	
+	public void insertStudent(String name, int java, int html, int spring)
+	{
+		
+	}
+	
+	public void deleteStudent(String name)
+	{
+		
+	}
+	
+	public void writeStudent()
+	{
+		
+	}
+	
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		Ex12Student ex12 = new Ex12Student();
+		int menu = 0;
+		String name;
+		int java, html, spring;
+		
+		while(true)
+		{
+			System.out.println("1. 학생정보 추가   2. 이름으로 삭제    3. 전체 출력    4. 종료");
+			menu = Integer.parseInt(sc.nextLine());
+			if(menu == 1)
+			{
+				System.out.print("추가할 이름은? >> ");
+				name = sc.nextLine();
+				System.out.print("자바 점수는? >> ");
+				java = Integer.parseInt(sc.nextLine());
+				System.out.print("HTML 점수는? >> ");
+				html = Integer.parseInt(sc.nextLine());
+				System.out.print("Spring 점수는? >> ");
+				spring = Integer.parseInt(sc.nextLine());
+				
+				ex12.insertStudent(name, java, html, spring);
+			}
+			else if(menu == 2)
+			{
+				System.out.print("삭제할 학생의 이름은? >>");
+				name = sc.nextLine();
+				ex12.deleteStudent(name);
+			}
+			else if(menu == 3)
+			{
+				ex12.writeStudent();
+			}
+			else 
+			{
+				System.out.println("** 프로그램을 종료합니다. **");
+				break;
+			}
+			System.out.println("=".repeat(50));
+		}
+		sc.close();
+	}
+}
