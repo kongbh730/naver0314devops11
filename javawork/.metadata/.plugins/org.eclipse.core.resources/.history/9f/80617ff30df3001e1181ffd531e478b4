@@ -6,19 +6,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Ex5SawonInsert {
+import day0404db.Ex1MysqlSawon;
 
+public class Ex9SawonUpdate 
+{
 	static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
 	static final String MYSQL_URL = "jdbc:mysql://localhost:3306/bit701?serverTimezone=Asia/Seoul";
 	static final String USERNAME = "root";
 	static final String PASSWORD = "1234";
 
-	public Ex5SawonInsert()
+	public Ex9SawonUpdate()
 	{
 		try 
 		{
 			Class.forName(MYSQL_DRIVER);
-			System.out.println("Mysql8 드라이버 성공!");
+			//System.out.println("Mysql8 드라이버 성공!");
 		} 
 		catch (ClassNotFoundException e) 
 		{
@@ -26,39 +28,48 @@ public class Ex5SawonInsert {
 		}
 	}
 	
-	public void insertSawon()
+	public void updateSawon()
 	{
+		Ex1MysqlSawon sawon = new Ex1MysqlSawon();
+		sawon.writeSawon();
+		System.out.println("-".repeat(50));
+		
 		Scanner sc = new Scanner(System.in);
+		String updateName, updateBuseo;
+		int updateScore;
+		
+		System.out.println("수정할 사람의 이름은?");
+		updateName = sc.nextLine();
+		
+		System.out.println("수정할 점수는?");
+		updateScore = Integer.parseInt(sc.nextLine());
+		
+		System.out.println("수정할 부서명?");
+		updateBuseo = sc.nextLine();
 
-		String name, gender, buseo;
-		int score, gnum, bnum;
-		String sql = "";
-		
-		System.out.println("이름은?");
-		name = sc.nextLine();
-		System.out.println("점수는?");
-		score = Integer.parseInt(sc.nextLine());
-		System.out.println("성별은? 선택 : 1. 남자   2. 여자");
-		gnum = Integer.parseInt(sc.nextLine());
-		gender = gnum == 1 ? "남자" : "여자";
-		
-		System.out.println("부서는? 선택 : 1. 홍보부    2. 인사부    3. 교육부");
-		bnum = Integer.parseInt(sc.nextLine());
-		buseo = bnum == 1 ? "홍보부" : bnum == 2 ? "인사부" : "교육부";
-		
-		sql = "insert into sawon (name, score, gender, buseo) values ('" + name + "','" + score + "','" + gender + "','" + buseo + "')";
+		String sql = "update sawon set score = " + updateScore + ", buseo = '" + updateBuseo + "' where name = '" + updateName + "'";
 		System.out.println(sql);
 		
 		Connection conn = null;
 		Statement stmt = null;
-		//ResultSet은 필요 없음 -> 출력이 아니니까
+		
 		try 
 		{
 			conn = DriverManager.getConnection(MYSQL_URL, USERNAME, PASSWORD);
 			stmt = conn.createStatement();
-			stmt.execute(sql);
-			System.out.println("데이터 추가 성공!");
-		} 
+			int n = stmt.executeUpdate(sql);
+			if(n == 0)
+			{
+				System.out.println(updateName + "님이 존재하지 않습니다.");
+			}
+			else
+			{
+				System.out.println(updateName + "님의 정보가 수정되었습니다.");
+				//수정됐는지 확인하기
+				sawon.writeSawon();
+			}
+
+		}
 		catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
@@ -66,7 +77,7 @@ public class Ex5SawonInsert {
 		}
 		finally
 		{
-			try 
+			try
 			{
 				stmt.close();
 				conn.close();
@@ -75,15 +86,13 @@ public class Ex5SawonInsert {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-		
 		
 		sc.close();
 	}
 	
 	public static void main(String[] args) {
-		Ex5SawonInsert ex5 = new Ex5SawonInsert();
-		ex5.insertSawon();
+		Ex9SawonUpdate ex9 = new Ex9SawonUpdate();
+		ex9.updateSawon();
 	}
 }

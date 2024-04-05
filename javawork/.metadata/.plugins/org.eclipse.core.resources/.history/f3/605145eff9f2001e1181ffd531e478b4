@@ -52,6 +52,7 @@ public class Ex5SawonInsert {
 		Connection conn = null;
 		Statement stmt = null;
 		//ResultSet은 필요 없음 -> 출력이 아니니까
+		
 		try 
 		{
 			conn = DriverManager.getConnection(MYSQL_URL, USERNAME, PASSWORD);

@@ -2,18 +2,19 @@ package day0405;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Ex5SawonInsert {
+public class Ex6SawonInsert2 {
 
 	static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
 	static final String MYSQL_URL = "jdbc:mysql://localhost:3306/bit701?serverTimezone=Asia/Seoul";
 	static final String USERNAME = "root";
 	static final String PASSWORD = "1234";
 
-	public Ex5SawonInsert()
+	public Ex6SawonInsert2()
 	{
 		try 
 		{
@@ -46,17 +47,26 @@ public class Ex5SawonInsert {
 		bnum = Integer.parseInt(sc.nextLine());
 		buseo = bnum == 1 ? "홍보부" : bnum == 2 ? "인사부" : "교육부";
 		
-		sql = "insert into sawon (name, score, gender, buseo) values ('" + name + "','" + score + "','" + gender + "','" + buseo + "')";
-		System.out.println(sql);
+		//sql = "insert into sawon (name, score, gender, buseo) values ('" + name + "','" + score + "','" + gender + "','" + buseo + "')";
+		sql = "insert into sawon (name, score, gender, buseo) values (?,?,?,?)";
+		//System.out.println(sql);
 		
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		//ResultSet은 필요 없음 -> 출력이 아니니까
 		try 
 		{
 			conn = DriverManager.getConnection(MYSQL_URL, USERNAME, PASSWORD);
-			stmt = conn.createStatement();
-			stmt.execute(sql);
+			pstmt = conn.prepareStatement(sql);
+			//4개의 ?에 차례대로 값을 바인등
+			pstmt.setString(1, name);
+			pstmt.setInt(2, score);
+			pstmt.setString(3, gender);
+			pstmt.setString(4, buseo);
+			
+			//바인딩이 모두 끝난 후 execute
+			pstmt.execute();
+			
 			System.out.println("데이터 추가 성공!");
 		} 
 		catch (SQLException e)
@@ -83,7 +93,7 @@ public class Ex5SawonInsert {
 	}
 	
 	public static void main(String[] args) {
-		Ex5SawonInsert ex5 = new Ex5SawonInsert();
+		Ex6SawonInsert2 ex5 = new Ex6SawonInsert2();
 		ex5.insertSawon();
 	}
 }
