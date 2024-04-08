@@ -42,9 +42,7 @@ public class Ex12Student
 			pstmt.setInt(2, java);
 			pstmt.setInt(3, html);
 			pstmt.setInt(4, spring);
-
 			pstmt.execute();// insert니까 수행만 하면 됨!
-
 			System.out.println("insert 성공!");
 		} 
 		catch (SQLException e)
@@ -72,7 +70,6 @@ public class Ex12Student
 		String sql = "delete from student where name = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		int n = 0;
 		//해당 학생이 없을 경우 "xxx님은 명단에 없어요!"
 		//있을 경우 "xxx 님의 성적정보를 삭제하였습니다."
 		try 
@@ -81,7 +78,7 @@ public class Ex12Student
 			pstmt = conn.prepareStatement(sql);//sql을 준비하고
 			//바인딩 먼저
 			pstmt.setString(1, name);
-			n = pstmt.executeUpdate();//sql 실행, 반환값이 필요함!
+			int n = pstmt.executeUpdate();//sql 실행, 반환값이 필요함!
 			if(n == 0)
 			{
 				System.out.println(name + "님은 명단에 없습니다.");
@@ -138,7 +135,7 @@ public class Ex12Student
 				int html = rs.getInt("html");
 				int spring = rs.getInt("spring");
 				int tot = rs.getInt("tot");
-				double avg = rs.getInt("avg");
+				double avg = rs.getDouble("avg");
 				String date = rs.getString("testday");
 
 				System.out.println(

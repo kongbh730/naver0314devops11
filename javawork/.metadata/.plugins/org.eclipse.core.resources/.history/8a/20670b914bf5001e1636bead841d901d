@@ -1,0 +1,5 @@
+package common.copy;
+
+public class DbConnect {
+
+}
