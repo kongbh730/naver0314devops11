@@ -44,14 +44,15 @@ public class DbConnect {
 	}
 	public void dbClose(PreparedStatement pstmt,Connection conn,ResultSet rs)
 	{
-		try {
+		try 
+		{
 			rs.close();
 			pstmt.close();
 			conn.close();
-		} catch (SQLException|NullPointerException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (SQLException|NullPointerException e) 
+		{
 			e.printStackTrace();
 		}
 	}
-
 }

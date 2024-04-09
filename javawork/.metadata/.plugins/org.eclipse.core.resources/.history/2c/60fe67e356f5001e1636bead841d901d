@@ -1,0 +1,55 @@
+package day0408;
+
+/*
+ * 이름 : 텍스트박스 / 점수 : 텍스트박스 / 성별 : 콤보박스 / 부서 : 콤보박스
+ * -------------------------------------------------------------
+ * 						TABLE
+ * -------------------------------------------------------------
+ * 추가	삭제		부서선택:콤보		전체ㅇ:라디오	남자ㅇ:라디오	여자ㅇ:라디오
+ */
+
+import java.awt.Color;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import db.common.DbConnect;
+
+public class Ex2_DBSawon extends JFrame
+{
+	DbConnect db=new DbConnect();//DB연결
+	JTable table;//테이블
+	DefaultTableModel tableModel;//테이블 모델
+	JTextField tfName,tfScore;//텍스트 필드
+	JButton btnAdd,btnDel;//추가 삭제 버튼
+	JComboBox<String> comboGender, comboTeam, comboTeamSort;//콤보박스 3개, 성별, 부서, 부서정렬
+	//라디오버튼 필요
+	int order=1;//?
+	
+	public Ex2_DBSawon(String title)
+	{
+		super(title);
+		this.setLocation(100, 100);//시작위치
+		this.setSize(600, 600);//창크기
+		//this.getContentPane().setBackground(new Color(255, 255, 0));//RGB순서 맞음
+		//this.getContentPane().setBackground(Color.CYAN);//Color의 상수도 가능
+		//유일하게 color의 클래스만 pane을 얻어야 가능함
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 종료
+		this.initDesign();//각종 컴포넌트 생성
+		this.setVisible(true);
+	}
+	
+	public void initDesign()
+	{
+		
+	}
+	
+	public static void main(String[] args) 
+	{
+		Ex2_DBSawon a = new Ex2_DBSawon("사원정보관리");
+	}
+}

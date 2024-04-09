@@ -231,7 +231,7 @@ public class Ex1_SwingDbStudent extends JFrame
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 
-			//기존 테이블의 데이타 지운후 추가하기
+			//기존 테이블의 데이타 지운 후 추가하기
 			tableModel.setRowCount(0);
 
 			while(rs.next())
