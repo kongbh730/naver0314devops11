@@ -195,8 +195,8 @@ public class Ex2_DBSawon extends JFrame
 		btnDel.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				
 			}
 		});
@@ -208,7 +208,6 @@ public class Ex2_DBSawon extends JFrame
 			public void itemStateChanged(ItemEvent e) 
 			{
 				buseo = (String)cbBuseoSearch.getSelectedItem();
-				writeSawon();
 			}
 		});
 
@@ -256,10 +255,6 @@ public class Ex2_DBSawon extends JFrame
 		{
 			pstmt = conn.prepareStatement(sql);
 			
-			//전체, 전체
-			//!전체, 전체
-			//전체, !전체
-			//!전체, !전체
 			
 			rs = pstmt.executeQuery(); // rs에 실행 결과 저장
 			tableModel.setRowCount(0);

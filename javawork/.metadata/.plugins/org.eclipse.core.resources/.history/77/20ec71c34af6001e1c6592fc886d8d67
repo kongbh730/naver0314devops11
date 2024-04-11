@@ -15,8 +15,6 @@ package day0408;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,13 +42,11 @@ public class Ex2_DBSawon extends JFrame
 	DefaultTableModel tableModel;//테이블 모델
 	JTextField tfName,tfScore;//텍스트 필드
 	JButton btnAdd,btnDel;//추가 삭제 버튼
-	JComboBox<String> cbGender, cbBuseo, cbBuseoSearch;//콤보박스 3개, 성별, 부서, 부서정렬
+	JComboBox<String> cbGender, cbBuseo, cbBuseoSelect;//콤보박스 3개, 성별, 부서, 부서정렬
 	JRadioButton rbMale, rbFemale, rbEntire;//라디오버튼
 	
-	//int buseoIndex = 1;//부서 전체
-	//int genderIndex = 1;//성별 전체
-	String buseo = "전체부서";
-	String gender = "전체";
+	int buseoIndex = 1;//부서 전체
+	int genderIndex = 1;//성별 전체
 
 	public Ex2_DBSawon(String title)
 	{
@@ -59,10 +55,10 @@ public class Ex2_DBSawon extends JFrame
 		this.setSize(600, 600);//창크기
 		//this.getContentPane().setBackground(new Color(255, 255, 0));//RGB순서 맞음
 		//this.getContentPane().setBackground(Color.CYAN);//Color의 상수도 가능
+		//유일하게 color의 클래스만 pane을 얻어야 가능함
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 종료
 		this.initDesign();//각종 컴포넌트 생성
 		this.setVisible(true);
-		this.writeSawon();
 	}
 
 	public void initDesign()
@@ -81,13 +77,13 @@ public class Ex2_DBSawon extends JFrame
 		p1.add(tfScore);
 
 		//성별 콤보박스
-		String []cbGenderStr = {"남성", "여성"};
+		String []cbGenderStr = {"남성", "여성", "티라노사우르스", "아파치 전투헬리콥터"};
 		p1.add(new JLabel("성별"));
 		cbGender = new JComboBox<String>(cbGenderStr);
 		p1.add(cbGender);
 
 		//부서 콤보박스
-		String []cbTeamStr = {"교육부", "인사부", "홍보부"};
+		String []cbTeamStr = {"인사부", "홍보부", "행정부"};
 		p1.add(new JLabel("부서"));
 		cbBuseo = new JComboBox<String>(cbTeamStr);
 		p1.add(cbBuseo);
@@ -114,15 +110,15 @@ public class Ex2_DBSawon extends JFrame
 		p2.add(btnDel);
 
 		//부서 정렬 콤보박스
-		String []cbBuseoSearchStr = {"전체부서", "홍보부", "교육부", "인사부"};
+		String []cbTeamSelectStr = {"전체", "인사부", "홍보부", "행정부"};
 		p2.add(new JLabel("부서"));
-		cbBuseoSearch = new JComboBox<String>(cbBuseoSearchStr);
-		p2.add(cbBuseoSearch);
+		//cbTeamSelect = new JComboBox<String>(cbTeamSelectStr);
+		//p2.add(cbTeamSelect);
 
 		//라디오 버튼
 		rbEntire = new JRadioButton("전체");
-		rbMale = new JRadioButton("남자");
-		rbFemale = new JRadioButton("여자");
+		rbMale = new JRadioButton("남");
+		rbFemale = new JRadioButton("여");
 		rbEntire.setSelected(true);
 
 		//라디오 버튼은 그룹 지정 필요
@@ -192,77 +188,37 @@ public class Ex2_DBSawon extends JFrame
 		});
 
 		//삭제버튼 이벤트
-		btnDel.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				
-			}
-		});
 
-		//부서검색 콤보박스 이벤트
-		cbBuseoSearch.addItemListener(new ItemListener() 
-		{
-			@Override
-			public void itemStateChanged(ItemEvent e) 
-			{
-				buseo = (String)cbBuseoSearch.getSelectedItem();
-				writeSawon();
-			}
-		});
+		//부서 콤보박스 이벤트
 
 		//성별 라디오박스 이벤트
-		rbEntire.addActionListener(new ActionListener() 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				gender = "전체";
-				writeSawon();
-			}
-		});
 		
-		rbFemale.addActionListener(new ActionListener() 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				gender = "여자";
-				writeSawon();
-			}
-		});
-		
-		rbMale.addActionListener(new ActionListener() 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				gender = "남자";
-				writeSawon();
-			}
-		});
+		//최초 출력
+		writeSawon();
 	}
 	
 	//출력 메서드
 	public void writeSawon()
 	{
+		
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "";
+		String sql = "select * from sawon ";
+		
+		/*
+		//콤보 박스
+		
+		//라디오 버튼
+		*/
 		
 		try 
 		{
 			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
-			//전체, 전체
-			//!전체, 전체
-			//전체, !전체
-			//!전체, !전체
-			
-			rs = pstmt.executeQuery(); // rs에 실행 결과 저장
 			tableModel.setRowCount(0);
+			
 			while(rs.next())
 			{
 				Vector<String> data = new Vector<String>();
@@ -276,6 +232,7 @@ public class Ex2_DBSawon extends JFrame
 		} 
 		catch (SQLException e) 
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally

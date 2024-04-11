@@ -256,10 +256,6 @@ public class Ex2_DBSawon extends JFrame
 		{
 			pstmt = conn.prepareStatement(sql);
 			
-			//전체, 전체
-			//!전체, 전체
-			//전체, !전체
-			//!전체, !전체
 			
 			rs = pstmt.executeQuery(); // rs에 실행 결과 저장
 			tableModel.setRowCount(0);

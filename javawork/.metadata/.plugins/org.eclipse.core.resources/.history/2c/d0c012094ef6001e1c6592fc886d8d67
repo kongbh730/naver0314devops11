@@ -15,8 +15,6 @@ package day0408;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -192,56 +190,13 @@ public class Ex2_DBSawon extends JFrame
 		});
 
 		//삭제버튼 이벤트
-		btnDel.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				
-			}
-		});
 
 		//부서검색 콤보박스 이벤트
-		cbBuseoSearch.addItemListener(new ItemListener() 
-		{
-			@Override
-			public void itemStateChanged(ItemEvent e) 
-			{
-				buseo = (String)cbBuseoSearch.getSelectedItem();
-				writeSawon();
-			}
-		});
 
 		//성별 라디오박스 이벤트
-		rbEntire.addActionListener(new ActionListener() 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				gender = "전체";
-				writeSawon();
-			}
-		});
 		
-		rbFemale.addActionListener(new ActionListener() 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				gender = "여자";
-				writeSawon();
-			}
-		});
-		
-		rbMale.addActionListener(new ActionListener() 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				gender = "남자";
-				writeSawon();
-			}
-		});
+		//최초 출력
+		writeSawon();
 	}
 	
 	//출력 메서드
@@ -256,10 +211,6 @@ public class Ex2_DBSawon extends JFrame
 		{
 			pstmt = conn.prepareStatement(sql);
 			
-			//전체, 전체
-			//!전체, 전체
-			//전체, !전체
-			//!전체, !전체
 			
 			rs = pstmt.executeQuery(); // rs에 실행 결과 저장
 			tableModel.setRowCount(0);
