@@ -7,7 +7,7 @@
     <style>
         #ex1, #ex2{
             background-color: paleturquoise;
-            width: 100px;
+            width: 120px;
             height: 20px;
             overflow: hidden;
             cursor: pointer;
@@ -19,21 +19,23 @@
         /*width 변경시 효과*/
         #ex1{
             transition-property: width;
-            transition-duration: 2s; /*2초동안 효과유지*/
+            transition-duration: 2s; /*너비가 350px가 되는 데 걸리는 시간 2초*/
         }
         #ex2{
-            transition-property: width;
-            transition-duration: 3s; /*3초동안 효과유지*/
+            /*transition-property: width;
+            transition-duration: 3s;*/ /*너비가 350px가 되는데 걸리는 시간 3초*/
             transition: width 4s;
         }
+        /*초기값*/
         #ex3 img{
             width: 120px;
-            opacity: 0.2;
+            opacity: 0.2;/*투명도*/
             border: 5px solid pink;
             transform: rotate(15deg);
             cursor: pointer;
             transition: all 3s;
         }
+        /*마우스 올리면*/
         #ex3 img:hover{
             opacity: 1.0;
             border-color: gray;

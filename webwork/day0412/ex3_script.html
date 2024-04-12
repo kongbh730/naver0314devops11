@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>자바스크립트로 jquery_image 폴더의 01.png~12.png까지 이미지 출력</h2>
+    <script>
+        for(let i = 1; i <= 12; i++)
+        {
+            let s = "";//변수범위 조심! 괄호내부 변수 선언은 괄호 내부에서만 적용
+            if(i < 10)
+            {
+                s = `<img src = "../image/jquery_image/0${i}.png" width = 60>`;
+            }
+            else
+            {
+                s = `<img src = "../image/jquery_image/${i}.png" width = 60>`;
+            }
+            document.write(s);
+        }
+        document.write("<hr>");
+    </script>
+    <script>
+        for(let i = 1; i <= 12; i++)
+        {
+            let s = "<img src = '../image/jquery_image/"+ (i < 10 ? "0" : "") + i + ".png' width = 70>";
+            document.write(s);
+        }
+    </script>
+    <hr>
+    <h3>mycar 폴더의 mycar1.png~mycar15.png까지 이미지 출력</h3>
+    <script>
+        for(let i = 1; i <= 15; i++)
+        {
+            let s = `<img src = "../image/mycar/mycar${i}.png" width = 60>`;
+            document.write(s);
+            if(i%5 == 0)
+            {
+                document.write("<br>");
+            }
+        }
+        for(let i = 0; i <= 2; i++)
+        {
+            for(let j = 1; j <= 5; j++)
+            {
+                let s = `<img src = "../image/mycar/mycar${i*5 + j}.png" width = 60>`;
+                document.write(s);
+            }
+            document.write("<br>");
+        }
+    </script>
+</body>
+</html>

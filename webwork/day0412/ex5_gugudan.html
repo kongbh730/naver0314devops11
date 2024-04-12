@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            border: 3px groove gray;
+        }
+        tr{
+            height: 40px;
+            border: 1px solid lightgray;
+        }
+        td, th{
+            border: 1px solid lightgray;
+            font-size: 20px;
+            font-family: 'Comic Sans MS';
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption><h3>[전체 구구단]</h3></caption>
+        <tr>
+            <th colspan="9", bgcolor="lightgray">구구단</th>
+        </tr>
+        <tr style="background-color: pink;">
+            <script>
+                for(let dan = 2; dan <= 9; dan++)
+                {
+                    let s = `<th>${dan}단</th>`;
+                    document.write(s);
+                }
+            </script>
+        </tr>
+
+        <script>
+        let dan = "<tr>";
+        for(let i = 1; i <= 9; i++)
+        {
+            dan += "<th style=\"background-color: aquamarine;\">" + `${i} 단` + "</th>"
+        }
+        dan += "</tr>";
+        document.write(dan);
+        //한 스크립트에 다 안 넣어도 됨
+
+        for(let i = 1; i <= 9; i++)
+        {
+            let k = "<tr>"
+            for(let j = 1; j <= 9; j++)
+            {   
+                let s = `${j} X ${i} = ${i*j}`;
+                s = "<td>" + s + "</td>";
+                k = k + s;
+            }
+            k += "</tr>";
+            document.write(k);
+        }
+
+        document.write("<tr></tr>");
+        for(let i = 1; i <= 9; i++)
+        {
+            document.write("<tr>");
+            for(let j = 1; j <= 9; j++)
+            {   
+                document.write(`<td>${j} X ${i} = ${i*j}</td>`);
+            }
+            document.write("</tr>");
+        }
+        </script>
+    </table>
+</body>
+</html>

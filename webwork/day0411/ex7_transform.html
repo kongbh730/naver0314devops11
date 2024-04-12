@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        div.box>div {
+        div.box>div 
+        {
             border: 1px solid gray;
             width: 200px;
             height: 200px;
@@ -21,10 +22,10 @@
 
         #img1 img{
             transform: translate(50px, 30px);/*위치 이동*/
-            /*크로스 부라우징 테스트를 위한 코드*/
-            -webkit-transform: translate(50px, 30px);
-            -o-transform: translate(50px, 30px);
-            -moz-transform: translate(50px, 30px);
+            /*크로스 브라우징 테스트를 위한 코드*/
+            -webkit-transform: translate(50px, 30px); /*크롬, 사파리*/
+            -o-transform: translate(50px, 30px); /*오페라*/
+            -moz-transform: translate(50px, 30px); /*익스플로러*/
         }
         
         #img2 img{
@@ -40,7 +41,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="box"">
     <div id="img1">
