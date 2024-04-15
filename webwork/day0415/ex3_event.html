@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload=function()
+        {
+            let txt1=document.getElementById("txt1");
+            //이벤트
+            txt1.onkeyup=function(e)//마지막글자까지 읽기?
+            {
+                //입력한 값을 읽어서 msg 아이디에 넣는다
+                /*
+                    innerHTML= "html 코드 포함 문자열";
+                    innerText= "텍스트만 가능";
+                */
+               //this는 이벤트가 발생하는 객체, txt1이다.
+               //console.log(txt1.value);//방법1
+               //console.log(txt1.value, this.value);//방법2
+               console.log(txt1.value, e.target.value);//3번째 방법 : 함수 매개변수로 이벤트e를 줘야함
+            
+               //입력한 문자열을 msg에 추가
+                //document.getElementById("msg").innerHTML=e.target.value;
+                document.getElementById("msg").innerText=e.target.value;
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="txt1">
+    <br>
+    <h2 id="msg">result</h2>
+    <hr>
+    <input type="text" id="txt2">
+    <br>
+    <div id="msg2">result</div>
+    <script>
+        document.getElementById("txt2").onkeyup=function()
+        {
+            //HTML코드 적용해서 출력
+            msg2.innerHTML=`<b style="font-size:25px; color:orange;">${this.value}</b>`;
+            //입력내용 자체를 출력
+            //msg2.innerText=`<b style="font-size:25px; color:orange;">${this.value}</b>`;
+        }
+    </script>
+</body>
+</html>

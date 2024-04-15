@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //이벤트
+        window.onload=function()
+        {
+            let photo=document.getElementById("photo");
+
+            //점점 작게 이벤트(너비 10씩 감수)
+            //작게는 되는데 왜 크게는 안되지
+            document.getElementById("btnsmall").onclick=function(){
+                let width = photo.getAttribute("width");
+                //width -= 10;
+                photo.setAttribute("width", width - 10);
+                //photo.setAttribute("width", width);
+            }
+
+            //점점 크게 이벤트(너비 10씩 증가)
+            document.getElementById("btnlarge").onclick=function(){
+                let width = photo.getAttribute("width");
+                //더하기일때만 문자열로 인식이 됨
+                //빼기나 곱하기는 숫자로 인식함
+                //let은 거의 무조건 String 타입
+                photo.setAttribute("width", Number(width) + 10);//width를 일단 숫자로 바꾸고 더함
+            }
+            
+            //select 이벤트: 사진변경, 라벨 얻어서 msg에 출력
+            document.getElementById("selphoto").onclick=function()
+            {
+                photo.setAttribute("src", this.value);
+                let label = this.options[this.selectedIndex].label;
+                msg.innerHTML=`<b style="color : blue">${label}</b>입니다`;//msg는 속성이 아니니까 setAttribute로 못바꿔
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>문제 : 이미지 크기 변경 및 사진변경하기</h2>
+    <button type="button" id="btnsmall">점점 작게</button>
+    <button type="button" id="btnlarge">점점 크게</button>
+    <select name="" id="selphoto">
+        <option value="../image/talent/15.jpg">설현</option> 
+        <option value="../image/talent/17.jpg">신민아</option>
+        <option value="../image/talent/19.jpg">수지</option>
+        <option value="../image/talent/12.jpg">박보영</option>
+    </select>
+
+    <br><br>
+    <img src="../image/talent/15.jpg" alt="" id="photo" width="200"><!--style로 준 width는 setAttribute로 못바꾼다.--> 
+    <h2 id="msg">설현입니다.</h2>
+</body>
+</html>
