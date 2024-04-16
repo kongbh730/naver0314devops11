@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 50px;
+            height: 50px;
+            float: left;
+            border: 1px solid black;
+            margin-right: 5px;
+            border-radius: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!--콤보박스 개수만큼 랜덤정수1~45까지 6개 원 안에 출력 -->
+    <h1>로또 번호 생성</h1>
+
+    <!--셀렉트 박스 생성 1부터 10까지-->
+    <select name="" id="selNum">
+        <option value="" hidden disabled selected>로또 생성 갯수</option><!--선택불가, 처음에만 보임-->
+        <script>
+        for(let i = 1; i <= 10; i++)
+        {
+            let s = `<option>${i}개</option>`;
+            document.write(s);
+        }
+        </script>
+    </select>
+
+    <script>
+
+    </script>
+</body>
+</html>
