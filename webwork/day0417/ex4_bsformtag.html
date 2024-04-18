@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
     </style>
 
 </head>
+
 <body>
     <div style="margin: 30px">
         <table class="table table-bordered" style="width:500px;">
@@ -23,15 +25,16 @@
             <tr>
                 <th class="table-info" style="width:100px;">이름</th>
                 <td>
-                   <input type="text" id="txtname" class="form-control"
-                   style="width: 130px;" autofocus placeholder="input name"> 
+                    <input type="text" id="txtname" class="form-control" style="width: 130px;" autofocus
+                        placeholder="input name">
                 </td>
             </tr>
             <tr>
                 <th class="table-info" style="width:100px;">성별</th>
                 <td>
-                    <label><input type="radio" value="남자" name="gender">남자</label><!--라벨 사이에 넣으면 라벨을 눌러도 체크가능-->
-                   <input type="radio" value="여자" name="gender" checked>여자 <!--일부러 여자는 라벨 사이에 안 넣어 본다.--><!--대신 기본 체크가 여자로 되게끔 checked를 지정한다-->
+                    <label><input type="radio" value="남자" name="gender" class="form-check-input">남자</label><!--라벨 사이에 넣으면 라벨을 눌러도 체크가능-->
+                    <input type="radio" value="여자" name="gender" class="form-check-input" checked>여자
+                    <!--일부러 여자는 라벨 사이에 안 넣어 본다.--><!--대신 기본 체크가 여자로 되게끔 checked를 지정한다-->
                 </td>
             </tr>
             <tr>
@@ -49,19 +52,103 @@
             <tr>
                 <th class="table-info" style="width: 100px;">이메일</th>
                 <td>
-                    <input type="text" id="email1" style="width: 80px;">
-                    <b>@</b>
-                    <input type="text" id="email2" style="width: 100px;">
-                    <select id="selemail">
-                        <option hidden disabled selected>select email</option>
-                        <option value="-">직업입력</option>
-                        <option value="naver.com">네이버</option>
-                        <option value="nate.com">네이트</option>
-                        <option value="google.com">구글</option>
-                    </select>
+                    <div class="input-group">
+                        <input type="text" id="email1" style="width: 60px;" class="form-control">
+                        <b>@</b>
+                        <input type="text" id="email2" style="width: 80px;" class="form-control">
+                        <select id="selemail" class="form-sleect form-select-sm">
+                            <option hidden disabled selected>select email</option>
+                            <option value="-">직접입력</option>
+                            <option value="naver.com">네이버</option>
+                            <option value="nate.com">네이트</option>
+                            <option value="google.com">구글</option>
+                        </select>
+                        <script>
+                            //select 이벤트
+                            document.getElementById("selemail").onchange=function(){
+                                let v = this.value;
+                                let e2 = document.getElementById("email2");
+                                if(v=='-')
+                                {
+                                    e2.value="";
+                                    e2.focus();
+                                }
+                                else
+                                {
+                                    e2.value = v;
+                                }
+                            }
+                        </script>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-info" style="width: 100px;">운전면허</th>
+                <td>
+                    <label>
+                        <input type="checkbox" id="lic" class="form-check-input">운전면허
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" class="table-secondary">
+                    <button type="button" class="btn btn-warning" style="width: 120px;" id="btnresult">결과확인</button>
                 </td>
             </tr>
         </table>
+        <div class="alert alert-light msg" style="width: 500px; height:auto">result</div>
     </div>
+    <script>
+        //결과확인 버튼 이벤트
+        document.getElementById("btnresult").onclick=function()
+        {
+            //출력할 div
+            let msg = document.querySelector(".msg");
+            let s= "";
+
+            //이미지
+            let image = document.getElementById("selimage").value;
+            s += `<img src=${image} width=130 align=left hspace=10><br>`;
+
+            //이름
+            let name = document.getElementById("txtname").value;
+            s += `이름 : ${name}<br>`;
+
+            //이메일
+            let em1 = document.getElementById("email1").value;
+            let em2 = document.getElementById("email2").value;
+            let email = em1 + "@" + em2;
+            s += `이메일 : ${email}<br>`;
+
+            //성별
+            let gender = document.getElementsByName("gender");//배열
+            let gg;
+            for(let g of gender)
+            {
+                //체크 상태일때만 value값 얻기
+                if(g.checked)//checked : check상태이면 true 반환
+                {
+                    gg = g.value;
+                }
+            }
+            s += `성별 : ${gg}<br>`;
+
+            //운전면허 //체크박스 : value 없음 ... check상태만 중요//checked, value없을 경우 on 얻음
+            let lic = document.getElementById("lic");//.checked ? "있음" : "없음";//체크 박스는 value가 아니라 checked로 확인?
+            let driver="";
+            if(lic.checked)
+            {
+                driver="있음";
+            }
+            else
+            {
+                driver="없음";
+            }
+            s += `운전면허 : ${driver}<br>`;
+
+            msg.innerHTML=s;
+        }
+    </script>
 </body>
+
 </html>
