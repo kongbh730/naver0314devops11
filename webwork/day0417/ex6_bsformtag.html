@@ -16,9 +16,39 @@
         }
     </style>
     <script>
+        let photo, pname;
+
+        function init()
+        {
+            //로컬 스토리지의 값 불러와서 적용하기
+            //사진, 선색상 유지
+            //사진 src : photosrc, 이름 : photoname, 인덱스 : photoindex
+            photo.setAttribute("src", localStorage.photosrc);
+            pname.innerText = localStorage.photoname;
+            photo.style.borderColor = localStorage.linecolor;
+
+            document.querySelector(".selcolor").selectedIndex=localStorage.lineindex;
+            document.querySelector(".selphoto").selectedIndex=localStorage.photoindex;
+
+            /*//의미 없음....
+            //largephoto의 src를 가져와서 모달의 이미지 변경하기
+            let photoSrc=photo.getAttribute("src");
+            document.querySelector(".modalphoto").setAttribute("src", photoSrc);
+            */
+        }
+
         window.onload = function () {
-            let photo = document.querySelector(".largephoto");
-            let pname = document.querySelector(".photoname");
+            photo = document.querySelector(".largephoto");
+            pname = document.querySelector(".photoname");
+
+            init(); //로컬스토리지의 값 적용하기
+
+            //사진 클릭시 모달 다이얼로그 사진 변경하기//이거 추가//클릭시 이벤트 만들기
+            photo.onclick=function()
+            {
+                let src = this.getAttribute("src");
+                document.querySelector(".modalphoto").setAttribute("src", src);
+            }
 
             //문제1: 선굵기 변경시 사진의 border 굵기 변경하기
             document.querySelector(".selwidth").onchange = function () {
@@ -28,6 +58,10 @@
             //문제2 : 선색상 변경시 사진의 border color 변경
             document.querySelector(".selcolor").onchange = function () {
                 photo.style.borderColor = this.value;
+
+                //로컬스토리지에 "linecolor"에 선 색상 저장,lineindex에 인덱스 저장
+                localStorage.linecolor = this.value;
+                localStorage.lineindex = this.selectedIndex;
             }
 
             //문제3 : 사진 변경시 value 값 얻어서 사진변경하고 label 값 얻어서 이름 변경
@@ -37,6 +71,12 @@
                 //이름얻기
                 let n = this.options[this.selectedIndex].label;
                 pname.innerText = n;
+
+                //사진변경시 3가지 로컬 스토리지에 저장
+                //사진 src : photosrc, 이름 : photoname, 인덱스 : photoindex
+                localStorage.photosrc = this.value;
+                localStorage.photoname= n;
+                localStorage.photoindex=this.selectedIndex;
             }
 
             //문제4 : 선 종류 변경시 사진의 border style 변경
@@ -46,73 +86,57 @@
 
             //굵게 //
             document.getElementById("ckbold").onclick = function () {
-                if (this.checked) 
-                {
+                if (this.checked) {
                     pname.style.fontWeight = "bold";
                 }
-                else 
-                {
+                else {
                     pname.style.fontWeight = "normal";
                 }
             }
 
             //밑줄 //text-decoration
             document.getElementById("ckunder").onclick = function () {
-                if (this.checked) 
-                {
+                if (this.checked) {
                     pname.style.textDecoration = "underline";
                 }
-                else 
-                {
+                else {
                     pname.style.textDecoration = "none";
                 }
             }
 
             //이탤릭 
             document.getElementById("ckitalic").onclick = function () {
-                if (this.checked) 
-                {
+                if (this.checked) {
                     pname.style.fontStyle = "italic";
                 }
-                else 
-                {
+                else {
                     pname.style.fontStyle = "normal";
                 }
             }
-            
-            // let currentphoto = document.querySelector(".largephoto");
-            // //let currentphoto = document.querySelector(".selimage");
-            // let image = document.getElementById("detailimage");
-            // currentphoto.onclick=function()
-            // {
-            //     let src = this.getAttribute("src");
-            //     modalimage.setAttribute("src", src);
-            // }
         }
     </script>
 </head>
 
 <body>
     <!-- The Modal -->
-    <div class="modal" id="myModal">
+    <div class="modal" id="myPhoto">
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">사진 상세보기</h4>
+                    <h4 class="modal-title">원본 사진 확인</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <!--Modal body..-->
-                    <img src="" alt="" width="100%" id="detailimage">
+                    <img src="" class="modalphoto" style="width: 100%;">
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
 
             </div>
@@ -125,8 +149,8 @@
         </caption>
         <tr>
             <td style="width: 300px;" rowspan="4" align="center">
-                <img src="../image/talent/15.jpg" width="180" class="largephoto" style="border: 5px inset gold"
-                data-bs-toggle="modal" data-bs-target="#myModal"><!--모달 클릭 추가-->
+                <img src="../image/talent/15.jpg" width="180" class="largephoto"
+                    style="border: 5px inset gold; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#myPhoto"><!--모달 클릭 추가-->
             </td>
             <td style="width: 70px;">선굵기</td>
             <td>
@@ -210,4 +234,5 @@
         </tr>
     </table>
 </body>
+
 </html>
