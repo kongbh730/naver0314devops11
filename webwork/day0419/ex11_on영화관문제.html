@@ -76,6 +76,8 @@
             let b = `<button type="button" class="a" id="btn1">영화예매</button>`;
             $("#one").html(b);
 
+            //========================================= 내 풀이 ==============================================
+            /*
             //btn1 이벤트
             $("#btn1").click(function () {
                 //alert("영화예매 버튼");
@@ -84,7 +86,7 @@
                 let select_movie = `<button type="button" class="b" id="btn2_m">영화선택</button>`;
                 $("#two").html(select_theater + " " + select_movie);
             });
-            //========================================= 내 풀이 ==============================================
+            
             //btn2_t이벤트
             $(document).on("click", "#btn2_t", function () {
                 let theaters = ["CGV 강남점", "MEGABOX 강남점", "CGV 교보타워점"];
@@ -132,36 +134,42 @@
             function showResult() {
                 $("#result").html(result_print); // 결과 출력
             }
+            */
             //============================================================================
             //==========================강사님 풀이============================
-            /*
-             //처음에 존재하지 않았던 요소에 대한 이벤트는 on사용
-             $(document).on("click","#btn2",function(){
-                var s="<h3 class='theater'>CGV 강남점</h3>";
-                s+="<h3 class='theater'>MEGABOX 강남점</h3>";
-                s+="<h3 class='theater'>CGV 교보타워점</h3>";
-                $("#three").html(s);	
+            $("#btn1").click(function () {
+                var b = "<button type='button' id='btn2' class='b'>극장 선택</button>";
+                b += "&nbsp;<button type='button' id='btn3' class='b'>영화 선택</button>";
+                $("#two").html(b);
             });
-	  
-            //영화
-            $(document).on("click","#btn3",function(){
-                var s="<h3 class='movie'>바람과 같이 사라지다</h3>";
-                s+="<h3 class='movie'>엑시트</h3>";
-                s+="<h3 class='movie'>괴물</h3>";
+
+            //처음에 존재하지 않았던 요소에 대한 이벤트는 on사용
+            $(document).on("click", "#btn2", function () {
+                var s = "<h3 class='theater'>CGV 강남점</h3>";
+                s += "<h3 class='theater'>MEGABOX 강남점</h3>";
+                s += "<h3 class='theater'>CGV 교보타워점</h3>";
                 $("#three").html(s);
             });
-            
+
+            //영화
+            $(document).on("click", "#btn3", function () {
+                var s = "<h3 class='movie'>바람과 같이 사라지다</h3>";
+                s += "<h3 class='movie'>엑시트</h3>";
+                s += "<h3 class='movie'>괴물</h3>";
+                $("#three").html(s);
+            });
+
             //영화제목이나 영화관에서 클릭하면 해당 값을 얻어서
             //#result 에 출력
-            $(document).on("click","#three h3",function(){
-                var select=$(this).attr("class");	
-                if(select=='theater')
-                    theater="극장명 : "+$(this).text();
+            $(document).on("click", "#three h3", function () {
+                var select = $(this).attr("class");
+                if (select == 'theater')
+                    theater = "극장명 : " + $(this).text();
                 else
-                    movie="영화제목 : "+$(this).text();
-                $("#result").html(theater+"<br>"+movie);
+                    movie = "영화제목 : " + $(this).text();
+                $("#result").html(theater + "<br>" + movie);
             });
-            */
+
             //===============================================================
         });
     </script>
