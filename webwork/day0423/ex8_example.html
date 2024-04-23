@@ -28,8 +28,6 @@
         }
 
         div.photos figure.photo img {
-            float: left;
-            margin: 10px;
             width: 150px;
         }
 
@@ -42,7 +40,7 @@
             init();
 
             //전체선택 체크박스 이벤트
-            $("allcheck").click(function(){
+            $("#allcheck").click(function(){
                 //현재 체크값 얻어도기
                 let ck = $(this).prop("checked");
                 //모든 삭제 체크박스에 적용
@@ -50,7 +48,7 @@
             });
 
             //선택한 사진 삭제하기 이벤트
-            $("btndel").click(function(){
+            $("#btndel").click(function(){
                 //$("delck:checked").parent().parent().parent().remove();
 
                 //parents:모든 부모들
@@ -78,6 +76,7 @@
                 </figure>
                 `
             }
+            $("div.photos").html(s);
         }
     </script>
 </head>
@@ -87,8 +86,8 @@
         <label>
             <input type="checkbox" id="allcheck">전체선택
         </label>
-        <button type="button" class="btn btn-outline-danger" id="btninit">선택한 사진 삭제하기</button>
-        <button type="button" class="btn btn-outline-danger" id="btndel">다시 원래대로 배치</button>
+        <button type="button" class="btn btn-outline-danger" id="btninit">다시 원래대로 배치</button>
+        <button type="button" class="btn btn-outline-danger" id="btndel">선택한 사진 삭제하기</button>
         <div class="photos"></div>
     </div>
 
