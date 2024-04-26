@@ -23,27 +23,15 @@ body * {
 </style>
 </head>
 <body>
-	<table class="table table-bordered" style="width: 100%">
-		<caption align="top"><h3><b>[구구단]</b></h3></caption>
-		<tr class="table-light">
-			<%
-			for(int dan = 2; dan <= 9; dan++)
-			{%>
-			<td align="center"><%=dan %>단</td>
-			<%}
-			%>
-		</tr>
-		<tr>
-		<%
-		for(int i=1; i <=9; i++)
-		{%><tr><%
-			for(int dan=2; dan<=9; dan++)
-			{%>
-				<td align="center"><%=dan %> * <%=i %> = <%=dan*i %></td>
-			<%}
-		%></tr><%}
-		%>
-		</tr>
-	</table>
+	<h5>include1 파일에서 include2 결과 포함시키기</h5>
+	<%
+		request.setCharacterEncoding("utf-8");//한글 엔코딩
+	%>
+	<div>
+		<jsp:include page="./ex4_include2.jsp">
+			<jsp:param value="Happy Day!!! 안녕!!!" name="msg" />
+			<jsp:param value="mycar15.png" name="car" />
+		</jsp:include>
+	</div>
 </body>
 </html>
