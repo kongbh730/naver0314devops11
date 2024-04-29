@@ -40,51 +40,64 @@ div.car img {
 	border-radius: 20px;
 }
 </style>
-
 <script>
-
+	
 </script>
 </head>
 <%
-	List <CarDto>list = new Vector<>();
-	//5개의 상품을 리스트에 등록해보자
-	list.add(new CarDto("BMW", "mycar1.png", 5000, 4, "lightgray"));
-	list.add(new CarDto("AUDI", "mycar3.png", 4000, 2, "red"));
-	list.add(new CarDto("MINI", "mycar5.png", 2300, 5, "green"));
-	list.add(new CarDto("VOLKSWAGEN", "mycar12.png", 3500, 1, "yellow"));
+List<CarDto> list = new Vector<>();
+//5개의 상품을 리스트에 등록해보자
+list.add(new CarDto("BMW", "mycar1.png", 5000, 4, "lightgray"));
+list.add(new CarDto("AUDI", "mycar3.png", 4000, 2, "red"));
+list.add(new CarDto("MINI", "mycar5.png", 2300, 5, "green"));
+list.add(new CarDto("VOLKSWAGEN", "mycar12.png", 3500, 1, "yellow"));
 %>
 <body>
 	<%
 	//상품출력
-	for(CarDto dto:list)
+	for (CarDto dto : list) 
 	{%>
-	<div class="car" style="background-color: <%=dto.getColor() %>">
-		<img src="./car/<%=dto.getPhoto()%>"> <br>
-		<br>
+	<div class="car" style="background-color: <%=dto.getColor()%>">
+		<img src="./car/<%=dto.getPhoto()%>"><br><br>
 		<h6>
-			모델명 : <%=dto.getModel() %>
+			모델명 :<%=dto.getModel()%>
 		</h6>
 		<h6>
-			가격 : <%=dto.getPrice() %>만원
+			가격 :<%=dto.getPrice()%>만원
 		</h6>
 		<h6>
-			수량 : <%=dto.getCount()  %>대
+			수량 :<%=dto.getCount()%>대
 		</h6>
-		<button class="purchasebtn" onclick="purchaseCar()">구매</button>
+		<!-- <button class="purchasebtn" onclick="purchaseCar(this)">구매</button> -->
+		<button class="purchasebtn" data-model="<%=dto.getModel()%>" data-price="<%=dto.getPrice()%>" data-count="<%=dto.getCount()%>" onclick="purchaseCar(this)">구매</button>
 	</div>
 	<%}
 	%>
-	
-	<!-- 버튼 수정하기 -->
+
 	<script>
-        $("#btn1").click(function(){
-            $("img.photo").each(function(idx){
-                //let src=`../image/mycar/mycar${idx + 1}.png`;
-                //$(this).attr("src", src);
-            });
-        });"C:/naver0314/workall/image/mycar/mycar13.png"
-    </script>
-    
+	/*
+	function purchaseCar(car){
+		let count = document.querySElector("")
+		alert("구매했습니다.");
+	};
+	*/
+	function purchaseCar(button) {
+        var model = button.getAttribute("data-model");
+        var price = button.getAttribute("data-price");
+        var count = button.getAttribute("data-count");
+        if(count > 0)
+        {
+        	count--;
+        	button.setAttribute("data-count", count);
+        	alert("구매했습니다!" + " 재고 수 : " + count);	
+        }
+        else
+        {
+        	alert("재고가 부족합니다!");
+        }
+        //alert("모델명: " + model + ", 가격: " + price + "만원, 수량: " + count + "대를 구매했습니다.");
+    }
+	</script>
 </body>
 </html>
 

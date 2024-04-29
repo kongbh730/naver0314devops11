@@ -36,9 +36,9 @@
 	회원 등급 : <%=member==null?"일반회원" : "우수회원" %>
 	
 	<br><br>
-	<a href="javascript:history.back()">다시 선택 #1</a>
+	<a href="javascript:history.back()">다시 선택 #1</a><!-- 입력값 유지 -->
 	<br><br>
-	<a href="ex10_formtag.jsp">다시 선택 #2</a>
+	<a href="ex10_formtag.jsp">다시 선택 #2</a> <!-- 입력값 초기화 -->
 </div>
 </body>
 </html>

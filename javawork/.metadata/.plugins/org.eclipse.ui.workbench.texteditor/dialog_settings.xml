@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="&lt;h3&gt;html주석과 jsp주석 비교하기&lt;/h3&gt;"/>
+		<item key="selection" value="$(&quot;#purchasebtn&quot;).click(function() {"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="$(&quot;#purchasebtn&quot;).click(function() {"/>
+			<item value="purchaseCar"/>
 			<item value="&lt;h3&gt;html주석과 jsp주석 비교하기&lt;/h3&gt;"/>
 			<item value="ck_sawon_gender"/>
 			<item value="ck_sa"/>
 			<item value="writeStudent"/>
 			<item value="table"/>
 			<item value="char []c = new char[3];"/>
-			<item value="sleep"/>
-			<item value="implements"/>
 		</list>
 		<list key="replacehistory">
 		</list>
