@@ -2,7 +2,6 @@
 <%@page import="data.dto.ShopDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
     <%
     	//1. 엔코딩
     	request.setCharacterEncoding("utf-8");
@@ -13,15 +12,23 @@
     	String sphoto=request.getParameter("sphoto");
     	int sprice = Integer.parseInt(request.getParameter("sprice"));
     	int scount = Integer.parseInt(request.getParameter("scount"));
+    	String shopidx = request.getParameter("shopidx");
     	
-    	//3. dto에 넣기 -setter로 넣기 (총 6개);
-    	//ShopDto dto = new ShopDto(sname, sprice, scount, scolor, sphoto);
+    	//3. dto에 넣기 -setter로 넣기 (총 6개), insert랑 다르게 값 지정
+    	ShopDto dto = new ShopDto();
+
+    	dto.setShopidx(shopidx);
+    	dto.setSname(sname);
+    	dto.setScolor(scolor);
+    	dto.setSphoto(sphoto);
+    	dto.setSprice(sprice);
+    	dto.setScount(scount);
     	
     	//4. dao 선언
     	ShopDao dao = new ShopDao();
     	
-    	
-    	
+    	//5. update 메서드 호출
+    	dao.updateShop(dto);
     	
     	//6. shoplist.jsp로 이동
     	response.sendRedirect("shoplist.jsp");//url주소 바뀜

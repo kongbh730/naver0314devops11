@@ -105,6 +105,7 @@ img.photo{
 				<tr>
 					<td colspan="2" align="center">
 						<button type="submit" class="btn btn-secondary">DB수정</button>
+						<br>
 						<button type="button" class="btn btn-secondary" onclick="history.back();">history.back() 이전으로</button>
 						<button type="button" class="btn btn-secondary" onclick="history.go(-1);">history.go(-1) 이전으로</button>
 					</td>
