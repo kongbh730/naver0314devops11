@@ -1,3 +1,5 @@
+<%@page import="data.dto.ShopDto"%>
+<%@page import="data.dao.ShopDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,35 +32,46 @@ img.photo{
 }
 </style>
 </head>
+<%
+	//shopidx int 타입으로 읽기
+	int shopidx = Integer.parseInt(request.getParameter("shopidx"));
+	//dao 선언
+	ShopDao dao = new ShopDao();
+	//dto 가져오기
+	ShopDto dto = dao.getSangpum(shopidx);
+	
+%>
 <body>
 	<div style="margin: 10px; width: 300px;">
-		<form action="./shopaction.jsp" method="post">
+		<form action="./shopupdateaction.jsp" method="post">
+		<!-- hidden : 서버 전송시 각 상품에 대한 인덱스 값이 같이 보내져야 한다. -->
+		<input type="hidden" name="shopidx" value="<%=shopidx %>">
 			<table class="table table-boardered">
 				<caption align="top">
-					<b>상품 등록</b>
+					<b>상품 수정</b>
 				</caption>
 				<tr>
 					<th width="100" class="table-danger">상품명</th>
 					<td><input type="text" name="sname" class="form-control"
-						required="required">
+						required="required" value="<%=dto.getSname()%>">
 					</td>
 				</tr>
 				<tr>
 					<th width="100" class="table-danger">상품가격</th>
 					<td><input type="text" name="sprice" class="form-control"
-						required="required">
+						required="required" value="<%=dto.getSprice()%>">
 					</td>
 				</tr>
 				<tr>
 					<th width="100" class="table-danger">상품갯수</th>
 					<td><input type="number" name="scount" class="form-control"
-						required="required" min="1" max="5" step="1" value="1">
+						required="required" min="1" max="5" step="1" value="<%=dto.getScount()%>">
 					</td>
 				</tr>
 				<tr>
 					<th width="100" class="table-danger">상품색상</th>
 					<td><input type="color" name="scolor" class="form-control"
-						value="#ccffff">
+						value="<%=dto.getScolor()%>">
 					</td>
 				</tr>
 				<tr>
@@ -67,12 +80,20 @@ img.photo{
 						<select name="sphoto" id="sphoto" class="form-select">
 							<%
 							for(int i = 1; i <= 34; i++)
-							{%>
-								<option value='../shop/<%=i %>.<%=i == 24?"gif":"jpg" %>'>상품번호 <%=i %></option>
-							<%}
+							{
+								String v = "../shop/" + i + "." + (i == 24 ? "gif" : "jpg");
+								if(v.equals(dto.getSphoto()))
+								{%>
+									<option value="<%=v %>" selected>상품번호 <%=i %></option><!-- 전달받은 상품과 같은 사진이면 selected -->
+								<%}
+								else
+								{%>
+									<option value="<%=v %>" >상품번호 <%=i %></option><!-- 그 이외는 그냥 수행 -->
+								<%}
+							}
 							%>				
 						</select>
-						<img alt="" src="../shop/1.jpg" class="photo">
+						<img alt="" src="<%=dto.getSphoto() %>" class="photo">
 						<script type="text/javascript">
 							//사진을 선택하면 이미지가 바뀌도록 이벤트 추가
 							$("#sphoto").change(function(){
@@ -83,7 +104,9 @@ img.photo{
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<button type="submit" class="btn btn-secondary">DB에 저장</button>
+						<button type="submit" class="btn btn-secondary">DB수정</button>
+						<button type="button" class="btn btn-secondary" onclick="history.back();">history.back() 이전으로</button>
+						<button type="button" class="btn btn-secondary" onclick="history.go(-1);">history.go(-1) 이전으로</button>
 					</td>
 				</tr>
 			</table>
