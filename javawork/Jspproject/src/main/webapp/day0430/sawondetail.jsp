@@ -1,3 +1,5 @@
+<%@page import="data.dto.SawonDto"%>
+<%@page import="data.dao.SawonDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +20,58 @@
         }
     </style>
 </head>
+<%
+	//num
+	int num = Integer.parseInt(request.getParameter("num"));
+	//dao
+	SawonDao dao = new SawonDao();
+	//dto
+	SawonDto dto = dao.getData(num);
+%>
 <body>
-	
+<h2>상세보기</h2>
+<div style="margin: 20px; width: 500px;">
+	<table>
+		<caption align="top">
+			<h2><b><%=dto.getName()%> 사원정보</b></h2>
+		</caption>
+		<tr>
+			<td width="250">
+				<img style="width: 250px;" src='<%=dto.getPhoto().equals("no")?"../image/noimage1.png":dto.getPhoto()%>'>
+			</td>
+			<td>
+				<h5>나이 : <%=dto.getAge() %>세</h5>
+				<h5>입사일 : <%=dto.getBirthday() %></h5>
+				<h5>부서명 : <%=dto.getBuseo() %></h5>
+				<h5>성별 : <%=dto.getGender() %></h5>
+				<h5>주소 : <%=dto.getAddr() %></h5>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<button type="button" class="btn btn-sm btn-warning" style="width: 80px" onclick="location.href='sawonform.jsp'">사원추가</button>
+				<button type="button" class="btn btn-sm btn-warning" style="width: 80px" onclick="location.href='sawonlist.jsp'">사원목록</button>
+				<button type="button" class="btn btn-sm btn-warning" style="width: 80px" onclick="location.href='sawonupdateform.jsp?num=<%=dto.getNum() %>'">정보수정</button>
+				<button type="button" class="btn btn-sm btn-warning" style="width: 80px" id="delsawon" num="<%=dto.getNum()%>" sawonname="<%=dto.getName()%>">사원삭제</button>
+			</td>
+		</tr>
+	</table>
+</div>
+<script type="text/javascript">
+	//사원삭제 버튼 이벤트
+	$("#delsawon").click(function(){
+		let num=$(this).attr("num");
+		let sawonname=$(this).attr("sawonname");
+		//이건 또 왜 됨?///////////시발
+		let a = confirm(`<%=dto.getName()%> 사원정보를 삭제할까요?`); //됨
+		//let a = confirm(`${sawonname} 사원정보를 삭제할까요?`); //됨
+		//let a = confirm(`\${sawonname} 사원정보를 삭제할까요?`); //됨
+		//let a = confirm(sawonname + " 사원정보를 삭제할까요?"); //강사님 풀이 //됨
+		if(a)
+		{
+			location.href="sawondelete.jsp?num=" + num;//페이지 이동
+		}
+	});
+</script>
 </body>
 </html>

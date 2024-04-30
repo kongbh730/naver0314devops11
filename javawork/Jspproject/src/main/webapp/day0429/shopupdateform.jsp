@@ -39,7 +39,6 @@ img.photo{
 	ShopDao dao = new ShopDao();
 	//dto 가져오기
 	ShopDto dto = dao.getSangpum(shopidx);
-	
 %>
 <body>
 	<div style="margin: 10px; width: 300px;">

@@ -18,6 +18,3 @@
 		//사원목록으로 이동
 		response.sendRedirect("sawonlist.jsp");
 	%>
-	    
-    
-    

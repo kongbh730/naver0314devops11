@@ -130,4 +130,25 @@ public class SawonDao {
 		
 		return dto;
 	}
+	
+	public void deleteSawon(int num)
+	{
+		String sql = "delete from mysawon where num=?";
+		
+		Connection conn=db.getConnection();//db 연결
+		PreparedStatement pstmt=null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);//바인딩
+			pstmt.setInt(1, num);
+			pstmt.execute();//실행
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally 
+		{
+			db.dbClose(pstmt, conn);
+		}
+	}
 }
