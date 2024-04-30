@@ -63,11 +63,22 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				<td colspan="2" align="center">
 					<button type="button" class="btn btn-outline-danger btn-sm" style="width: 80px" onclick="location.href='shoplist.jsp'">목록</button>
 					<button type="button" class="btn btn-outline-danger btn-sm" style="width: 80px" onclick="location.href='shopupdateform.jsp?shopidx=<%=dto.getShopidx()%>'">수정</button>
-					<button type="button" class="btn btn-outline-danger btn-sm" style="width: 80px" onclick="location.href='shopdelete.jsp?shopidx=<%=dto.getShopidx()%>'">삭제</button>
+					<button type="button" class="btn btn-outline-danger btn-sm" style="width: 80px" onclick="location.href='shopdelete.jsp?shopidx=<%=dto.getShopidx()%>'">삭제1</button>
+					<button type="button" class="btn btn-outline-danger btn-sm" style="width: 80px" shopidx="<%=shopidx %>" id="delshop">삭제2</button>
 					<button type="button" class="btn btn-outline-danger btn-sm" style="width: 80px" onclick="location.href='shopform.jsp'">상품추가</button>
 				</td>
 			</tr>
 		</table>
 	</div>
+	<script type="text/javascript">
+	//삭제2 버튼 이벤트
+	$("#delshop").click(function(){
+		let shopidx=$(this).attr("shopidx");
+		let a = confirm(`\${shopidx} 번 상품을 삭제할까요?`);//jsp에서 리터럴 스크립트에 변수를 사용할 때 $를 쓰려면 \$로 적어야 한다.//a는 확인버튼
+		if(a){
+			location.href="shopdelete.jsp?shopidx=" + shopidx;//페이지 이동
+		}
+	});
+	</script>
 </body>
 </html>

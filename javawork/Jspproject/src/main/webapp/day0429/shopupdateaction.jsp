@@ -31,5 +31,9 @@
     	dao.updateShop(dto);
     	
     	//6. shoplist.jsp로 이동
-    	response.sendRedirect("shoplist.jsp");//url주소 바뀜
+    	//response.sendRedirect("shoplist.jsp");//url주소 바뀜
+    	
+    	//6. shopdetail 페이지로 이동하고 싶어//이때 shopidx를 주어 수정된 데이터가 있는 페이지로 이동 가능하다
+    	response.sendRedirect("shopdetail.jsp?shopidx="+shopidx);
+    	
     %>
