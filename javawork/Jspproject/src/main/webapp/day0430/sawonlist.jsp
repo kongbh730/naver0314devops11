@@ -52,29 +52,36 @@ div.list img {
 	//list 가져오기
 	List<SawonDto> list = dao.getAllSawons();
 	%>
-</body>
-<div style="margin: 20px; width: 500px">
-	<div class="input-group">
-		<h5 class="alert alert-danger" style="width: 400px;">
-			총
-			<%=list.size()%>명의 사원이 있습니다.
-		</h5>
-		<button type="button" class="btn btn-sm btn-info"
-			onclick="location.href='sawonform.jsp'"
-			style="margin-left: 10px; height: 50px">사원추가</button>
+	<div style="margin: 20px; width: 500px">
+		<div class="input-group">
+			<h5 class="alert alert-danger" style="width: 400px;">
+				총
+				<%=list.size()%>명의 사원이 있습니다.
+			</h5>
+			<button type="button" class="btn btn-sm btn-info"
+				onclick="location.href='sawonform.jsp'"
+				style="margin-left: 10px; height: 50px">사원추가</button>
+		</div>
 	</div>
-</div>
-<%
-for (SawonDto dto : list) {
-%>
-<div class="list">
-	<img
-		src='<%=dto.getPhoto().equals("no") ? "../image/noimage1.png" : dto.getPhoto()%>'>
-	<br><%=dto.getName()%>사원 <br>
-	<button type="button" class="btn btn-sm btn-outline-danger"
-		onclick="location.href='sawondetail.jsp?num=<%=dto.getNum()%>'">상세보기</button>
-</div>
-<%
+	<div style="margin: 20px 50px;">
+		<button type="button" class="btn btn-success" style="width: 170px;"
+			onclick="location.href='sawongenderanalysis.jsp'">우리회사성별분석표</button>
+
+		<button type="button" class="btn btn-success" style="width: 170px;"
+			onclick="location.href='sawonbuseoanalysis.jsp'">우리회사부서별분석표</button>
+	</div>
+	<%
+	for (SawonDto dto : list) {
+	%>
+	<div class="list">
+		<img
+			src='<%=dto.getPhoto().equals("no") ? "../image/noimage1.png" : dto.getPhoto()%>'>
+		<br><%=dto.getName()%>사원 <br>
+		<button type="button" class="btn btn-sm btn-outline-danger"
+			onclick="location.href='sawondetail.jsp?num=<%=dto.getNum()%>'">상세보기</button>
+	</div>
+	<%
 }
 %>
+</body>
 </html>

@@ -26,3 +26,28 @@ create table mysawon(
 select * from mysawon;
     
 drop table mysawon;
+
+create table mystudent(
+	num smallint auto_increment primary key,
+    java smallint,
+    spring smallint,
+    html smallint,
+    name varchar(20),
+    blood varchar(10),
+    license char(1),
+    writeday datetime
+);
+select * from mystudent;
+
+drop table mystudent;
+
+create table mymemo(
+	num smallint auto_increment primary key,
+    uploadphoto varchar(30),
+    title varchar(100), 
+    content varchar(1000),
+    writeday datetime
+);
+select * from mymemo;
+
+drop table mymemo;

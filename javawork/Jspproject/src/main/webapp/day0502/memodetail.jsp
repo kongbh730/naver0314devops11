@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="data.dto.MemoDto"%>
+<%@page import="data.dao.MemoDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +21,22 @@
         }
     </style>
 </head>
+<%
+	int num = Integer.parseInt(request.getParameter("num"));
+	MemoDao dao = new MemoDao();
+	MemoDto dto = dao.getData(num);
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+%>
 <body>
-	
+<h3>
+	<b><%=dto.getTitle() %></b>
+</h3>
+<h6 style="color: gray;"><%=sdf.format(dto.getWriteday()) %></h6>
+<img alt="" src="../save/<%=dto.getUploadPhoto()%>" style="max-width: 400px;" border="1">
+<br><br>
+<!-- content는 여러줄 이므로 pre태그를 이용하거나 replace로 \n을 <br>로 바꿔야 한다 -->
+<pre style="font-size:20px"><%=dto.getContent() %></pre>	
+<hr>
+<button type="button" class="btn btn-info" onclick="history.back()">이전으로</button>
 </body>
 </html>

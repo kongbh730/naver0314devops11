@@ -80,5 +80,4 @@ public class ShopDto {
 		this.writeday = writeday;
 	}
 	
-	
 }
