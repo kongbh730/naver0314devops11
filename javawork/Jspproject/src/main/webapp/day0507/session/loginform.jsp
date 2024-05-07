@@ -30,7 +30,7 @@
 		<caption align="top">
 			<b>회원 로그인</b>
 			<label>
-				<input type="checkbox" name="save" style="margin-left: 50px" <%=writeid.length()==0?"":"checked" %>>아이디 저장
+				<input type="checkbox" name="save" style="margin-left: 50px;" <%=writeid.length()==0?"":"checked" %>>아이디저장
 			</label>
 		</caption>
 			<tr>

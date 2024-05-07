@@ -11,7 +11,7 @@
 		//세션에 저장
 		session.setAttribute("myid", myid);
 		session.setAttribute("loginok", "yes");
-		session.setAttribute("saveof", save==null?"no":"yes");
+		session.setAttribute("saveok", save==null?"no":"yes");
 		//세션유효시간 지정(기본 30분)
 		session.setMaxInactiveInterval(60*60*3);//3시간 유지
 		//메인으로 이동

@@ -22,6 +22,7 @@
 <style>
 body * {
 	/*font-family: 'Jua';*/
+	
 }
 
 .container {
@@ -83,12 +84,12 @@ body * {
 	<div style="text-align: right;">
 		<button type="button" onclick="location.href='insertform.jsp'">영화추가</button>
 		<button type="button" onclick="location.href='loginform.jsp'">로그인</button>
-		사용자 : manager1 <!-- 이후 추가기능 -->
-		&nbsp;&nbsp;&nbsp;       
+		<!-- 사용자 : manager1 -->
+		<!-- 이후 추가기능 -->
+		&nbsp;&nbsp;&nbsp;
 	</div>
 	<div style="background-color: black">
-		<br>
-		<br>
+		<br> <br>
 		<div class="container">
 			<!-- 가로 스크롤을 감싸는 컨테이너 -->
 			<%
@@ -123,13 +124,14 @@ body * {
 
 	<script>
 	//마우스 휠 이벤트 추가
-		document.querySelector(".container").addEventListener("wheel",
-				function(event) {
-					if (event.deltaY !== 0) {
-						event.preventDefault();
-						this.scrollLeft += event.deltaY;
-					}
-				});
+		document.querySelector(".container").addEventListener("wheel",function(event) 
+		{
+			if (event.deltaY !== 0) 
+			{
+				event.preventDefault();
+				this.scrollLeft += event.deltaY;
+			}
+		});
 	</script>
 </body>
 </html>

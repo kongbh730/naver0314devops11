@@ -30,7 +30,7 @@ MovieDto dto = dao.getData(num);
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <style>
 body {
-	font-family: 'Jua';
+	/*font-family: 'Jua';*/
 }
 </style>
 
@@ -64,15 +64,22 @@ body {
 	</div>
 
 	<div style="">
+	<br>
 		<table class="table table-bordered" style="height: 150px;">
 			<tr>
-				<br>
-				<h3>영화정보</h3>
+				<h3>
+					<i >
+						<b style="font-size:40px">
+							<%=dto.getTitle() %><nbsp><nbsp>
+						</b>
+					</i>
+					영화정보
+				</h3>
 			</tr>
 			<tr>
-				<td style="width: 50px">장르<br>클릭시 동일 장르 영화 탐색 기능 추가
+				<td style="width: 50px"><b>장르</b>
 				</td>
-				<td style="width: 100px"><%=dto.getGenre()%></td>
+				<td style="width: 100px"><b><%=dto.getGenre()%></b><br>클릭시 동일 장르 영화 탐색 기능 추가</td>
 				<td rowspan='3' style="width: 200px">
 					<div>
 						<%=dto.getIntroduce()%>
@@ -80,14 +87,14 @@ body {
 				</td>
 			</tr>
 			<tr>
-				<td>감독<br>클릭시 동일 감독 영화 탐색 기능 추가
+				<td><b>감독</b>
 				</td>
-				<td><%=dto.getDirector()%></td>
+				<td><b><%=dto.getDirector()%></b><br>클릭시 동일 감독 영화 탐색 기능 추가</td>
 			</tr>
 			<tr>
-				<td>출연<br>클릭시 동일 출연진 영화 탐색 기능 추가
+				<td><b>출연</b>
 				</td>
-				<td><%=dto.getActors()%></td>
+				<td><b><%=dto.getActors()%></b><br>클릭시 동일 출연진 영화 탐색 기능 추가</td>
 			</tr>
 		</table>
 	</div>
@@ -114,6 +121,16 @@ body {
         	location.href = 'deleteaction.jsp?num=<%=dto.getNum()%>';
 			}
 		};
+	</script>
+	<script>
+	//마우스 휠 이벤트 추가
+		document.querySelector(".container").addEventListener("wheel",
+				function(event) {
+					if (event.deltaY !== 0) {
+						event.preventDefault();
+						this.scrollLeft += event.deltaY;
+					}
+				});
 	</script>
 </body>
 </html>

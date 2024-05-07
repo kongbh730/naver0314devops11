@@ -27,7 +27,6 @@ body * {
 		<form action="./signupaction.jsp" method="post"> 
 			<table class="table table-bordered"
 				style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px">
-				<caption style="text-align: center; caption-side: top; cursor: pointer;" onclick="location.href='loginform.jsp'"><h2>비트캠프701 커뮤니티</h2></caption>
 				<tr>
 					<td colspan="2" align="center"><b>회원가입</b></td>
 				</tr>
@@ -48,15 +47,16 @@ body * {
 				</tr>
 				<tr>
 					<td align="center" style="width: 200px">이메일</td>
-					<td style="width: 200px"><input type="email" name="email"
-						required="required"></td>
+					<td style="width: 200px">
+						<input type="email" name="email"required="required">
+					</td>
 				</tr>
 				<tr>
-					<td align="center" style="width: 200px">역할</td>
+					<td align="center" style="width: 200px">권한</td>
 					<td style="width: 200px">
 						<select>
 							<option>사용자</option>
-							<option>관리자</option>
+							<option>관리자</option>	
 						</select>
 					</td>
 				</tr>
