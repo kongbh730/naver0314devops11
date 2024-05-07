@@ -45,6 +45,7 @@ public class SawonDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
+	
 	//전체출력
 	public List<SawonDto> getAllSawons()
 	{

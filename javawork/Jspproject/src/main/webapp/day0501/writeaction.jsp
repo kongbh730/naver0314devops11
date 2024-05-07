@@ -1,7 +1,7 @@
 <%@page import="data.dao.StudentDao"%>
 <%@page import="data.dto.StudentDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 	//한글 엔코딩
 	request.setCharacterEncoding("utf-8");
