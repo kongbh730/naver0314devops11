@@ -35,7 +35,29 @@ body {
 </style>
 
 <script>
-
+	// 왼쪽 오른쪽 자동으로 스크롤 이동 함수
+	var right_direction = true;
+	function autoScroll() {
+		var scrollContainer = document.querySelector('.container');
+		if (right_direction == true) {
+			scrollContainer.scrollLeft += 2; // 스크롤 속도 조절 가능
+			// 스크롤이 오른쪽 끝에 도달하면 왼쪽 끝으로 이동
+			if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth
+					- scrollContainer.clientWidth - 2)) {
+				right_direction = false;
+			}
+		} 
+		else//right_direction == false;
+		{
+			scrollContainer.scrollLeft -= 1; // 스크롤 속도 조절 가능//오른쪽 스크롤이 왼쪽 스크롤보다 더 빠르게 느껴짐//그래서 속도 조절
+			// 스크롤이 왼쪽 끝에 도달하면 오른쪽 끝으로 이동
+			if (scrollContainer.scrollLeft < 2) {
+				right_direction = true;
+			}
+		}
+	}
+	// Nms마다 autoScroll 함수 호출하여 자동으로 스크롤 이동
+	setInterval(autoScroll, 20);
 </script>
 </head>
 
@@ -101,7 +123,7 @@ body {
 	<div style="background-color: black">
 	<div class="container" style="overflow-x: auto; white-space: nowrap; background-color: black">
 		<%
-		for (int i = 1; i <= 4; i++) {
+		for (int i = 1; i <= 9; i++) {
 		%>
 		<img
 			style="width: 200px; height: 300px; display: inline-block; margin-right: 10px;"
