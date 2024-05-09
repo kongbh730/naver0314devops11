@@ -110,11 +110,11 @@ function list1()
 				
 				if(photo=='no')
 				{
-					s+= "<img src='../image/noimage2.png' align='left'>";
+					s+= "<img src='../image/noimage2.png'>";
 				}
 				else
 				{
-					s+= `<img src="${photo}" align="left">`;
+					s+= `<img src="${photo}">`;
 				}
 				s+= `
 					<b style="color: red">${buseo}</b>&nbsp;${name}
@@ -182,7 +182,7 @@ function list3()
 			`
 			$(data).find("sawon").each(function(idx,ele)
 			{
-				let s ="<tr><td>";
+				let s ="";
 				let name=$(this).find("name").text();
 				let buseo=$(this).find("buseo").text();
 				let age=$(this).find("age").text();
@@ -191,14 +191,15 @@ function list3()
 				let addr=$(this).find("addr").text();
 				
 				s+= `
-					${name}</td>
+					<tr>
+					<td>${name}</td>
 					<td>${buseo}</td>
 					<td>${age}세</td>
 					<td>${gender}</td>
 					<td>${addr}</td>
-					<td>${ipsaday}
+					<td>${ipsaday}</td>
+					</tr>
 				`;
-				s+="</td></tr>"
 				w += s;
 			});
 			w += "</table></div>";
