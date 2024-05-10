@@ -220,4 +220,56 @@ public class ShopDao {
 			connect.dbClose(pstmt, conn);
 		}
 	}
+	
+	//순서변경하기
+	public List<ShopDto> getShopDatas(int idx)
+	{
+		List<ShopDto> list=new Vector<ShopDto>();
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql = "";
+		if(idx == 1)
+		{
+			sql="select * from myshop order by shopidx asc";//등록순
+		}
+		else if(idx == 2)
+		{
+			sql="select * from myshop order by sprice asc";//낮은가격순
+		}
+		else if(idx == 2)
+		{
+			sql="select * from myshop order by sprice desc";//높은 가격순
+		}
+		else
+		{
+			sql="select * from myshop order by sname asc";//상품명순
+		}
+		
+		conn=connect.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ShopDto dto=new ShopDto();
+				//db 에서 가져와서 dto에 넣기
+				dto.setShopidx(rs.getString("shopidx"));
+				dto.setSname(rs.getString("sname"));
+				dto.setSprice(rs.getInt("sprice"));
+				dto.setScount(rs.getInt("scount"));
+				dto.setScolor(rs.getString("scolor"));
+				dto.setSphoto(rs.getString("sphoto"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+				
+				//list 추가
+				list.add(dto);				
+			}
+		} catch (SQLException e) {
+			System.out.println("select 오류:"+e.getMessage());
+		}finally {
+			connect.dbClose(rs, pstmt, conn);
+		}
+		
+		return list;
+	}
 }
