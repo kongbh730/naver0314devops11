@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="alert"/>
+		<item key="selection" value="show"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="show"/>
+			<item value="selectdata"/>
+			<item value="unum"/>
+			<item value="data, ele"/>
+			<item value="shoplist"/>
+			<item value="myModalUpdate"/>
+			<item value="detail"/>
 			<item value="alert"/>
-			<item value="Memo"/>
-			<item value="num"/>
-			<item value="파일선택"/>
-			<item value="update"/>
-			<item value="&lt;%@page import=&quot;data.dto.SawonDto&quot;%&gt;"/>
-			<item value="col"/>
-			<item value="$(&quot;#purchasebtn&quot;).click(function() {"/>
-			<item value="purchaseCar"/>
-			<item value="&lt;h3&gt;html주석과 jsp주석 비교하기&lt;/h3&gt;"/>
-			<item value="ck_sawon_gender"/>
-			<item value="ck_sa"/>
-			<item value="writeStudent"/>
-			<item value="table"/>
-			<item value="char []c = new char[3];"/>
+			<item value="삭제"/>
+			<item value="delete"/>
+			<item value=".adel"/>
+			<item value="입고"/>
+			<item value="입고일"/>
+			<item value="listshop"/>
+			<item value="list"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Guest"/>
@@ -33,8 +33,8 @@
 		<item key="DIALOG_Y_ORIGIN" value="344"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="9"/>
-		<item key="DIALOG_Y_ORIGIN" value="238"/>
+		<item key="DIALOG_X_ORIGIN" value="838"/>
+		<item key="DIALOG_Y_ORIGIN" value="354"/>
 		<item key="DIALOG_WIDTH" value="369"/>
 		<item key="DIALOG_HEIGHT" value="454"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

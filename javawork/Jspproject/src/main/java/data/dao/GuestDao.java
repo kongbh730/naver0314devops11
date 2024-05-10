@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Vector;
 
 import data.dto.GuestDto;
+import data.dto.SawonDto;
 import db.common.MySqlConnect;
 
 public class GuestDao {
@@ -159,25 +160,23 @@ public class GuestDao {
 	//수정
 	public void updateGuest(GuestDto dto)
 	{
-		String sql="update guest set nickname=?, content=?, where num=?";
+		String sql="update guest set nickname=?,content=? where num=?";
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 
 		try {
 			pstmt=conn.prepareStatement(sql);
 			//바인딩
-			pstmt.setString(1,dto.getNickname());
-			pstmt.setString(2,dto.getContent());
-			pstmt.setInt(3,dto.getNum());
+			pstmt.setString(1, dto.getNickname());
+			pstmt.setString(2, dto.getContent());			
+			pstmt.setInt(3, dto.getNum());
 			//실행
 			pstmt.execute();
-		} 
-		catch (SQLException e) 
-		{
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			db.dbClose(pstmt, conn);
-		}	
+		}
 	}
 }

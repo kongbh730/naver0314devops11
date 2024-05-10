@@ -110,7 +110,6 @@ public class ShopDao {
 		}
 		
 		return dto;
-		
 	}
 	
 	//완성 shopupdateaction도 수정
@@ -237,7 +236,7 @@ public class ShopDao {
 		{
 			sql="select * from myshop order by sprice asc";//낮은가격순
 		}
-		else if(idx == 2)
+		else if(idx == 3)
 		{
 			sql="select * from myshop order by sprice desc";//높은 가격순
 		}

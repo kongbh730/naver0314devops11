@@ -18,7 +18,7 @@
 		ob.put("shopidx", dto.getShopidx());
 		ob.put("sname", dto.getSname());
 		ob.put("sprice", dto.getSprice());
-		ob.put("spcount", dto.getScount());
+		ob.put("scount", dto.getScount());
 		ob.put("scolor", dto.getScolor());
 		ob.put("sphoto", dto.getSphoto());
 		ob.put("writeday", sdf.format(dto.getWriteday()));
