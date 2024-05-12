@@ -13,4 +13,5 @@
 	ob.put("nickname",dto.getNickname());
 	ob.put("content",dto.getContent());
 %>
+
 <%=ob.toString()%>
