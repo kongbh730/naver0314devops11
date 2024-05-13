@@ -40,7 +40,7 @@
 	<hr>
 	
 	<h5>shop 데이타 출력</h5>
-	<table class="table table-striped" style="width: 800px">
+	<table class="table table-striped" style="width: 90%">
 		<tr>
 			<th width="50">번호</th>
 			<th width="150">상품명</th>
@@ -58,6 +58,7 @@
 				<td align="right">
 					<fmt:formatNumber value="${dto.sprice}" type="number"/>원
 				</td>
+				
 				<!-- 색상 -->
 				<td style="background-color: ${dto.scolor}">
 					${dto.scolor}
