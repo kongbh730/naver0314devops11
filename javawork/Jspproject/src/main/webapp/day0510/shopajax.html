@@ -53,6 +53,21 @@ div.colorbox {
 	border: 1px solid black;
 	border-radius: 100px;
 }
+
+#detailphoto{
+	border: 10px groove gray;
+}
+
+.detailinfo{
+	padding-top: 80px;
+}
+
+.boxcolor{
+	width: 40px;
+	height:40px;
+	border:1px solid black;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -112,8 +127,9 @@ div.colorbox {
     	//detail은 모달
     	//삭제는 confirm으로
     	
-    	//삭제 이벤트
+    	//삭제 이벤트 delete 이벤트
     	//클래스는 . / id는 #
+    	/*
     	$(document).on("click", ".btndelete", function(e){
 			e.preventDefault();	
 			
@@ -132,17 +148,38 @@ div.colorbox {
 				})	
 			}
     	});
+    	*/
+    	
+    	$(document).on("click", ".btndelete", function(){
+			let shopidx = $(this).attr("shopidx");//동일한 이름을 사용하여 실수 방지
+			let a = confirm("해당 상품을 삭제하시겠습니까?");//오타 주의
+			if(a)
+			{
+				$.ajax({
+					type:"get",
+					dataType:"html",//반환받는 데이터가 없을 테니까
+					url:"./data/deleteshop.jsp",
+					data:{"shopidx" : shopidx},
+					success:function(){//삭제 성공하면?
+						list();//삭제 후 목록 다시 출력
+					}
+				});	
+			}
+    	});
+    	
+    	//상세보기 모달클릭 이벤트
     	
     	//모달클릭이벤트
-    	$(document).on("click", ".btndetail", function(e){
-    		e.preventDefault();
+    	$(document).on("click", ".btndetail", function(){
     		let shopidx = $(this).attr("shopidx");
+    		
     		$.ajax({
         		type: "get",
         		dataType: "json",
         		url: "./data/selectdata.jsp",
         		data: {"shopidx" : shopidx},
         		success: function(data) {
+        			//내가 한거
             		// 받은 데이터를 모달에 출력
             		/*
             		$("#modalShopidx").text(data.shopidx);
@@ -157,6 +194,8 @@ div.colorbox {
             		$("#myModal").modal("show");
             		*/
             		
+            		//도움받은 거
+            		/*
             		let s = `
             			<table class="table table-border">
             				<tr>
@@ -184,6 +223,20 @@ div.colorbox {
             		
             		$(".modal-body").empty();
             		$(".modal-body").append(s);
+            		*/
+            		
+            		//강사님 풀이
+            		$("#detailphoto").attr("src", data.sphoto);
+            		let s = `
+            		입고일 : ${data.writeday}<br>
+            		상품명 : ${data.sname}<br>
+            		가격 : ${data.sprice}원<br>
+            		수량 : ${data.scount}개<br>
+            		색상 : <br>${data.scolor}
+            		<div class="boxcolor" style="background-color:${data.scolor}"</div>
+            		`;
+            		
+            		$("div.detailinfo").html(s);
             		//$(".modal-body").html(s);
         		}
    		 	});
@@ -252,7 +305,7 @@ div.colorbox {
     					<td align="right">${ele.sprice}원</td>
     					<td>
     						<button type="button" class="btn btn-success btn-sm btndetail" shopidx="${ele.shopidx}" 
-    						data-bs-toggle="modal" data-bs-target="#myModalDetail">Detail</button>
+    						data-bs-toggle="modal" data-bs-target="#myModalDetail">Detail</button><!-- <-- 여기에 모달 클릭 버튼 추가 -->
     					</td>
     					<td>
     						<button type="button" class="btn btn-danger btn-sm btndelete" shopidx="${ele.shopidx}">Delete</button>
@@ -285,7 +338,10 @@ div.colorbox {
 
 
 				<!-- Modal body -->
+				<!-- 도움받은 거 -->
 				<div class="modal-body"></div>
+				
+				<!-- 내가 한거 -->
 				<!--
 				<div class="modal-body">
 					<h5>상품 정보</h5>
@@ -310,6 +366,18 @@ div.colorbox {
 					</div>
 				</div>
 				-->
+				
+				<!-- 강사님 풀이 -->
+				<table>
+					<tr>
+						<td width="300">
+							<img alt="" src="" id="detailphoto" style="width:90%">
+						</td>
+						<td>
+							<div class="detailinfo"></div>
+						</td>
+					</tr>
+				</table>
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
