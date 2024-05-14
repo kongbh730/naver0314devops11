@@ -48,8 +48,8 @@ body * {
 			<th>입사일</th>
 		</tr>
 		<c:forEach var="dto" items="${list}" varStatus="i">
-			<!-- 부서명을 적은 경우 -->
-			<c:if test="${dto.buseo == param.search || param.search == ''}">
+			<!-- 부서명을 적은 경우 --><!-- empty param.search는 첫 실행에 아무것도 안적혀 있을 경우에도 전부 출력할 수 있게 함 -->
+			<c:if test="${dto.buseo == param.search || empty param.search || param.search == ''}">
 				<tr>
 					<td>
 						<!-- 번호 --> 

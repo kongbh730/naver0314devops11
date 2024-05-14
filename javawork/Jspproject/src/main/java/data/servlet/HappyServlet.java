@@ -21,7 +21,6 @@ public class HappyServlet extends HttpServlet {
 		List<String> list1 = Arrays.asList("orange","green","pink","gray","magenta","tomato");
 		request.setAttribute("list1", list1);
 		
-
 		//문자열 저장
 		request.setAttribute("flowers", "장미꽃, 안개꽃, 다알리아, 프리지아, 국화꽃, 채송화, 칸나");
 		
