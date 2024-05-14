@@ -79,15 +79,15 @@ public class SimpleBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = """
-				selert * form simpleboard order by num desc limit ?, ?
+				select * from simpleboard order by num desc limit ?, ?
 				""";
 		List<SimpleBoardDto> list = new Vector<SimpleBoardDto>();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			//바인딩
-			pstmt.setInt(1,  start);
-			pstmt.setInt(2,  persize);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, persize);
 			
 			rs = pstmt.executeQuery();
 			
@@ -113,9 +113,159 @@ public class SimpleBoardDao {
 			e.printStackTrace();
 		}
 		finally {
-			db.dbClose(pstmt, conn);
+			db.dbClose(rs, pstmt, conn);
 		}
 		
 		return list;
+	}
+	
+	//list 목록 나열
+	public int getTotalCount()
+	{
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = """
+				select count(*) from simpleboard
+				""";
+		int n = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();//실행
+			
+			if(rs.next())
+			{
+				n = rs.getInt(1);
+			}
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return n;
+	}
+	
+	//list 중 하나만 선택
+	public SimpleBoardDto getData(int num)
+	{
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = """
+				select * from simpleboard where num = ?
+				""";
+		SimpleBoardDto dto = new SimpleBoardDto();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setInt(1, num);
+			//실행
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+			{
+				dto.setNum(rs.getInt("num"));
+				dto.setWriter(rs.getString("writer"));
+				dto.setAvata(rs.getString("avata"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setReadcount(rs.getInt("readcount"));
+				dto.setChu(rs.getInt("chu"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+			}
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return dto;
+	}
+	
+	//삭제 delete
+	public void deleteBoard(int num)
+	{
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = """
+				delete from simpleboard where num = ?
+				""";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setInt(1, num);
+			pstmt.execute();
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	//updateReadcount
+	public void UpdateReadcount(int num)
+	{
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = """
+				update simpleboard set readcount = readcount + 1 where num = ?
+				""";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setInt(1, num);
+			pstmt.execute();
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	//updateChu
+	public void UpdateChu(int num)
+	{
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = """
+				update simpleboard set chu = chu + 1 where num = ?
+				""";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setInt(1, num);
+			pstmt.execute();
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			db.dbClose(pstmt, conn);
+		}
 	}
 }
