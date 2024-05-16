@@ -39,7 +39,6 @@
     </script>
 </head>
 <body>
-<!-- 내가 만든 detail -->
 <div style="margin: 30px;">
 	<form action="./update" method="post">
 	<!-- hidden -->
