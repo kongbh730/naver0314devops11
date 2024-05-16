@@ -220,7 +220,7 @@ public class SimpleBoardDao {
 	}
 	
 	//updateReadcount
-	public void UpdateReadcount(int num)
+	public void updateReadcount(int num)
 	{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -245,7 +245,7 @@ public class SimpleBoardDao {
 	}
 	
 	//updateChu
-	public void UpdateChu(int num)
+	public void updateChu(int num)
 	{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;

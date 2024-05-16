@@ -10,26 +10,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import data.dao.SimpleBoardDao;
-import data.dto.SimpleBoardDto;
 
-@WebServlet("/board/delete")
-public class DeleteServlet extends HttpServlet {
+@WebServlet("/board/updatechu")
+public class UpdateChuServlet extends HttpServlet 
+{
 	SimpleBoardDao dao = new SimpleBoardDao();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//num, currentPage를 읽는다.
+		//num읽기
 		int num = Integer.parseInt(request.getParameter("num"));
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-
-		//삭제
-		dao.deleteBoard(num);
 		
-		//목록으로 리다이렉트
-		response.sendRedirect("./list?currentPage=" + currentPage);
+		//dao의 chu값 업데이트
+		dao.updateChu(num);
+		
+		//update된 chu값 얻기
+		int chu=dao.getData(num).getChu();
+		
+		//json 형식으로 문자열을 만듦 //{"chu" : 5}형태
+		String s = "{\"chu\" : " + chu + "}";
+				
+		//request에 담기;
+		request.setAttribute("s", s);
+		
+		//jsonchu.jsp로 포워드
+		RequestDispatcher rd = request.getRequestDispatcher("../day0514/jsonchu.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

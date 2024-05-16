@@ -21,7 +21,7 @@ public class DetailServlet extends HttpServlet {
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		//조회수 증가를 무조건 시킨다
-		dao.UpdateReadcount(num);
+		dao.updateReadcount(num);
 		
 		//num에 해당하는 dto 얻기
 		SimpleBoardDto dto = dao.getData(num);
