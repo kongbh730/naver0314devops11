@@ -22,5 +22,16 @@
 	<h1>${msg}</h1>
 	<h1>오늘 날짜</h1>
 	<fmt:formatDate value="${today}" pattern="yyyy-MM-dd HH:mm"/>
+	
+	<h3>${dto1.sang }</h3>
+	<img src="./photo/${dto1.photo}" widht="200">
+	<h4>가격 : ${dto1.price }</h4>
+	<h4>수량 : ${dto1.su }</h4>
+	<hr>
+	<h3>${dto2.sang }</h3>
+	<img src="./photo/${dto2.photo}" widht="200">
+	<h4>가격 : ${dto2.price }</h4>
+	<h4>수량 : ${dto2.su }</h4>
+	
 </body>
 </html>
