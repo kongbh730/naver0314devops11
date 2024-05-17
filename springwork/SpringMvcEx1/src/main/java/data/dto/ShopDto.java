@@ -13,7 +13,7 @@ import lombok.ToString;
 //@Getter
 //@ToString
 
-@Data //setter + getter + 
+@Data //setter + getter + ToString
 public class ShopDto {
 	private String sang;
 	private String photo;

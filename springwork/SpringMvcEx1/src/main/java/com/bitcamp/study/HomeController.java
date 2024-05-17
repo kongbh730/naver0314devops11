@@ -5,13 +5,16 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ShopDto;
 
 @Controller
 public class HomeController {
+	/*
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) 
 	{
@@ -27,11 +30,45 @@ public class HomeController {
 		model.addAttribute("dto2", dto2);
 		
 		System.out.println(dto1.toString());
-		System.out.println(dto2/*.toString()*/);//toString 생략가능;
+		System.out.println(dto2);//toString 생략가능;
 		
 		model.addAttribute("msg", "SpringFrameWork!!!");	
 		model.addAttribute("today", new Date());
 		
 		return "home";
 	}
+	*/
+	
+	//@RequestMapping을 써도 되는데 get이나 post방식에 따라
+	//@GetMapping, @PostMapping이 스프링버전 5부터 추가됨
+	
+	@GetMapping("/")
+	public String hello()
+	{
+		return "start";
+	}	
+	//Model에 데이터를 저장하고 포워드 파일명을 리턴하는 두가지 방법
+	
+	@GetMapping("/board/list")// board/list.do도 호출..
+	//@GetMapping("/board/list.do")//이 경우는 /board/list.do라고 정확히 써야만 호출 가능
+	public String hello2(Model model)
+	{
+		model.addAttribute("msg", "안녕하세요 반가워요!!");
+		return "result1";
+	}
+	
+	@GetMapping("/guest/list")
+	public ModelAndView hello3()
+	{
+		ModelAndView mview = new ModelAndView();
+		mview.addObject("today", new Date());
+		mview.setViewName("result2");
+		return mview;
+	}
+	
+	
+	
+	
+	
+	
 }

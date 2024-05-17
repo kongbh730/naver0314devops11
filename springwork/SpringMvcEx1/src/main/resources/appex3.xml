@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	
+	<!-- Person -->
+	<bean id="person" class="study.ex3.Person">
+		<constructor-arg value="구혜선"></constructor-arg><!-- 생성자로 주입 -->
+		<property name="phone" value="010-1111-1111"></property><!-- 레퍼런스로 주입 --><!-- 생성자 없음 -->
+	</bean>
+	
+	<!-- MyCart -->
+	<!-- 생성자 존재 -->
+	<bean id="mycart" class="study.ex3.MyCart" scope="prototype">
+		<!-- scope : 생략시 singleton기본 -->
+		<!-- prototype로 지정하면 다른주소에 새로 생김 -->
+		
+		<constructor-arg value="그릇세트"></constructor-arg>
+		<constructor-arg value="10000"></constructor-arg>
+		<property name="person" ref="person"></property><!-- setter의 레퍼런스로 주입 -->
+	</bean>
+	
+</beans>
