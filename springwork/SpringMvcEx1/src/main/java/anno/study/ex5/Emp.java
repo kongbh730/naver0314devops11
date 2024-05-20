@@ -25,8 +25,8 @@ public class Emp {
 		System.out.println("사원 정보");
 		System.out.println("입사일 : " + ipsaday);
 		System.out.println("회사명 : " + empName);
-		System.out.println("사원명" + sawon.getName());
-		System.out.println("주소" + sawon.getAddr());
-		System.out.println("나이" + sawon.getAge());
+		System.out.println("사원명 : " + sawon.getName());
+		System.out.println("주소 : " + sawon.getAddr());
+		System.out.println("나이 : " + sawon.getAge());
 	}
 }

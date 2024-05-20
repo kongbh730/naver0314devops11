@@ -12,5 +12,4 @@ public class ShopDto {
 	private String sang;
 	private int su;
 	private int dan;
-
 }

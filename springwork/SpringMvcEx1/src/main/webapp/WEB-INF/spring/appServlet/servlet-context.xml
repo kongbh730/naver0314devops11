@@ -16,11 +16,11 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	
 	<!-- photo mapping -->
-	<resources location="\WEB-INF/photo/" mapping="/photo/**"></resources>
+	<resources location="/WEB-INF/photo/" mapping="/photo/**"></resources>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/bitcamp/" /><!-- <= 여기 수정 -->
+		<beans:property name="prefix" value="/WEB-INF/bitcamp/" /><!-- <== 여기 수정 -->
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	

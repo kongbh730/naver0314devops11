@@ -11,8 +11,6 @@ public class Ex2Main {
 		Student stu = (Student)context.getBean("stu");
 		stu.show();
 		
-		
-		
 	}
 
 }
