@@ -111,6 +111,7 @@
 			</td>
 			<td rowspan="2">
 				<img src="" id="showimg1" style="width:100%" onerror="this.src='../image/noimage1.png'"/>
+				<!-- 여기 뭐가 문제지 -->
 			</td>
 		</tr>
 		<tr>
@@ -122,7 +123,9 @@
 		<tr>
 			<th width="100" class="table-info">핸드폰</th>
 			<td width="200" colspan="2">
-				<input type="number" name="hp" class="form-control" required="required" placeholder="숫자만 입력하세요">
+				<input type="tel" name="hp" class="form-control" 
+				required="required" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+				placeholder="xxx-xxxx-xxxx"><!-- 010-0000-0000패턴으로 넣어라 -->
 			</td>
 		</tr>
 		<tr>

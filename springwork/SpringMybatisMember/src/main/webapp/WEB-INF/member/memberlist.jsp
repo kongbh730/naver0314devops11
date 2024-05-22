@@ -27,7 +27,36 @@
 	</span>
 </h2>
 <div>
-	<h2 align="center">회원명단</h2>
+	<table class="table table-striped" style="width:500px;">
+		<caption align="top">
+			<h3><b>쌤이 만든 회원명단</b></h3>
+		</caption>
+		<tr class="table-danger">
+			<td width="50">번호</td>
+			<td width="120">회원명</td>
+			<td width="100">아이디</td>
+			<td width="120">핸드폰</td>
+			<td>상세보기</td>
+		</tr>
+		<c:forEach var="dto" items="${list}" varStatus="i">
+			<tr>
+				<td align="center">${i.count}</td>
+				<td>
+					<img src="../image/${dto.photo}" class="rounded-circle" style="width: 40px; height:40px;">
+					${dto.name}
+				</td>
+				<td>${dto.myid}</td>
+				<td>${dto.hp}</td>
+				<td align="center">
+				<!-- 여기 detail?num이어야 함 -->
+					<button type="button" class="btn btn-sm btn-info" onclick="location.href='./detail?num=${dto.num}'">Detail</button>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+</div>
+<div>
+	<h2 align="center">내가 만든 회원명단</h2>
 		<table class="table table-bordered">
 			<tr align="center" class="table-danger">
 				<td>번호</td>
@@ -47,7 +76,8 @@
 					<td>${item.myid}</td>
 					<td>${item.hp}</td>
 					<td>
-						<button class="btn btn-sm btn-success">Detail</button>
+					<!-- 여기 detail?num이어야 함 -->
+						<button type="button" class="btn btn-sm btn-success" onclick="location.href='./detail?num=${item.num}'">Detail</button>
 					</td>
 				</tr>
 			</c:forEach>
