@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +20,19 @@
    </style>
 </head>
 <body>
-<img src="<%=request.getContextPath()%>/mycar/mycar13.png" width="100">
-
-<h3 class="alert alert-success">
-	총 ${totalCount}명의 회원이 있습니다
-</h3>
+	<div class="mainlayout">
+		<div>
+			<tiles:insertAttribute name="header"/>
+		</div>
+		<div>
+			<tiles:insertAttribute name="menu"/>
+		</div>
+		<div>
+			<tiles:insertAttribute name="info"/>
+		</div>
+		<div>
+			<tiles:insertAttribute name="main"/>
+		</div>
+	</div>
 </body>
 </html>

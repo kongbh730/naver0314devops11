@@ -19,10 +19,13 @@
    </style>
 </head>
 <body>
-<img src="<%=request.getContextPath()%>/mycar/mycar13.png" width="100">
-
-<h3 class="alert alert-success">
-	총 ${totalCount}명의 회원이 있습니다
-</h3>
+<c:set  var="root" value="<%=request.getContextPath()%>"/>
+<a href="${root}/">홈</a>
+&nbsp;
+<a href="${root}/member/list">회원목록</a>
+&nbsp;
+<a href="${root}/board/list">게시판</a>
+&nbsp;
+<a href="${root}/guest/list">방명록</a>
 </body>
 </html>
