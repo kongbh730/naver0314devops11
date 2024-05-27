@@ -42,6 +42,11 @@ public class MemberService {
 		return memInter.getData(num);
 	}
 	
+	public MemberDto getDataById(String myid)
+	{
+		return memInter.getDataById(myid);
+	}
+	
 	public void updatePhoto(int num, String photo)
 	{
 		Map<String, Object> map = new HashMap<>();

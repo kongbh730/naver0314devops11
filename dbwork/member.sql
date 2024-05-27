@@ -19,6 +19,7 @@ alter table memberdb modify photo varchar(100);
 desc memberdb;
 select count(*) from memberdb where num = 3 and passwd='1234';
 delete from memberdb where myid = 'aaa';
+		
 
 create table reboard (
 	num smallint auto_increment primary key,
@@ -35,3 +36,16 @@ create table reboard (
 );
 
 drop table reboard;
+select * from reboard;
+
+insert into reboard (writer, myid, subject, uploadphoto, content, regroup, restep, relevel, writeday) 
+	values ('HHH', 'hhh', '안녕', 'no', '반가워요',1, 0, 0, now());
+        
+insert into reboard (writer, myid, subject, uploadphoto, content, regroup, restep, relevel, writeday) 
+	values ('CCC', 'CCC', 'CCC', 'no', 'CCC반가워요',2, 0, 0, now());
+    
+insert into reboard (writer, myid, subject, uploadphoto, content, regroup, restep, relevel, writeday) 
+	values ('DDD', 'DDD', '안녕', 'no', 'DDD입니다.',1, 1, 1, now());
+    
+insert into reboard (writer, myid, subject, uploadphoto, content, regroup, restep, relevel, writeday) 
+	values ('EEE', 'EEE', '안녕하세요', 'no', 'EEE입니다', 1, 2, 2, now());
