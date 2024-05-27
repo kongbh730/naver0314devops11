@@ -17,20 +17,57 @@
        body *{
            font-family: 'Jua';
        }
+       
+       div.mainlayout>div{
+       		border: 0px solid gray;/*레이아웃 확인 후 나중에 0으로 변경*/
+       		position: absolute;
+       }
+       
+       div.mainlayout>div a{
+       		text-decoration: none;
+       		color: black;
+       }
+       		
+       div.mainlayout>div.header{
+       		width:100%;
+       		heigh: 100px;
+       		line-height: 100px;
+       		font-size: 35px;
+       		text-align: center;
+       }
+       
+       div.mainlayout>div.menu{
+       		top: 100px;
+       		width: 100%;
+       		height: 100px;
+       		line-height: 80px;	
+       }
+       div.mainlayout>div.info{
+       		top: 250px;
+       		left: 50px;
+       		width: 180px;
+       		height: 200px;
+       }
+       div.mainlayout>div.main{
+       		top: 210px;
+       		left: 300px;
+       		width: 70%;
+       		height: auto;
+       }
    </style>
 </head>
 <body>
 	<div class="mainlayout">
-		<div>
+		<div class="header">
 			<tiles:insertAttribute name="header"/>
 		</div>
-		<div>
+		<div class="menu">
 			<tiles:insertAttribute name="menu"/>
 		</div>
-		<div>
+		<div class="info">
 			<tiles:insertAttribute name="info"/>
 		</div>
-		<div>
+		<div class="main">
 			<tiles:insertAttribute name="main"/>
 		</div>
 	</div>

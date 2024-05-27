@@ -19,6 +19,14 @@
    </style>
 </head>
 <body>
-main
+<div class="mainphoto">
+	<marquee direction="left" behavior="alternate">
+	<!-- scroll은 계속 돌면서 무한 루프 -->
+		<img src="./image/mainImg.png" width="200px" height="200px">
+		<img src="./food/1.jpg" width="200px" height="200px">
+		<img src="./food/2.jpg" width="200px" height="200px">
+		<img src="./food/3.jpg" width="200px" height="200px">
+	</marquee>
+</div>
 </body>
 </html>

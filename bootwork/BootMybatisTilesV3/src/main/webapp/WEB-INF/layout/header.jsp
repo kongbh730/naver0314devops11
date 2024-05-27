@@ -19,6 +19,10 @@
    </style>
 </head>
 <body>
-제목
+<c:set var="root" value="<%=request.getContextPath() %>"></c:set>
+<a href="${root}/">
+	<img src="${root}/mycar/mycar11.png" width="60">
+	스프링부트와 JSP를 이용한 프로젝트
+</a>
 </body>
 </html>
