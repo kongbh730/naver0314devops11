@@ -21,6 +21,7 @@
 <body>
 <form action="./update" method="post">
 	<input type="hidden" name="num" value="${dto.num}">
+	<input type="hiddne" name="currnetPage" value="">
 	
 	<table class="table table-bordered" style="width: 400px;">
 		<caption align="top">

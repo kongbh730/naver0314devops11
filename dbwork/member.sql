@@ -49,3 +49,17 @@ insert into reboard (writer, myid, subject, uploadphoto, content, regroup, reste
     
 insert into reboard (writer, myid, subject, uploadphoto, content, regroup, restep, relevel, writeday) 
 	values ('EEE', 'EEE', '안녕하세요', 'no', 'EEE입니다', 1, 2, 2, now());
+    
+    
+create table boardanswer (
+	aidx smallint auto_increment primary key,
+    num smallint,
+    writer varchar(20),
+    myid varchar(20),
+    content varchar(1000),
+    writeday datetime,
+    foreign key(num) references reboard(num) on delete cascade
+);
+
+select * from boardanswer;
+drop table boardanswer;

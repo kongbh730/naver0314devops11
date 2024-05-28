@@ -84,4 +84,14 @@ public class ReBoardService {
 	{
 		return boardMapper.getData(num);
 	}
+	
+	public void updateBoard(ReBoardDto dto)
+	{
+		boardMapper.updateBoard(dto);
+	}
+	
+	public void deleteBoard(int num)
+	{
+		boardMapper.deleteBoard(num);
+	}
 }

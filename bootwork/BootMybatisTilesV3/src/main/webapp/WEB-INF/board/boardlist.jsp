@@ -24,14 +24,17 @@ body * {
 }
 </style>
 </head>
+	
 <body>
+<div class="input-group" style="width: 600px;margin-bottom: 20px;">
+	<h5>총 ${totalCount} 개의 글이 있습니다.</h5>
 	<!-- 글쓰기 버튼은 로그인을 해야만 보임 -->
 	<c:if test="${sessionScope.loginok != null}">
 		<button type="button" class="btn btn-outline-success"
 			style="width: 100px; margin-left: 100px"
 			onclick="location.href='./form'">글쓰기</button>
 	</c:if>
-	<h5>총 ${totalCount} 개의 글이 있습니다.</h5>
+</div>
 	<table class="table table-striped" style="width: 600px;">
 		<tr>
 			<th width="50">번호</th>
@@ -53,28 +56,39 @@ body * {
 					<!-- 번호 --> ${no } <c:set var="no" value="${no-1 }" />
 				</td>
 				<td>
-					<!-- 제목 --> <a href="./detail?num=${dto.num }"> <!-- relevel 한개당 두칸 띄우기 -->
+					<!-- 제목 --> 
+					<a href="./detail?num=${dto.num}&currentPage=${currentPage}"> <!-- relevel 한개당 두칸 띄우기 -->
 						<c:forEach begin="1" end="${dto.relevel}">
-						&nbsp;&nbsp;
-					</c:forEach> <!-- 답글일 경우 답글 이미지 --> <c:if test="${dto.restep>0}">
-							<img src="../image/re.png">
-						</c:if> ${dto.subject }
-				</a>
+							&nbsp;&nbsp;
+						</c:forEach>
+						<!-- 답글일 경우 답글 이미지 --> 
+						<c:if test="${dto.restep>0}">
+						<img src="../image/re.png">
+						</c:if> 
+						${dto.subject}
+						<!-- 사진이 있으면 photo아이콘 제목 끝에 회색으로 출력되도록 -->
+						<c:if test="${dto.uploadphoto != 'no'}">
+							<i class="bi bi-image" style="color : gray;"></i>
+						</c:if>
+					</a>
 				</td>
 				<td>
-					<!-- 작성자 --> ${dto.writer }
+					<!-- 작성자 --> 
+					${dto.writer }
 				</td>
 				<td>
-					<!-- 작성일 --> <!--${dto.writeday}--> <fmt:formatDate
-						value="${dto.writeday}" pattern="yyyy-MM-dd" />
+					<!-- 작성일 --> <!--${dto.writeday}--> 
+					<fmt:formatDate value="${dto.writeday}" pattern="yyyy-MM-dd" />
 				</td>
 				<td>
-					<!-- 조회 --> ${dto.readcount }
+					<!-- 조회 --> 
+					${dto.readcount }
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
 
+	<!-- 작성자, 작성일, 조회수, 서블릿 페이징 처리 -->
 	<div style="width: 600px; text-align: center; font-size: 22px;">
 		<!-- 이전 : startPage가 1보다 클 경우 이전이 보이도록 설정  -->
 		<!-- 이전을 클릭할 경우 전 블럭의 마지막 페이지가 현재페이지가 되어야 한다. -->
@@ -99,4 +113,3 @@ body * {
 	</div>
 </body>
 </html>
-<!-- 작성자, 작성일, 조회수, 서블릿 페이징 처리 -->
