@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,8 @@ import data.dto.MemberDto;
 import data.service.MemberService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import naver.cloud.NcpObjectStorageService;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -31,14 +34,25 @@ public class MemberUpdateController {
 	@NonNull
 	private MemberService memberService;
 	
+	//==========================================================================
+	//NCP사용을 위해 추가된 것들!!!!
+	private String bucketName = "bitcamp-bucket-56";
+	private String folderName = "photocommon";
+	
+	@Autowired
+	private NcpObjectStorageService storageService;
+	//==========================================================================
+	
 	@ResponseBody
 	@PostMapping("/upload")
 	public Map<String, String> uploadPhoto(
 			@RequestParam("upload") MultipartFile upload,
 			@RequestParam int num,
 			HttpServletRequest request
-			)
+			)//여기 매개변수 필요없는거 지워야 함
 	{
+		//기존 코드 주석처리
+		/*
 		//업로드 위치 지정
 		String savePath = request.getSession().getServletContext().getRealPath("/save");
 		
@@ -55,6 +69,13 @@ public class MemberUpdateController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
+		
+		//==========================================================================
+		//스토리지에 업로드하기//NCP 사용을 위해 새로 추가
+		String photo = storageService.uploadFile(bucketName, folderName, upload);
+		//==========================================================================
+		
 		//db에서 photo 수정
 		memberService.updatePhoto(num, photo);
 		
@@ -99,8 +120,3 @@ public class MemberUpdateController {
 		return map;
 	}
 }
-
-// 수정과 삭제 각자 완성
-
-
-

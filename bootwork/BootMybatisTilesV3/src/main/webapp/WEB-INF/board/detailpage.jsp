@@ -146,6 +146,10 @@ function answer_list(){
 
 </script>
 </head>
+   	
+<!-- NCP사용을 위해 새로 추가 -->
+<c:set var="stpath" value="https://kr.object.ncloudstorage.com/bitcamp-bucket-56/photocommon"></c:set>
+	
 <body>
 	<div style="width:70%;">
 	<h1>내가 만든거</h1>
@@ -155,7 +159,9 @@ function answer_list(){
 			<table class="table table-bordered"><!-- 나중에 처리 -->
 				<tr>
 					<td rowspan="2" style="width:60px;">
-						<img id="profile_photo" src="../save/${profile_photo}" 
+						<!-- <img id="profile_photo" src="../save/${profile_photo}" 
+						style="width:50px; heigth:50px; border: 1px solid gray" class="rounded-circle"> -->
+						<img id="profile_photo" src="${stpath}/${profile_photo}" 
 						style="width:50px; heigth:50px; border: 1px solid gray" class="rounded-circle">
 					</td>
 					<td>
@@ -180,7 +186,8 @@ function answer_list(){
 		<hr>
 		<!-- 내용 + 사진 -->
 		<div>
-			<img alt="" src="../save/${dto.uploadphoto}" onerror="this.src='../image/noimage2.png'"><!-- onerror 이게 출력한다는 뜻은 아님! -->
+			<!-- <img alt="" src="../save/${dto.uploadphoto}" onerror="this.src='../image/noimage2.png'"> -->
+			<img alt="" src="${stpath}/${dto.uploadphoto}" onerror="this.src='../image/noimage2.png'"><!-- onerror 이게 출력한다는 뜻은 아님! -->
 			<pre>${dto.content}</pre>
 		</div>
 
@@ -230,7 +237,11 @@ function answer_list(){
 		<td>
 			<h2><b>${dto.subject}</b></h2>
 			<!-- 프로필 사진 -->
-			<img src="../save/${profile_photo}"
+			<!-- <img src="../save/${profile_photo}"
+			  onerror="this.src='../image/noimage2.png'"
+			  style="width: 45px;height: 45px;margin-right:5px;"
+			  class="rounded-circle" align="left"> -->
+			  <img src="${stpath}/${profile_photo}"
 			  onerror="this.src='../image/noimage2.png'"
 			  style="width: 45px;height: 45px;margin-right:5px;"
 			  class="rounded-circle" align="left">
@@ -251,7 +262,10 @@ function answer_list(){
 	<tr>
 		<td>
 			<c:if test="${dto.uploadphoto != 'no'}"><!-- uploadphoto가 'no'가 아니면 해당 photo 출력 -->
-				<img src="../save/${dto.uploadphoto}"
+				<!-- <img src="../save/${dto.uploadphoto}"
+				onerror="this.src='../image/noimage2.png'"
+				style="max-width: 300px;"> -->
+				<img src="${stpath}/${dto.uploadphoto}"
 				onerror="this.src='../image/noimage2.png'"
 				style="max-width: 300px;">
 				<br><br> <!-- onerror 이게 출력한다는 뜻은 아님! -->

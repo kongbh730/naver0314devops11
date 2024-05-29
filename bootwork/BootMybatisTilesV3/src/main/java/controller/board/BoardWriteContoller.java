@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import data.dto.ReBoardDto;
 import data.service.MemberService;
 import data.service.ReBoardService;
+import naver.cloud.NcpObjectStorageService;
 
 @Controller
 @RequestMapping("/board")
@@ -29,6 +30,15 @@ public class BoardWriteContoller {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	//==========================================================================
+	//NCP사용을 위해 추가된 것들!!!!
+	private String bucketName = "bitcamp-bucket-56";
+	private String folderName = "photocommon";
+		
+	@Autowired
+	private NcpObjectStorageService storageService;
+	//==========================================================================
 	
 	@GetMapping("/form")
 	public String form(
@@ -67,6 +77,8 @@ public class BoardWriteContoller {
 			HttpSession session
 			)
 	{
+		//기존코드 주석처리
+		/*
 		//업로드할 폴더
 		String saveFolder = request.getSession().getServletContext().getRealPath("/save");
 		//업로드하지 않았을 경우 "no", 업로드 했을 경우 랜덤 파일명으로 저장
@@ -89,6 +101,8 @@ public class BoardWriteContoller {
 				e.printStackTrace();
 			}
 		}
+		*/
+		String photo = storageService.uploadFile(bucketName, folderName, upload);
 		dto.setUploadphoto(photo);
 		
 		//세션으로부터 아이디 얻기

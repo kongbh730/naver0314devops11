@@ -19,12 +19,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 import data.dto.MemberDto;
 import data.service.MemberService;
+import naver.cloud.NcpObjectStorageService;
 @Controller
 public class MemberFormController 
 {
 	@Autowired
 	private MemberService memberService;
 	
+	//==========================================================================
+	//NCP사용을 위해 추가된 것들!!!!
+	private String bucketName = "bitcamp-bucket-56";
+	private String folderName = "photocommon";
+	
+	@Autowired
+	private NcpObjectStorageService storageService;
+	//==========================================================================
 	
 	@GetMapping("/member/form")
 	public String form() 
@@ -47,10 +56,13 @@ public class MemberFormController
 	@PostMapping("/member/insert")
 	public String saveData(
 			@ModelAttribute MemberDto dto,
-			@RequestParam("myfile") MultipartFile myFile,
+			@RequestParam("myfile") MultipartFile myfile,
 			HttpServletRequest request
 			)
 	{
+		//기존 코드 주석처리
+		/*
+		//업로드 경로
 		String savePath = request.getSession().getServletContext().getRealPath("/save");
 	
 		//업로드한 파일의 확장자 분리
@@ -66,6 +78,14 @@ public class MemberFormController
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
+		
+		//==========================================================================
+		//스토리지에 업로드하기//NCP 사용을 위해 새로 추가
+		String photo = storageService.uploadFile(bucketName, folderName, myfile);
+		dto.setPhoto(photo);//업로드된 UUID파일명을 dto에 저장
+		//==========================================================================
+		
 		//db에 저장
 		memberService.insertMember(dto);
 		

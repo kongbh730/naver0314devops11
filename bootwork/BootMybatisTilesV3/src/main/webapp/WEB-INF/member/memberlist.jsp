@@ -24,6 +24,10 @@ body * {
 }
 </style>
 </head>
+
+<!-- NCP사용을 위해 새로 추가 -->
+<c:set var="stpath" value="https://kr.object.ncloudstorage.com/bitcamp-bucket-56/photocommon"></c:set>
+
 <body>
 	<h2 class="alert alert-danger" style="width: 500px;">
 		총 ${totalCount }명의 회원이 있습니다. <span style="float: right;">
@@ -33,22 +37,21 @@ body * {
 	</h2>
 	<div>
 		<!-- admin이 아닌 계정으로 로그인을 했거나 로그인 상태가 아닐 경우 보여질 메시지 -->
+		<%-- 
 		<c:if test="${sessionScope.loginok == null or sessionScope.loginid != 'admin'}">
 			<h2>
 				<b>
 					전체 회원 명단은 관리자만 확인 가능합니다.
 				</b>
 			</h2>
-		</c:if>
+		</c:if> 
+		--%>
 
 		<!-- admin계정으로 로그인 시에만 전체 명단 확인 가능 -->
-		<c:if
-			test="${sessionScope.loginok != null and sessionScope.loginid == 'admin'}">
+		<%-- <c:if test="${sessionScope.loginok != null and sessionScope.loginid == 'admin'}"> --%>
 			<table class="table table-striped" style="width: 500px;">
 				<caption align="top">
-					<h3>
-						<b>쌤이 만든 회원명단</b>
-					</h3>
+					<h3><b>쌤이 만든 회원명단</b></h3>
 				</caption>
 				<tr class="table-danger">
 					<td width="50">번호</td>
@@ -60,9 +63,15 @@ body * {
 				<c:forEach var="dto" items="${list}" varStatus="i">
 					<tr>
 						<td align="center">${i.count}</td>
-						<td><img src="../save/${dto.photo}" class="rounded-circle"
+						<!-- ==========================../save를 ${stpath}로 수정했음======================= -->
+						<td>
+							<!-- <img src="../save/${dto.photo}" class="rounded-circle"
 							style="width: 40px; height: 40px;"
-							onerror="this.src='../image/noimage1.png'"> ${dto.name}</td>
+							onerror="this.src='../image/noimage1.png'"> ${dto.name} -->
+							<img src="${stpath}/${dto.photo}" class="rounded-circle"
+							style="width: 40px; height: 40px;"
+							onerror="this.src='../image/noimage1.png'"> ${dto.name}
+						</td>
 						<td>${dto.myid}</td>
 						<td>${dto.hp}</td>
 						<td align="center">
@@ -73,7 +82,7 @@ body * {
 					</tr>
 				</c:forEach>
 			</table>
-		</c:if>
+		<%-- </c:if> --%>
 	</div>
 	<!-- 
 <div>

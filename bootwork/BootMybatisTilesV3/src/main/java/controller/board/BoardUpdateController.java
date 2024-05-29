@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import data.dto.ReBoardDto;
 import data.service.ReBoardService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import naver.cloud.NcpObjectStorageService;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,6 +29,15 @@ public class BoardUpdateController {
 
 	@NonNull
 	private ReBoardService boardService; 
+	
+	//==========================================================================
+	//NCP사용을 위해 추가된 것들!!!!
+	private String bucketName = "bitcamp-bucket-56";
+	private String folderName = "photocommon";
+		
+	@Autowired
+	private NcpObjectStorageService storageService;
+	//==========================================================================
 	
 	@GetMapping("/updateform")
 	public String updateform(
@@ -52,6 +63,8 @@ public class BoardUpdateController {
 			)
 			
 	{
+		//기존 코드 주석처리
+		/*
 		//업로드 경로
 		String saveFolder = request.getSession().getServletContext().getRealPath("/save");
 		//업로드 안 했을 경우 null값 보내서 수정시 컬럼 제외
@@ -69,9 +82,15 @@ public class BoardUpdateController {
 				e.printStackTrace();
 			}
 		}
-		
+		*/
+		//==========================================================================
+		//스토리지에 업로드하기//NCP 사용을 위해 새로 추가
+		String uploadphoto = storageService.uploadFile(bucketName, folderName, upload);
+		//==========================================================================
+
 		//dto의 사진 변경
 		dto.setUploadphoto(uploadphoto);
+		
 		//사진 수정
 		boardService.updateBoard(dto);
 		
