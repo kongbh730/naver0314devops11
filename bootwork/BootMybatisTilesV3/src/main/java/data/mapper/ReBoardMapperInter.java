@@ -17,7 +17,5 @@ public interface ReBoardMapperInter {
 	public void updateReadCount(int num);
 	public ReBoardDto getData(int num);
 	public void updateBoard(ReBoardDto dto);
-	
-	//------------------------------------------
 	public void deleteBoard(int num);
 }

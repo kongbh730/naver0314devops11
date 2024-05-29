@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"controller.*","*.member", "data.*", "tiles.config", "com.example.demo"}) //{}안에서는 ','로 여러개를 줄 수 있다.
+@ComponentScan({"controller.*","*.member", "data.*", "tiles.config", "com.example.demo", "naver.cloud"}) //{}안에서는 ','로 여러개를 줄 수 있다.
 @MapperScan("data.mapper")
 public class BootMybatisTilesV3Application {
 

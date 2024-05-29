@@ -59,7 +59,7 @@ public class BoardWriteContoller {
 	}
 	
 	@PostMapping("/insert")
-	public String intsert(
+	public String insert(
 			@ModelAttribute ReBoardDto dto,
 			@RequestParam("upload") MultipartFile upload,
 			@RequestParam int currentPage,

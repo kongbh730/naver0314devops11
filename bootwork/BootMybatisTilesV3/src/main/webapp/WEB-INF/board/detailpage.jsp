@@ -23,7 +23,128 @@ body * {
 	font-family: 'Jua';
 }
 
+pre.adata{
+	margin-left: 10px;
+	color: gray;
+}
+
+span.aday{
+	margin-left:100px;
+	color: gray;
+	font-size: 0.9em;
+}
+
 </style>
+<script type="text/javascript">
+$(function(){
+	//처음 로딩시 댓글 목록 출력
+	answer_list();
+	
+	//댓글 추가 버튼//....버튼은 몰라도, content는 id로 다르게 받아야함...
+	//$("#btnansweradd").click(function()
+	$(".btnansweradd").click(function() //클래스로 바꿔봄
+	{
+		let num = ${dto.num};
+		let content = $("#acontent").val(); //여기 id를 ""안에 안 넣어줌
+		let my_content = $("#my_acontent").val();
+		//let content = $(".acontent").val(); //클래스로 바꿔봄//.....두개 동시 수행이 안됨....//두개를 따로 저장해야 할듯...
+		if(content == '' && my_content == '')//쌤이 만든것과 내가 만든거 모두 처리할 수 있게
+		{
+			alert("댓글을 입력 후 등록해주세요");
+			return;
+		}
+		/*
+		if(content == '')
+		{
+			alert("댓글을 입력 후 등록해주세요");
+			return;
+		}
+		*/
+		$.ajax({
+			type:'post',
+			dataType:'text',
+			url:"./ainsert",
+			data:{"num":num, "content": (content != '' ? content : my_content)},
+			//data:{"num":num, "content":content},
+			success:function(){
+				//댓글 목록 다시 출력
+				answer_list();
+				//초기화
+				//$("#acontent").val("");
+				$(".acontent").val("");//클래스로 바꿔봄//초기화는 class로도 가능하지 않나?
+			}
+		});
+	});
+	
+	//댓글 삭제 이벤트
+	$(document).on("click", ".adel", function(){
+		let aidx = $(this).attr("aidx");
+		let a = confirm("해당 댓글을 삭제할까요?");
+		
+		if(a)
+		{
+			$.ajax({
+				type:"get",
+				dataType: "text", //json은 map이나 list를 보내야함. text는 안그래도 됨!...
+				//...그래서 dataType를 json으로 하면 삭제 실행은 되지만 success가 반환되지 않아 success 함수가 실행되지 않음!
+				data: {"aidx": aidx},
+				url:"./adelete",
+				success:function(){
+					answer_list();
+				}
+			});	
+		}
+	});
+});//end of function
+
+//댓글 목록 출력
+function answer_list(){
+	let num = ${dto.num};
+	
+	//로그인 중인지, 로그인 중일 경우 로그인 아이디 얻기
+	let loginok = '${sessionScope.loginok}';
+	let loginid = '${sessionScope.loginid}';
+	//alert(loginok + "\n" + loginid);
+	//console.log(loginok + "\n" + loginid);
+	
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		data:{"num":num},
+		url:"./alist",
+		success:function(data){
+			//댓글 갯수 출력
+			$(".answercount").text(data.length);
+			
+			//목록 출력
+			let s = "";
+			$.each(data, function(idx, ele){
+				s +=
+					`
+						\${ele.writer}(\${ele.myid})
+						<span class="aday">\${ele.writeday}</span>
+					`;
+					//로그인 중이면서 댓글 아이디와 로그인 아이디가 같을 경우 삭제 아이콘 추가
+				if(loginok == 'yes' && loginid == ele.myid)
+				{
+					s += 
+						`
+						<i class="bi bi-trash adel" aidx="\${ele.aidx}" style="cursor:pointer;"></i>
+						`
+				}
+				s += 
+					`	
+						<br>
+						<pre class="adata">\${ele.content}</pre>
+						<br>
+					`;
+			});	
+			$(".answerlist").html(s);
+		}
+	})
+}
+
+</script>
 </head>
 <body>
 	<div style="width:70%;">
@@ -46,6 +167,13 @@ body * {
 						<fmt:formatDate value="${dto.writeday}" pattern="yyyy.MM.dd. HH:mm" />
 						&nbsp;&nbsp;조회&nbsp;${dto.readcount}
 					</td>
+					<td>
+						<span style="float: right;color: gray;">
+			  			<i class="bi bi-chat-dots"></i>
+			  			&nbsp;
+			  			댓글 <span class="answercount">0</span>
+						</span>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -56,17 +184,25 @@ body * {
 			<pre>${dto.content}</pre>
 		</div>
 
-		<!-- 댓글 -->
+		<!-- ####################### 내가 만든 댓글 ############################ -->
+		<hr>
 		<div>
-			<textarea name="content" required="required" 
-			style="width:100%; height:100px; border: 2px solid gray; border-radius: 10px;" 
-			placeholder="댓글을 남겨보세요."></textarea>
+			<div class="answerlist"></div>
+			<c:if test="${sessionScope.loginok != null }">
+				<b>댓글</b><br>
+				<textarea name="content" required="required" 
+				style="width:80%; height:100px; border: 2px solid gray; border-radius: 10px;" 
+				placeholder="댓글을 남겨보세요." id="my_acontent" class="acontent"></textarea>
+				<button type="button" class="btn btn-outline-success btnansweradd" 
+				style="height: 65px; position: relative; top:-50px;"
+				id = "btnansweradd">등록</button>
+			</c:if>
 		</div>
 
 		<!-- 버튼 -->
 		<div>
 			<!-- 새 글쓰기 -->
-			<button type="button" class="btn btn-sm btn-success" onclick="location.href='.from'">
+			<button type="button" class="btn btn-sm btn-success" onclick="location.href='./form'">
 				<i class="bi bi-pencil"></i>&nbsp;글쓰기
 			</button>
 			
@@ -74,6 +210,7 @@ body * {
 			<button type="button" class="btn btn-sm btn-secondary" 
 			onclick="location.href='./form?num=${dto.num}&regroup=${dto.regroup}&restep=${dto.restep}&relevel=${dto.relevel}&currentPage=${currentPage}'">
 			답글</button>
+			
 			<!-- 로그인 본인일 경우에만 수정, 삭제 버튼 보이게 -->
 			<c:if test="${sessionScope.loginok != null and sessionScope.loginid == dto.myid}">
 				<!-- 수정 -->
@@ -107,7 +244,7 @@ body * {
 			  <span style="float: right;color: gray;">
 			  	<i class="bi bi-chat-dots"></i>
 			  	&nbsp;
-			  	댓글 0
+			  	댓글 <span class="answercount">0</span>
 			  </span>
 		</td>
 	</tr>
@@ -123,6 +260,24 @@ body * {
 		</td>
 	</tr>
 	<tr>
+		<td>
+			<!-- 댓글 출력할 영역 -->
+			<div class="answerlist"></div>
+		</td>
+	</tr>
+	<!-- ####################### 쌤이 만든 댓글 ############################ -->
+	<c:if test="${sessionScope.loginok != null }">
+		<tr>
+			<td>
+				<b>댓글</b><br>
+				<textarea style="width: 80%; height: 60px;" id="acontent" class="acontent"></textarea>
+				<button type="button" class="btn btn-outline-success btnansweradd" 
+				style="height: 65px; position: relative; top:-25px;"
+				id = "btnansweradd">등록</button>
+			</td>
+		</tr>
+	</c:if>
+	<tr>
 		<td class="buttons">
 		    <!-- 새글 -->
 			<button type="button" class="btn btn-sm btn-outline-success"
@@ -136,8 +291,7 @@ body * {
 			답글</button>
 			
 			<!-- 수정,삭제는 로그인중이며 자기가ㅏ 쓴글에만 나타나게 하기 -->
-			<c:if 
-			test="${sessionScope.loginok!=null and sessionScope.loginid==dto.myid}">
+			<c:if test="${sessionScope.loginok!=null and sessionScope.loginid==dto.myid}">
 				<button type="button" class="btn btn-sm btn-outline-secondary"
 					onclick="location.href='./updateform?num=${dto.num}&currentPage=${currentPage}'">			
 					수정</button>
