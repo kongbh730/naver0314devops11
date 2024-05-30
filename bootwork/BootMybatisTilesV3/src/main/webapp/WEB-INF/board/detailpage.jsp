@@ -162,7 +162,7 @@ function answer_list(){
 						<!-- <img id="profile_photo" src="../save/${profile_photo}" 
 						style="width:50px; heigth:50px; border: 1px solid gray" class="rounded-circle"> -->
 						<img id="profile_photo" src="${stpath}/${profile_photo}" 
-						style="width:50px; heigth:50px; border: 1px solid gray" class="rounded-circle">
+						style="width:50px; heigth:50px; border: 1px solid gray" class="rounded-circle"> <!-- 여기 사진 경로 수정 -->
 					</td>
 					<td>
 						<b>${dto.writer}</b>
@@ -187,7 +187,7 @@ function answer_list(){
 		<!-- 내용 + 사진 -->
 		<div>
 			<!-- <img alt="" src="../save/${dto.uploadphoto}" onerror="this.src='../image/noimage2.png'"> -->
-			<img alt="" src="${stpath}/${dto.uploadphoto}" onerror="this.src='../image/noimage2.png'"><!-- onerror 이게 출력한다는 뜻은 아님! -->
+			<img alt="" src="${stpath}/${dto.uploadphoto}" style="width: 70%";onerror="this.src='../image/noimage2.png'"><!-- 여기 사진 경로 수정 --><!-- onerror 이게 출력한다는 뜻은 아님! -->
 			<pre>${dto.content}</pre>
 		</div>
 
@@ -244,7 +244,7 @@ function answer_list(){
 			  <img src="${stpath}/${profile_photo}"
 			  onerror="this.src='../image/noimage2.png'"
 			  style="width: 45px;height: 45px;margin-right:5px;"
-			  class="rounded-circle" align="left">
+			  class="rounded-circle" align="left"> <!-- 여기 사진 경로 수정 -->
 			  <b>${dto.writer}</b><br>
 			  <span style="color: gray;font-size: 13px;">
 			  	<fmt:formatDate value="${dto.writeday}"
@@ -267,7 +267,7 @@ function answer_list(){
 				style="max-width: 300px;"> -->
 				<img src="${stpath}/${dto.uploadphoto}"
 				onerror="this.src='../image/noimage2.png'"
-				style="max-width: 300px;">
+				style="max-width: 300px;"> <!-- 여기 사진 경로 수정 -->
 				<br><br> <!-- onerror 이게 출력한다는 뜻은 아님! -->
 			</c:if>
 			<pre style="font-size: 17px;">${dto.content}</pre>

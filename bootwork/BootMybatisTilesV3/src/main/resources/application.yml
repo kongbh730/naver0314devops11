@@ -16,6 +16,7 @@ spring:
 #    url: jdbc:mysql://localhost:3306/bit701?serverTimezone=Asia/Seoul
 #    username: root
 #    password: 1234
+# 5월 29일 수업 때 주석처리 
 
 #gangsa ncloud mysql db
     driver-class-name: com.mysql.cj.jdbc.Driver

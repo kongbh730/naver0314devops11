@@ -72,7 +72,7 @@ public class MemberUpdateController {
 		*/
 		
 		//==========================================================================
-		//스토리지에 업로드하기//NCP 사용을 위해 새로 추가
+		//스토리지에 업로드하기 //NCP 사용을 위해 새로 추가
 		String photo = storageService.uploadFile(bucketName, folderName, upload);
 		//==========================================================================
 		

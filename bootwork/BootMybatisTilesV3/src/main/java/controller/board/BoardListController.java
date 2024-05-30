@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import data.dto.ReBoardDto;
+import data.service.BoardAnswerService;
 import data.service.ReBoardService;
 
 @Controller
 public class BoardListController {
 	@Autowired
 	private ReBoardService boardService;
+	
+	@Autowired
+	private BoardAnswerService answerService;
 
 	@GetMapping("/board/list")
 	public String list(
@@ -26,7 +30,7 @@ public class BoardListController {
 		int totalCount = boardService.getTotalCount();
 
 		//페이징에 필요한 변수들
-		int perPage = 5;//한페이지당 보여질 그의 갯수
+		int perPage = 10;//한페이지당 보여질 그의 갯수
 		int perBlock = 5;//현재 블럭에 보여질 페이지의 갯수
 		int start;//db에서 가져올 시작번호
 		int startPage;//각 블럭에 보여질 시작페이지
@@ -52,8 +56,17 @@ public class BoardListController {
 
 		//각 페이지에 출력할 시작번호	
 		no= totalCount - (currentPage - 1) * perPage;
+		
+		//목록가져오기
 		List<ReBoardDto> list = boardService.getPagingList(start, perPage);
 
+		//list의 각 dto에 댓글 갯수 저장하기
+		for(ReBoardDto dto:list)
+		{
+			//num에 해당하는 각 댓글의 갯수 저장
+			dto.setRecount(answerService.getAnswerData(dto.getNum()).size());
+		}
+		
 		//모델에 필요한 데이터 저장
 		//model 에 저장
 		model.addAttribute("totalCount", totalCount);
