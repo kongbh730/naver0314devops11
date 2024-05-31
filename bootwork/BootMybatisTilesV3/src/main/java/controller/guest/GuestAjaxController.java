@@ -88,8 +88,8 @@ public class GuestAjaxController {
 			//db에 pdto를 insert
 			guestService.insertGuestPhoto(pdto);
 		}
-		
 	}
+	
 	@GetMapping("/datas")
 	public List<GuestDto> guestList()
 	{
