@@ -23,22 +23,37 @@ body * {
 	font-family: 'Jua';
 }
 
-pre.adata{
+pre.adata {
 	margin-left: 10px;
 	color: gray;
 }
 
-span.aday{
-	margin-left:100px;
+span.aday {
+	margin-left: 100px;
 	color: gray;
 	font-size: 0.9em;
 }
 
+/*css 수정*/
+div.trans {
+	position: absolute;
+	top: 150px;
+	left: 550px;
+	width: 500px;
+
+	/*
+	height: 400px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	*/
+}
 </style>
 <script type="text/javascript">
 $(function(){
 	//처음 로딩시 댓글 목록 출력
 	answer_list();
+	
+	trans_content();//처음시작시 content 출력
 	
 	//댓글 추가 버튼//....버튼은 몰라도, content는 id로 다르게 받아야함...
 	//$("#btnansweradd").click(function()
@@ -95,7 +110,41 @@ $(function(){
 			});	
 		}
 	});
+	//번역언어 선택 이벤트
+	$("#seltrans").change(function(){
+		trans_content();
+	})
+	
 });//end of function
+
+//번역해서 가져오는 함수
+function trans_content()
+{
+	//번역할 문장
+	let text = `${dto.content}`;//여러줄 content를 출력하기 위해서 ''대신 `` 사용
+	//번역할 언어코드
+	let lang=$("#seltrans").val();
+	console.log(text);
+	console.log(lang);
+	
+	$.ajax({
+		type:"post",
+		dataType:"text",
+		url:"./trans",
+		data:{"text":text, "lang":lang},
+		success:function(data){
+			console.log(data);//json 형식의 문자열
+			console.log(typeof(data));//String 으로 출력됨
+			//String 타입을 json 타입으로 변환
+			let m = JSON.parse(data);
+			console.log(typeof(m));//object라고 나옴
+			//번역된 텍스트만 추출
+			let s=m.message.result.translatedText;
+			console.log(s);
+			$("#trans_lang").html(s);//trans_lang에서 s 출력
+		}
+	});
+}
 
 //댓글 목록 출력
 function answer_list(){
@@ -146,23 +195,33 @@ function answer_list(){
 
 </script>
 </head>
-   	
+
 <!-- NCP사용을 위해 새로 추가 -->
-<c:set var="stpath" value="https://kr.object.ncloudstorage.com/bitcamp-bucket-56/photocommon"></c:set>
-	
+<c:set var="stpath"
+	value="https://kr.object.ncloudstorage.com/bitcamp-bucket-56/photocommon"></c:set>
+
 <body>
-	<div style="width:70%;">
-	<h1>내가 만든거</h1>
-		<!-- 제목 + 프로필 이미지 + 이름 + 작성일 + 조회수 -->
+	<div class="trans">
+		<div class="input-group">
+			<b>번역할 언어 선택</b> 
+			<select id="seltrans" class="form-select" style="width: 130px; maring-left: 10px;">
+				<option value="en">영어</option>
+				<option value="ja">일어</option>
+				<option value="zh-CN">중국어</option>
+				<option value="es">스페인어</option>
+			</select>
+		</div>
+		<pre id="trans_lang" style="margin-top: 20px; font-size: 25px; white-space: pre-wrap; word-wrap: break-word; width: 400px;"></pre>
+	</div>
+
+	<div style="width: 70%;">
+		<h1>내가 만든거</h1>
 		<div>
 			<h3>${dto.subject}</h3>
-			<table class="table table-bordered"><!-- 나중에 처리 -->
+			<table class="table table-bordered">
 				<tr>
-					<td rowspan="2" style="width:60px;">
-						<!-- <img id="profile_photo" src="../save/${profile_photo}" 
-						style="width:50px; heigth:50px; border: 1px solid gray" class="rounded-circle"> -->
-						<img id="profile_photo" src="${stpath}/${profile_photo}" 
-						style="width:50px; heigth:50px; border: 1px solid gray" class="rounded-circle"> <!-- 여기 사진 경로 수정 -->
+					<td rowspan="2" style="width: 60px;">
+						<img id="profile_photo" src="${stpath}/${profile_photo}" style="width: 50px; heigth: 50px; border: 1px solid gray" class="rounded-circle"> <!-- 여기 사진 경로 수정 -->
 					</td>
 					<td>
 						<b>${dto.writer}</b>
@@ -170,157 +229,148 @@ function answer_list(){
 				</tr>
 				<tr>
 					<td style="color: gray">
-						<fmt:formatDate value="${dto.writeday}" pattern="yyyy.MM.dd. HH:mm" />
+						<fmt:formatDate value="${dto.writeday}" pattern="yyyy.MM.dd. HH:mm"/>
 						&nbsp;&nbsp;조회&nbsp;${dto.readcount}
 					</td>
 					<td>
-						<span style="float: right;color: gray;">
-			  			<i class="bi bi-chat-dots"></i>
-			  			&nbsp;
-			  			댓글 <span class="answercount">0</span>
-						</span>
+						<span style="float: right; color: gray;"></span>
+						<i class="bi bi-chat-dots"></i>
+						&nbsp; 댓글 <span class="answercount">0</span>
 					</td>
 				</tr>
 			</table>
 		</div>
 		<hr>
-		<!-- 내용 + 사진 -->
-		<div>
-			<!-- <img alt="" src="../save/${dto.uploadphoto}" onerror="this.src='../image/noimage2.png'"> -->
-			<img alt="" src="${stpath}/${dto.uploadphoto}" style="width: 70%";onerror="this.src='../image/noimage2.png'"><!-- 여기 사진 경로 수정 --><!-- onerror 이게 출력한다는 뜻은 아님! -->
-			<pre>${dto.content}</pre>
-		</div>
-
-		<!-- ####################### 내가 만든 댓글 ############################ -->
-		<hr>
+	</div>
+			
+	<div>
+	<img src="${stpath}/${dto.uploadphoto}" onerror="this.src='../image/noimage2.png'" style="width: 70%;">
+		  
+	<pre style="margin-top: 20px; font-size: 25px; white-space: pre-wrap; word-wrap: break-word; width: 400px;">${dto.content}</pre>
+	<!-- ####################### 내가 만든 댓글 ############################ -->
+	<hr>
 		<div>
 			<div class="answerlist"></div>
 			<c:if test="${sessionScope.loginok != null }">
-				<b>댓글</b><br>
-				<textarea name="content" required="required" 
-				style="width:80%; height:100px; border: 2px solid gray; border-radius: 10px;" 
-				placeholder="댓글을 남겨보세요." id="my_acontent" class="acontent"></textarea>
-				<button type="button" class="btn btn-outline-success btnansweradd" 
-				style="height: 65px; position: relative; top:-50px;"
-				id = "btnansweradd">등록</button>
+				<b>댓글</b>
+				<br>
+				<textarea name="content" required="required"
+					style="width: 80%; height: 100px; border: 2px solid gray; border-radius: 10px;"
+					placeholder="댓글을 남겨보세요." id="my_acontent" class="acontent"></textarea>
+				<button type="button" class="btn btn-outline-success btnansweradd"
+					style="height: 65px; position: relative; top: -50px;"
+					id="btnansweradd">등록</button>
 			</c:if>
 		</div>
 
 		<!-- 버튼 -->
 		<div>
 			<!-- 새 글쓰기 -->
-			<button type="button" class="btn btn-sm btn-success" onclick="location.href='./form'">
+			<button type="button" class="btn btn-sm btn-success"
+				onclick="location.href='./form'">
 				<i class="bi bi-pencil"></i>&nbsp;글쓰기
 			</button>
-			
+
 			<!-- 답글 -->
-			<button type="button" class="btn btn-sm btn-secondary" 
-			onclick="location.href='./form?num=${dto.num}&regroup=${dto.regroup}&restep=${dto.restep}&relevel=${dto.relevel}&currentPage=${currentPage}'">
-			답글</button>
-			
+			<button type="button" class="btn btn-sm btn-secondary"
+				onclick="location.href='./form?num=${dto.num}&regroup=${dto.regroup}&restep=${dto.restep}&relevel=${dto.relevel}&currentPage=${currentPage}'">
+				답글</button>
+
 			<!-- 로그인 본인일 경우에만 수정, 삭제 버튼 보이게 -->
-			<c:if test="${sessionScope.loginok != null and sessionScope.loginid == dto.myid}">
+			<c:if
+				test="${sessionScope.loginok != null and sessionScope.loginid == dto.myid}">
 				<!-- 수정 -->
-				<button type="button" class="btn btn-sm btn-secondary" onclick="location.href='./updateform?num=${dto.num}&currentPage=${currentPage}'">수정</button>
-				
+				<button type="button" class="btn btn-sm btn-secondary"
+					onclick="location.href='./updateform?num=${dto.num}&currentPage=${currentPage}'">수정</button>
+
 				<!-- 삭제 -->
-				<button type="button" class="btn btn-sm btn-secondary" onclick="del()">삭제</button>
+				<button type="button" class="btn btn-sm btn-secondary"
+					onclick="del()">삭제</button>
 			</c:if>
-			<button type="button" class="btn btn-sm btn-secondary" onclick="location.href='./list?currentPage=${currentPage}'">목록</button>
+			<button type="button" class="btn btn-sm btn-secondary"
+				onclick="location.href='./list?currentPage=${currentPage}'">목록</button>
 		</div>
 	</div>
-<hr>
+	
+	<hr>
 	<div>
-	<h1>쌤이 만든거</h1>
+		<h1>쌤이 만든거</h1>
 		<table class="table" style="width: 500px;">
-	<tr>
-		<td>
-			<h2><b>${dto.subject}</b></h2>
-			<!-- 프로필 사진 -->
-			<!-- <img src="../save/${profile_photo}"
+			<tr>
+				<td>
+					<h2>
+						<b>${dto.subject}</b>
+					</h2> <!-- 프로필 사진 --> <!-- <img src="../save/${profile_photo}"
 			  onerror="this.src='../image/noimage2.png'"
 			  style="width: 45px;height: 45px;margin-right:5px;"
-			  class="rounded-circle" align="left"> -->
-			  <img src="${stpath}/${profile_photo}"
-			  onerror="this.src='../image/noimage2.png'"
-			  style="width: 45px;height: 45px;margin-right:5px;"
-			  class="rounded-circle" align="left"> <!-- 여기 사진 경로 수정 -->
+			  class="rounded-circle" align="left"> --> 
+			  <img src="${stpath}/${profile_photo}" onerror="this.src='../image/noimage2.png'" style="width: 45px; height: 45px; margin-right: 5px;" class="rounded-circle" align="left"> 
+			  <!-- 여기 사진 경로 수정 --> 
 			  <b>${dto.writer}</b><br>
-			  <span style="color: gray;font-size: 13px;">
-			  	<fmt:formatDate value="${dto.writeday}"
-			  	pattern="yyyy.MM.dd HH:mm"/>
-			  	 &nbsp; &nbsp;
-			  	 조회 &nbsp;${dto.readcount}
-			  </span>
-			  <span style="float: right;color: gray;">
-			  	<i class="bi bi-chat-dots"></i>
-			  	&nbsp;
-			  	댓글 <span class="answercount">0</span>
-			  </span>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<c:if test="${dto.uploadphoto != 'no'}"><!-- uploadphoto가 'no'가 아니면 해당 photo 출력 -->
-				<!-- <img src="../save/${dto.uploadphoto}"
+					<span style="color: gray; font-size: 13px;"> <fmt:formatDate
+							value="${dto.writeday}" pattern="yyyy.MM.dd HH:mm" /> &nbsp;
+						&nbsp; 조회 &nbsp;${dto.readcount}
+				</span> <span style="float: right; color: gray;"> <i
+						class="bi bi-chat-dots"></i> &nbsp; 댓글 <span class="answercount">0</span>
+				</span>
+				</td>
+			</tr>
+			<tr>
+				<td><c:if test="${dto.uploadphoto != 'no'}">
+						<!-- uploadphoto가 'no'가 아니면 해당 photo 출력 -->
+						<!-- <img src="../save/${dto.uploadphoto}"
 				onerror="this.src='../image/noimage2.png'"
 				style="max-width: 300px;"> -->
-				<img src="${stpath}/${dto.uploadphoto}"
-				onerror="this.src='../image/noimage2.png'"
-				style="max-width: 300px;"> <!-- 여기 사진 경로 수정 -->
-				<br><br> <!-- onerror 이게 출력한다는 뜻은 아님! -->
+						<img src="${stpath}/${dto.uploadphoto}"
+							onerror="this.src='../image/noimage2.png'"
+							style="max-width: 300px;">
+						<!-- 여기 사진 경로 수정 -->
+						<br>
+						<br>
+						<!-- onerror 이게 출력한다는 뜻은 아님! -->
+					</c:if> <pre style="font-size: 17px;">${dto.content}</pre></td>
+			</tr>
+			<tr>
+				<td>
+					<!-- 댓글 출력할 영역 -->
+					<div class="answerlist"></div>
+				</td>
+			</tr>
+			<!-- ####################### 쌤이 만든 댓글 ############################ -->
+			<c:if test="${sessionScope.loginok != null }">
+				<tr>
+					<td><b>댓글</b><br> <textarea
+							style="width: 80%; height: 60px;" id="acontent" class="acontent"></textarea>
+						<button type="button" class="btn btn-outline-success btnansweradd"
+							style="height: 65px; position: relative; top: -25px;"
+							id="btnansweradd">등록</button></td>
+				</tr>
 			</c:if>
-			<pre style="font-size: 17px;">${dto.content}</pre>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<!-- 댓글 출력할 영역 -->
-			<div class="answerlist"></div>
-		</td>
-	</tr>
-	<!-- ####################### 쌤이 만든 댓글 ############################ -->
-	<c:if test="${sessionScope.loginok != null }">
-		<tr>
-			<td>
-				<b>댓글</b><br>
-				<textarea style="width: 80%; height: 60px;" id="acontent" class="acontent"></textarea>
-				<button type="button" class="btn btn-outline-success btnansweradd" 
-				style="height: 65px; position: relative; top:-25px;"
-				id = "btnansweradd">등록</button>
-			</td>
-		</tr>
-	</c:if>
-	<tr>
-		<td class="buttons">
-		    <!-- 새글 -->
-			<button type="button" class="btn btn-sm btn-outline-success"
-			onclick="location.href='./form'">
-			<i class="bi bi-pencil-fill"></i>
-			글쓰기</button>
-			
-			<!-- 답글 -->
-			<button type="button" class="btn btn-sm btn-outline-secondary"
-			onclick="location.href='./form?num=${dto.num}&regroup=${dto.regroup}&restep=${dto.restep}&relevel=${dto.relevel}&currentPage=${currentPage}'">			
-			답글</button>
-			
-			<!-- 수정,삭제는 로그인중이며 자기가ㅏ 쓴글에만 나타나게 하기 -->
-			<c:if test="${sessionScope.loginok!=null and sessionScope.loginid==dto.myid}">
-				<button type="button" class="btn btn-sm btn-outline-secondary"
-					onclick="location.href='./updateform?num=${dto.num}&currentPage=${currentPage}'">			
-					수정</button>
-					
-				<button type="button" class="btn btn-sm btn-outline-secondary"
-					onclick="del()">			
-					삭제</button>
-			</c:if>
-			
-			<button type="button" class="btn btn-sm btn-outline-secondary"
-					onclick="location.href='./list?currentPage=${currentPage}'">			
-					목록</button>
-		</td>
-	</tr>
-</table>
+			<tr>
+				<td class="buttons">
+					<!-- 새글 -->
+					<button type="button" class="btn btn-sm btn-outline-success"
+						onclick="location.href='./form'">
+						<i class="bi bi-pencil-fill"></i> 글쓰기
+					</button> <!-- 답글 -->
+					<button type="button" class="btn btn-sm btn-outline-secondary"
+						onclick="location.href='./form?num=${dto.num}&regroup=${dto.regroup}&restep=${dto.restep}&relevel=${dto.relevel}&currentPage=${currentPage}'">
+						답글</button> <!-- 수정,삭제는 로그인중이며 자기가 쓴글에만 나타나게 하기 --> <c:if
+						test="${sessionScope.loginok!=null and sessionScope.loginid==dto.myid}">
+						<button type="button" class="btn btn-sm btn-outline-secondary"
+							onclick="location.href='./updateform?num=${dto.num}&currentPage=${currentPage}'">
+							수정</button>
+
+						<button type="button" class="btn btn-sm btn-outline-secondary"
+							onclick="del()">삭제</button>
+					</c:if>
+
+					<button type="button" class="btn btn-sm btn-outline-secondary"
+						onclick="location.href='./list?currentPage=${currentPage}'">
+						목록</button>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<script type="text/javascript">
 		function del()
