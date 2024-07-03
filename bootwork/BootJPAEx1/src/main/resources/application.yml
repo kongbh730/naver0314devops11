@@ -11,15 +11,21 @@ spring:
 
 #jpa setting
 #ddl-auto: create(기존 테이블을 제거 후 다시 생성 : 절대 주의해서 사용), update(변경된 부분만 반영)
-jpa:
-  hibernate:
-    ddl-auto: update
-  #ddl 생성시 데이터 베이스 고유의 기능을 사용할 것인가?
-  generate-ddl: true
-  # api 호출시 실행되는 sql 문을 콘솔에 보여줄 것인가
-  show-sql: true
-  # 사용할 데이터 베이스 종류
-  database: mysql
-  #MySQL 상세 지정
-  database-platform: org.hibernate.dialect.MySQL57Dialect
+  jpa:
+    hibernate:
+      ddl-auto: update
+    #ddl 생성시 데이터 베이스 고유의 기능을 사용할 것인가?
+    generate-ddl: true
+    # api 호출시 실행되는 sql 문을 콘솔에 보여줄 것인가?
+    show-sql: true
+    # 사용할 데이터 베이스 종류
+    database: mysql
+    #MySQL 상세 지정
+    database-platform: org.hibernate.dialect.MySQLDialect
+    #database-platform: org.hibernate.dialect.MySQL57Dialect
 
+  #하위 폴더명 .말고 /로 생성할 때 추가한거 -> 없어도 됨
+  #mvc:
+  #  view:
+  #    prefix: /templates
+  #    suffix: .html
