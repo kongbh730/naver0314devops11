@@ -1,4 +1,4 @@
-create table memberdb (
+reate table memberdb (
 	num smallint auto_increment primary key,
     name varchar(20),
     myid varchar(20),

@@ -25,6 +25,7 @@
        		border: 2px solid gray;
        }
    </style>
+
    <script type="text/javascript">
    	$(function(){
    		$("#upload").change(function(){
@@ -48,7 +49,6 @@
    	
    </script>
 </head>
-
 	<c:if test="${sessionScope.loginok == null}"><!-- 로그인이 안 되어 있는 상태라면? -->
 		<script type="text/javascript">
 			alert("먼저 로그인 후 글을 작성해 주세요");
