@@ -24,7 +24,7 @@
 </head>
 <body>
 <h3 class="alert alert-info input-group" style="width: 600px;">
-    총 [[${count}]]개의 자동차 목록이 있습니다
+    총 [[${totalCount}]]개의 자동차 목록이 있습니다
     <button type="button" class="btn btn-sm btn-danger"
             style="margin-left: 30px;"
             onclick="location.href='./form'">자동차등록
@@ -60,7 +60,7 @@
     </tr>
 </table>
 <div th:if="${pageSize < totalCount}">
-    <button type="button" class="btn btn-sm btn-danger" th:onclick="|Location.href='@{./list(more=2)}'|">More</button>
+    <button type="button" class="btn btn-sm btn-danger" th:onclick="|location.href='@{./list(more=2)}'|">More</button>
 
 </div>
 </body>
