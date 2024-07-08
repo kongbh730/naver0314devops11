@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const ThreeApp =()=>{
-
     const [number, setNumber] = useState(0); //useState(초기값)
 
     //style 변경하는 세번째 방법
@@ -21,10 +20,17 @@ const ThreeApp =()=>{
             <div style={numberStyle}>
                 {number}
             </div>
-            <button type="button" className="btn btn-danger btn-sm" style={{marginLeft:'60px'}}>감소</button>
-            <button type="button" className="btn btn-success btn-sm" style={{marginLeft:'10px'}}>증가</button>
-
-
+            <button type="button" className="btn btn-danger btn-sm" style={{marginLeft:'60px'}}
+            onClick={()=>{
+                //number 변수값 1 감소
+                setNumber(number - 1);
+            }}>감소</button>
+            
+            <button type="button" className="btn btn-success btn-sm" style={{marginLeft:'10px'}}
+            onClick={()=>{
+                //number 변수값 1 증가
+                setNumber(number+1);
+            }}>증가</button>
 
         </div>
     )
