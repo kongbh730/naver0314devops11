@@ -37,6 +37,7 @@ public class MycarController {
         return "redirect:./mycar/list";
     }
 
+    //페이징 미적용
     /*@GetMapping("/mycar/list")
     public String list(Model model)
     {
@@ -48,6 +49,7 @@ public class MycarController {
         return "mycar/mycarlist";
     }*/
 
+    //페이징 적용. 근데 별로임....
     int pageSize;
     @GetMapping("/mycar/list")
     public String list(Model model,

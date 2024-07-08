@@ -1,0 +1,28 @@
+.photo{
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    margin: 10px;
+}
+
+.line1{
+    border: 5px solid hotpink;
+}
+
+.line2{
+    border: 5px double darkgreen;
+}
+
+.line3{
+    border: 5px dotted paleturquoise;
+}
+
+.msg{
+    width: 400px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-family: 'Dancing Script';
+    font-size: 25px;
+}
+

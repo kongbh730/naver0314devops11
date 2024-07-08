@@ -31,6 +31,8 @@ public class MyCarDao{
         return daoInter.findAll(Sort.by(Sort.Direction.DESC,"num")); //나중에 추가됐을 수록 위로
     }
 
+    //=======================================================================================================
+
     //num에 해당하는 이미지 가져오기
     public MycarDto getData(Long num)
     {
@@ -68,7 +70,5 @@ public class MyCarDao{
     {
         return daoInter.findAll(pageable);//페이지에 필요한 만큼만 데이터 반환;
     }
-
-
 
 }
