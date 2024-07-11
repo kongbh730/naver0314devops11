@@ -34,6 +34,15 @@ const OneApp = () => {
         })
     }
 
+    const deleteSangpum=(idx)=>{
+        let confirmDelete = window.confirm(`${idx+1}번째 상품을 삭제하시겠습니까?`);
+
+        if(confirmDelete)
+        {
+            setInputArray(inputArray.filter((inputArray, currentidx) => currentidx !== idx));
+        }
+    }
+
     return (
         <div>
             <Alert color='success'>OneApp-모든 입력값 하나의 변수에 넣기</Alert>
@@ -96,7 +105,7 @@ const OneApp = () => {
                 <tbody>
                     {
                         inputArray.map((item, idx) =>
-                        <OneSubApp key={idx} idx={idx} item={item}></OneSubApp>)
+                        <OneSubApp key={idx} idx={idx} item={item} deleteSangpum={deleteSangpum}></OneSubApp>)
                     }
                 </tbody>
 

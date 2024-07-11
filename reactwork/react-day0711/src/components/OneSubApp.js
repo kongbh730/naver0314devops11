@@ -1,12 +1,15 @@
+import { CloseSharp } from '@mui/icons-material';
 import React from 'react';
 
-const OneSubApp = ({idx, item}) => {
+const OneSubApp = ({idx, item, deleteSangpum}) => {
     return (
         <>
             <tr>
-                <td style={{width:'200px', backgroundColor:'#ccf'}} rowSpan={4}>
+                <td style={{width:'200px', backgroundColor:'#ccf'}} rowSpan={4} align='center'>
                     <img alt="" src={require(`../shop/${item.sphoto}`)}
                     style={{width:'120px', height:'130px', border:'1px solid gray'}} />
+                    <br></br>
+                    <CloseSharp style={{cursor:'pointer'}} onClick={()=>deleteSangpum(idx)}/>
                 </td>
                 <td>
                     상품번호 : {idx + 1}번

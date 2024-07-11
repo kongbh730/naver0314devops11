@@ -6,7 +6,7 @@ import FourApp from './FourApp';
 
 const MainApp = () => {
     // 인덱스 변수 생성 : 기본값은 1
-    const [idx, setidx] = useState(1);//기본 선택값
+    const [idx, setidx] = useState(2);//기본 선택값
 
     // 인덱스 값 변경 이벤트
     const changeApp=(e)=>{
