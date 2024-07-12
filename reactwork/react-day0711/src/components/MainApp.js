@@ -3,10 +3,11 @@ import TwoApp from './TwoApp';
 import OneApp from './OneApp';
 import ThreeApp from './ThreeApp';
 import FourApp from './FourApp';
+import RootApp from '../context/Root';
 
 const MainApp = () => {
     // 인덱스 변수 생성 : 기본값은 1
-    const [idx, setidx] = useState(2);//기본 선택값
+    const [idx, setidx] = useState(5);//기본 선택값
 
     // 인덱스 값 변경 이벤트
     const changeApp=(e)=>{
@@ -15,7 +16,7 @@ const MainApp = () => {
 
     return (
         <div>
-            <h2>2024-07-10 리액트 수업</h2>
+            <h2>2024-07-11~12 리액트 수업</h2>
             <div style={{fontSize:'16px'}}>
                 <label>
                     {/* 라디오 버튼은 name을 같게 줘야 하나의 라디오 버튼으로 작동한다. */}
@@ -30,12 +31,18 @@ const MainApp = () => {
                 <br></br>
                 <label>
                     <input type='radio' name='app' defaultValue={3} onClick={changeApp}/>
-                        ThreeApp-데이터 추가, 삭제, 출력(부모,자식 컴포넌트 사용)
+                        ThreeApp-json 데이터 출력
                 </label>
                 <br></br>
                 <label>
                     <input type='radio' name='app' defaultValue={4} onClick={changeApp}/>
-                        FourApp-문제
+                        FourApp-json
+                </label>
+                {/* ================================================ */}
+                <br></br>
+                <label>
+                    <input type='radio' name='app' defaultValue={5} onClick={changeApp}/>
+                        Root-useContext 공부
                 </label>
 
             </div>
@@ -43,7 +50,8 @@ const MainApp = () => {
             {
                 idx === 1 ? <OneApp></OneApp> : 
                 idx === 2 ? <TwoApp></TwoApp> :
-                idx === 3 ? <ThreeApp></ThreeApp> : <FourApp></FourApp>
+                idx === 3 ? <ThreeApp></ThreeApp> :
+                idx === 4 ? <FourApp></FourApp> : <RootApp></RootApp>
             }
         </div>
     );

@@ -10,15 +10,26 @@ const TwoApp = () => {
         {irum:'유재석', blood:'A', age:45, today:new Date()}
     ]);
 
+    //삭제 함수
     const deleteData=(idx)=>{
         setDataArray(dataArray.filter((d,i)=> i !== idx));
     }
 
+    //추가 함수
+    const addData=(data)=>{
+        setDataArray(dataArray.concat({
+            ...data, 
+            today:new Date()
+        })
+    )};
+    
+
     return (
         <div>
             <Alert color='success'>TwoApp-데이터 추가, 삭제, 출력(부모, 자식 컴포넌트)</Alert>
+            {/* 입력폼 컴포넌트 */}
+            <TwoWriteForm onSave={addData}></TwoWriteForm>
 
-            <TwoWriteForm></TwoWriteForm>
             <hr></hr>
             <table className='table table-striped' style={{width:'400px'}}>
                 <thead>
