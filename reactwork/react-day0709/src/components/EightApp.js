@@ -40,15 +40,17 @@ const EightApp=()=>{
 
             <hr></hr>
 
-            <table className="table table-bordered">
-                <tbody>
-                    <tr className="alert alert-danger">
-                        <td>번호</td>
-                        <td>사진</td>
-                        <td>이름</td>
-                        <td>주소</td>
-                        <td>나이</td>
+            <table className="table table-bordered" style={{width:'400px'}}>
+                <thead>
+                    <tr className="table-danger">
+                        <td style={{width:'50px'}}>번호</td>
+                        <td style={{width:'60px'}}>사진</td>
+                        <td style={{width:'70px'}}>이름</td>
+                        <td style={{width:'130px'}}>주소</td>
+                        <td style={{width:'40px'}}>나이</td>
                     </tr>
+                </thead>
+                <tbody>
                 {
                     personArray.map((item, idx)=>
                     <tr>

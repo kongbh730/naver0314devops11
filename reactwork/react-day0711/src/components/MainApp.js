@@ -4,10 +4,11 @@ import OneApp from './OneApp';
 import ThreeApp from './ThreeApp';
 import FourApp from './FourApp';
 import RootApp from '../context/Root';
+import FiveApp from './FiveApp';
 
 const MainApp = () => {
     // 인덱스 변수 생성 : 기본값은 1
-    const [idx, setidx] = useState(5);//기본 선택값
+    const [idx, setidx] = useState(6);//기본 선택값
 
     // 인덱스 값 변경 이벤트
     const changeApp=(e)=>{
@@ -45,13 +46,20 @@ const MainApp = () => {
                         Root-useContext 공부
                 </label>
 
+                <br></br>
+                <label>
+                    <input type='radio' name='app' defaultValue={6} onClick={changeApp}/>
+                        FiveApp-Axios db 데이터 가져오기
+                </label>
+
             </div>
             <hr></hr>
             {
                 idx === 1 ? <OneApp></OneApp> : 
                 idx === 2 ? <TwoApp></TwoApp> :
                 idx === 3 ? <ThreeApp></ThreeApp> :
-                idx === 4 ? <FourApp></FourApp> : <RootApp></RootApp>
+                idx === 4 ? <FourApp></FourApp> : 
+                idx === 5 ? <RootApp></RootApp> : <FiveApp></FiveApp>
             }
         </div>
     );

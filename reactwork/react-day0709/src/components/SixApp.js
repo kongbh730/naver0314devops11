@@ -5,8 +5,6 @@ import img3 from '../food/3.jpg';
 import img4 from '../food/9.jpg';
 import './MyStyle.css';
 
-
-
 const SixApp =()=>{
     const names=["장미꽃", "안개꽃", "달리아", "목수국", "채송화"];
     const photos=[img1, img2, img3, img4];

@@ -40,7 +40,7 @@ const FourApp=()=>{
                 </input>
 
                 {/* age 20세 미만은 car1, 50세 미만은 car2, 나머지는 car3 */}
-                {/* <input type="text" className="form-control" style={{width: '60px'}} placeholder="나이" value={age}
+                {/* { <input type="text" className="form-control" style={{width: '60px'}} placeholder="나이" value={age}
                 onChange={(e)=>{
                     setAge(e.target.value);
                     if(Number(age) < 20)
@@ -56,7 +56,7 @@ const FourApp=()=>{
                         setPhoto(car3);
                     }
                 }}>
-                </input> */}
+                </input> } */}
 
                 <input type="text" className="form-control" style={{width: '60px'}} placeholder="나이" value={age}
                 onChange={(e)=>setAge(e.target.value)}

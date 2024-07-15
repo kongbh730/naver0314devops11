@@ -6,7 +6,7 @@ const Footer = () => {
     const {isDark, setIsDark}=useContext(ThemeContext);
     
     return (
-        <footer className='footer' style={{backgroundColor:isDArk? 'pink' : 'cyan'}}>
+        <footer className='footer' style={{backgroundColor:isDark? 'pink' : 'cyan'}}>
             <Button variant='contained' color='error'>
                 Dark Mode
             </Button>

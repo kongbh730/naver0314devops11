@@ -72,13 +72,6 @@ const FourApp = () => {
 
                 </tbody>
             </table>
-
-
-
-
-
-
-
             
         </div>
     );

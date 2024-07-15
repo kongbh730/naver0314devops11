@@ -9,7 +9,6 @@ const FiveApp = () => {
     const[show, setShow]=useState(false);
     const[show2, setShow2]=useState(false);
 
-
     //처음 + 값 변경시 마다 호출
     // useEffect(()=>{
     //     console.log("1.처음 또는 값 변경시 항상 호출");
@@ -23,7 +22,7 @@ const FiveApp = () => {
     //number변경때만 호출
     useEffect(()=>{
         console.log("3. number가 변경 될 때만 호출");
-        if(number % 3 == 0)
+        if(number % 3 === 0)
         {
             setShow(true);
         }
@@ -36,7 +35,7 @@ const FiveApp = () => {
     //count변경때만 호출
     useEffect(()=>{
         console.log("4. count가 변경 될 때만 호출");
-        if(count % 10 == 0)
+        if(count % 10 === 0)
         {
             setShow2(true);
         }
@@ -85,10 +84,6 @@ const FiveApp = () => {
                 show2 &&
                 <img alt="이미지" src={photo1} style={{width:'150px'}} />
             }
-
-
-
-
         </div>
     );
 };

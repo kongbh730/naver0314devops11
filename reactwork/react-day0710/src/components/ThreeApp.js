@@ -36,7 +36,6 @@ const ThreeApp = () => {
 
             {/* 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning', */}
 
-
         </div>
     );
 };
