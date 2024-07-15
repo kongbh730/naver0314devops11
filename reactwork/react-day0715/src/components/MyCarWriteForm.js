@@ -2,7 +2,7 @@ import { Alert, Button } from '@mui/material';
 import axios from 'axios'; // 중괄호가 들어가면 안됨// Axios로 임포트 하면 자동완성으로 중괄호가 생성됨
 import React, { useState } from 'react';
 
-const MyCarWriteForm = () => {
+const MyCarWriteForm = ({onSave}) => {
     const [carname, setCarname]=useState('');
     const [carprice, setCarprice]=useState('');
     const [carcolor, setCarcolor]=useState('#ccffaa');
@@ -20,14 +20,27 @@ const MyCarWriteForm = () => {
         const uploadForm = new FormData();
         uploadForm.append("upload", uploadFilename);
 
-        axios.post({
-            method:'post',
+        //이미지가 아니라 데이터만 보낼 때는 axios.post()
+        axios({
+            method:'post', //이미지를 보낼 때는 안에서 post
             url:'/mycar/upload',
             data:uploadForm,
             headers:{'Content-Type':'multipart/form-data'}
         }).then(res=>{
             setCarphoto(res.data.carphoto);
         })
+    }
+
+    //등록버튼 이벤트....
+    const addDataEvent=()=>{
+        //부모컴포넌트의 onSave에 데이터 보내기
+        onSave({carname, carphoto, carprice, carguip, carcolor});
+
+        setCarcolor("#ccffaa");
+        setCarguip('');
+        setCarname('');
+        setCarphoto('');
+        setCarprice('');
     }
 
     return (
@@ -92,7 +105,7 @@ const MyCarWriteForm = () => {
                     {/* 등록버튼 */}
                     <tr>
                         <td colSpan={3} align='center'>
-                            <Button variant='contained' color='success'>등록</Button>
+                            <Button variant='contained' color='success' onClick={addDataEvent}>등록</Button>
                         </td>
                     </tr>
                 </tbody>

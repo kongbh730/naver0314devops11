@@ -1,10 +1,17 @@
-import { DeleteForeverOutlined, Filter, InvertColors } from '@mui/icons-material';
+import { DeleteForeverOutlined } from '@mui/icons-material';
 import React from 'react';
 
-const MyCarRowItem = ({ idx, row }) => {
+const MyCarRowItem = ({ idx, row, onDelete }) => {
     const photopath1 = "https://oaucs8mz3715.edge.naverncp.com/Fx9RP95Kaa/mycar";
     const photopath2 = "?type=f&w=40&h=40&faceopt=true&ttype=jpg";
 
+    const deleteMycar=(num)=>{
+        let a = window.confirm("해당 상품을 삭제할까요?");
+        if(a)
+        {
+            onDelete(num);
+        }
+    }
     return (
         <tr style={{ fontSize: '14px' }}>
             <td>
@@ -40,7 +47,8 @@ const MyCarRowItem = ({ idx, row }) => {
                 <span style={{ color: 'gray', fontSize: '13px' }}>
                     {row.writeday}
                     &nbsp;
-                    <DeleteForeverOutlined style={{ cursor: 'pointer' }}></DeleteForeverOutlined>
+                    {/* row가 가진 num을 deleteMycar의 이벤트 함수로 보냄 */}
+                    <DeleteForeverOutlined style={{ cursor: 'pointer' }} onClick={()=>deleteMycar(row.num)} ></DeleteForeverOutlined>
                 </span>
             </td>
         </tr>

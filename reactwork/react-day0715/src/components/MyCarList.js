@@ -19,12 +19,33 @@ const MyCarList = () => {
         MyCarList();
     },[]);
 
+    //자동차 등록 이벤트 : 왜? -> 하위컴포넌트에서 호출해서 부모의 list를 다시 호출해야 하니까!
+    const addMycarEvent=(data)=>{
+        console.log(data);
+        Axios.post("/mycar/insert", data)
+        .then(res=>{
+            //목록 다시 출력
+            MyCarList();
+        });
+    }
+
+    //자동차 삭제 이벤트 
+    const deleteMycarEvent=(num)=>{
+        console.log(num);
+        
+        Axios.delete("/mycar/delete?num="+num)
+        .then(res=>{
+            //삭제후 목록 다시 출력
+            MyCarList();
+        })
+    }
+
     return (
         <div>
             <Button variant='contained' color='info' onClick={()=>setShow(!show)}>자동차 등록 show/hide</Button>
             {
                 show && 
-                <MyCarWriteForm></MyCarWriteForm>
+                <MyCarWriteForm onSave={addMycarEvent}></MyCarWriteForm>//onSave라는 이름으로 addMycarEvent 보냄
             }
 
             <Alert severity='success' style={{fontSize:'15px', width:'500px'}}>
@@ -43,7 +64,7 @@ const MyCarList = () => {
                 <tbody>
                 {
                     list.map((row, idx) => 
-                        <MyCarRowItem key={idx} idx={idx} row={row}></MyCarRowItem>   
+                        <MyCarRowItem key={idx} idx={idx} row={row} onDelete={deleteMycarEvent}></MyCarRowItem> //onDelete라는 이름으로 삭제 이벤트 보냄 
                     )
                 }    
                 </tbody>
