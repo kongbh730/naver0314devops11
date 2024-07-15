@@ -62,6 +62,12 @@ public class MyCarListController {
         myCarService.deleteMycar(num);// sql 삭제
     }
     
-    
+    //수정
+    @PostMapping("/mycar/update")
+    public void updateMycar(@RequestBody MycarDto dto)
+    {
+        System.out.println("update dto >> " + dto);
+        myCarService.updateMycar(dto);
+    }
 
 }

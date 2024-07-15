@@ -39,10 +39,10 @@ public class MycarDto {
     @Column(length = 20)
     private String carcolor;
 
-    @Column(length = 20)
+    @Column(length = 20, updatable = false)
     private String carguip;
 
-    @Column(length = 100)
+    @Column(length = 100, updatable = false)
     private String carphoto;
 
     @CreationTimestamp  //현재시간으로 세팅

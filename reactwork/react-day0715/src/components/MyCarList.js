@@ -35,7 +35,16 @@ const MyCarList = () => {
         
         Axios.delete("/mycar/delete?num="+num)
         .then(res=>{
-            //삭제후 목록 다시 출력
+            //삭제 성공 후 목록 다시 출력
+            MyCarList();
+        })
+    }
+
+    //수정이벤트
+    const updateMycar=(data)=>{
+        Axios.post("/mycar/update", data)
+        .then(res=>{
+            //수정 성공 후 목록 다시 출력
             MyCarList();
         })
     }
@@ -64,7 +73,7 @@ const MyCarList = () => {
                 <tbody>
                 {
                     list.map((row, idx) => 
-                        <MyCarRowItem key={idx} idx={idx} row={row} onDelete={deleteMycarEvent}></MyCarRowItem> //onDelete라는 이름으로 삭제 이벤트 보냄 
+                        <MyCarRowItem key={idx} idx={idx} row={row} onDelete={deleteMycarEvent} onUpdate={updateMycar}></MyCarRowItem> //onDelete라는 이름으로 삭제 이벤트 보냄 
                     )
                 }    
                 </tbody>
