@@ -26,7 +26,7 @@ public class BoardCommentDto {
     private Long idx;
 
     @ManyToOne
-    @JoinColumn(name="boardNum")
+    @JoinColumn(name="boardnum")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private BoardDto boardDto;
 

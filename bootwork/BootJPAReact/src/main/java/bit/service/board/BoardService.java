@@ -3,7 +3,6 @@ package bit.service.board;
 import bit.data.board.BoardDto;
 import bit.repository.board.BoardDao;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,24 +23,24 @@ public class BoardService {
         return boardDao.getAllDatas();
     }
 
-    public void updateReadCount(Long boardNum)
+    public void updateReadCount(Long boardnum)
     {
-        boardDao.updateReadCount(boardNum);
+        boardDao.updateReadCount(boardnum);
     }
 
-    public BoardDto getData(Long boardNum)
+    public BoardDto getData(Long boardnum)
     {
-        return boardDao.getData(boardNum);
+        return boardDao.getData(boardnum);
     }
 
-    public boolean isEqualPass(Long boardNum, String pass)
+    public boolean isEqualPass(Long boardnum, String pass)
     {
-        return boardDao.isEqualPass(boardNum, pass);
+        return boardDao.isEqualPass(boardnum, pass);
     }
 
-    public void deleteBoard(Long boardNum)
+    public void deleteBoard(Long boardnum)
     {
-        boardDao.deleteBoard(boardNum);
+        boardDao.deleteBoard(boardnum);
     }
 
     public void updateBoard(BoardDto dto)

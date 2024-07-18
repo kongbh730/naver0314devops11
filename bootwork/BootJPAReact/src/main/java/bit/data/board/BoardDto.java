@@ -21,7 +21,7 @@ import java.sql.Timestamp;
 public class BoardDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long boardNum;
+    private Long boardnum;
 
     @Column(length = 30)
     private String writer;
