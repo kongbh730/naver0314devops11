@@ -42,7 +42,9 @@ const BoardList = () => {
                     boardList && 
                     boardList.map((row, idx)=>
                     <tr key={idx}>
-                        <td align='center'>{boardList.length-idx}</td>
+                        <td align='center'>
+                            {boardList.length-idx}
+                        </td>
                         <td>
                             <NavLink to={`/board/detail/${row.boardnum}`} 
                             style={{textDecoration:'none', color:'black'}}>
@@ -57,7 +59,7 @@ const BoardList = () => {
                         <td align='center'>
                             {row.writer}
                         </td>
-                        <td>
+                        <td align='center'>
                             {/* 기본은 시,분까지 출력 */}
                             {/* {row.writeday} */}
                             <span style={{fontSize:'14px'}}>
@@ -65,7 +67,7 @@ const BoardList = () => {
                                 {/* 년월일까지만 출력 */}
                             </span>
                         </td>
-                        <td>
+                        <td align='center'>
                             {row.readcount}
                         </td>
                     </tr>
@@ -73,7 +75,6 @@ const BoardList = () => {
                 }
                 </tbody>
             </table>
-
         </div>
     );
 };

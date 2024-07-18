@@ -6,6 +6,8 @@ import Home from '../components/Home';
 import BoardForm from '../components/BoardForm';
 import BoardList from '../components/BoardList';
 import BoardDetail from '../components/BoardDetail';
+import UpdatePassForm from '../components/UpdatePassForm';
+import UpdateForm from '../components/UpdateForm';
 
 const RouterMain = () => {
     return (
@@ -19,6 +21,8 @@ const RouterMain = () => {
                     <Route path='form' element={<BoardForm></BoardForm>}></Route>
                     <Route path='list' element={<BoardList></BoardList>}></Route>
                     <Route path='detail/:boardnum' element={<BoardDetail></BoardDetail>}></Route>
+                    <Route path='updatepass/:boardnum' element={<UpdatePassForm></UpdatePassForm>}></Route>
+                    <Route path='updateform/:boardnum' element={<UpdateForm></UpdateForm>}></Route>
                 </Route>
             </Routes>
         </div>
@@ -26,5 +30,3 @@ const RouterMain = () => {
 };
 
 export default RouterMain;
-
-

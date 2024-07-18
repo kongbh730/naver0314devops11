@@ -53,17 +53,20 @@ public class BoardController {
         System.out.println("detail >> " + boardnum);
         //조회수 증가 후 dto 반환
         boardService.updateReadCount(boardnum);
+
         return boardService.getData(boardnum);
     }
 
     @GetMapping("/updatecheckpass")
     public Map<String, Object> checkPass(@RequestParam Long boardnum, @RequestParam String pass)
     {
+        System.out.println("checkPass >> " + boardnum);
         Map<String, Object> map = new HashMap<>();
-
         boolean flag = boardService.isEqualPass(boardnum, pass);
+
         if(flag){
-            map.put("dto", map);
+            //BoardDto boardDto = boardService.getData(boardnum);
+            //map.put("dto", map);
             map.put("result", "success");
         }
         else
@@ -74,6 +77,12 @@ public class BoardController {
         return map;
     }
 
+    @GetMapping("/updateform")
+    public BoardDto select(@RequestParam ("boardnum") Long boardnum)
+    {
+        return boardService.getData(boardnum);
+    }
+
     @PostMapping("/update")
     public void update(@RequestBody BoardDto dto)
     {
@@ -81,16 +90,19 @@ public class BoardController {
     }
 
     @GetMapping("/deletecheckpass")
-    public Map<String, Object> delcheckPass(@RequestParam Long boardnum, @RequestParam String pass)
+    public Map<String, Object> delcheckPass(@RequestParam("boardnum") Long boardnum, @RequestParam("pass") String pass)
     {
+        System.out.println("deletepass >> " + boardnum + ", " + pass);
         Map<String, Object> map = new HashMap<>();
-
         boolean flag = boardService.isEqualPass(boardnum, pass);
+
         if(flag)
         {
             //비번이 맞으면
             String oldPhotoName = boardService.getData(boardnum).getPhoto(); //사진 정보 가져와서
             storageService.deleteFile(bucketName, folderName, oldPhotoName); //버켓에서 사진 삭제
+            boardService.deleteBoard(boardnum);
+
             map.put("result", "success");
         }
         else
