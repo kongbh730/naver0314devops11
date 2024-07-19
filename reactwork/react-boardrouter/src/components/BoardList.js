@@ -54,6 +54,14 @@ const BoardList = () => {
                                 src={row.photo !== 'no' ? `${storage}/${row.photo}` : noimage}
                                 style={{width:'40px', height:'40px'}} />
                                 &nbsp;{row.subject}
+                                &nbsp;
+                                {
+                                    row.answercount > 0 ? 
+                                    <span style={{color:'red'}}>
+                                        [{row.answercount}]
+                                    </span> : ""
+                                }
+                                
                             </NavLink>
                         </td>
                         <td align='center'>

@@ -1,6 +1,7 @@
 package bit.controller.board;
 
 import bit.data.board.BoardDto;
+import bit.service.board.BoardCommentService;
 import bit.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import naver.storage.NcpObjectStorageService;
@@ -19,6 +20,7 @@ public class BoardController {
 
     final private BoardService boardService;
     final private NcpObjectStorageService storageService;
+    final private BoardCommentService boardCommentService;
 
     String bucketName="bitcamp-kbh-37";
     String folderName="reactboard";
@@ -44,7 +46,16 @@ public class BoardController {
     public List<BoardDto> boardList()
     {
         System.out.println("list >> ");
-        return boardService.getAllDatas();
+        List<BoardDto> list= boardService.getAllDatas();
+        for(BoardDto dto:list)
+        {
+            //댓글 갯수 구하기
+            int answercount = boardCommentService.getCommentList(dto.getBoardnum()).size();
+            dto.setAnswercount(answercount);
+        }
+
+        //return boardService.getAllDatas();
+        return list;
     }
 
     @GetMapping("/detail")

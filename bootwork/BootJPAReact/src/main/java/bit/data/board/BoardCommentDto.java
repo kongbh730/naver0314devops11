@@ -41,4 +41,7 @@ public class BoardCommentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     private Timestamp writeday;
 
+    @Transient
+    private Long boardnum;
+
 }

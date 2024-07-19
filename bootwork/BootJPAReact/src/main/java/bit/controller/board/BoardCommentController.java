@@ -13,22 +13,34 @@ import java.util.List;
 @RequestMapping("/boot/comment")
 public class BoardCommentController {
 
-    private BoardCommentService boardCommentService;
+    final private BoardCommentService boardCommentService;
 
-    @GetMapping("/insert")
-    public void insertComment(@RequestParam("boardnum") Long boardnum,
-                              @RequestParam("nickname") String nickname,
-                              @RequestParam("comment") String comment)
+//    @GetMapping("/insert")
+//    public void insertComment(@RequestParam("boardnum") Long boardnum,
+//                              @RequestParam("nickname") String nickname,
+//                              @RequestParam("comment") String comment)
+//    {
+//        System.out.println("comment insert >> " + boardnum);
+//        BoardDto boardDto = BoardDto.builder().boardnum(boardnum).build();
+//
+//        BoardCommentDto dto = BoardCommentDto.builder()
+//                .nickname(nickname)
+//                .comment(comment)
+//                .boardDto(boardDto)
+//                .build();
+//
+//        boardCommentService.insertComment(dto);
+//    }
+
+    @PostMapping("/insert")
+    public void insertComment(@RequestBody BoardCommentDto boardCommentDto)
     {
-        BoardDto boardDto = BoardDto.builder().boardnum(boardnum).build();
-
-        BoardCommentDto dto = BoardCommentDto.builder()
-                .nickname(nickname)
-                .comment(comment)
-                .boardDto(boardDto)
-                .build();
-
-        boardCommentService.insertComment(dto);
+        System.out.println(boardCommentDto);
+        BoardDto boardDto = BoardDto.builder().boardnum(boardCommentDto.getBoardnum()).build();
+        System.out.println(boardDto);
+        boardCommentDto.setBoardDto(boardDto);
+        
+        boardCommentService.insertComment(boardCommentDto);//이걸 왜 몰랐냐
     }
 
     @GetMapping("/list")
@@ -37,7 +49,18 @@ public class BoardCommentController {
         return boardCommentService.getCommentList(boardnum);
     }
 
+    @DeleteMapping("/delete")
+    public void deleteComment(@RequestParam("idx") Long idx)
+    {
+        boardCommentService.deleteComment(idx);
+    }
 
+    @GetMapping("/update")
+    public void updateComment(@RequestParam("idx") Long idx,
+                              @RequestParam("comment") String comment)
+    {
+        boardCommentService.updateComment(idx, comment);
+    }
 
 
 }

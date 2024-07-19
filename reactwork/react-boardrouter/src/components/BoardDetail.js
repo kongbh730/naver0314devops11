@@ -1,6 +1,8 @@
+import { EditNote, HighlightOff } from '@mui/icons-material';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import InputEmojiWithRef from 'react-input-emoji';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const BoardDetail = () => {
@@ -29,12 +31,76 @@ const BoardDetail = () => {
             })
     };
 
-    //댓글 불러오기
-    const
-
     useEffect(() => {
         getData();
-    },[]);
+        commentListEvent();//처음 시작시 댓글 출력
+    }, []);
+
+    //댓글 관련
+    //=====================================================
+
+    const [nickname, setNickname] = useState('');
+    const [comment, setComment] = useState('');
+
+    //댓글 입력 후 엔터 이벤트
+    const addCommentEvent = () => {
+        //alert('comment');
+        if (nickname === '') {
+            alert('닉네임을 입력해 주세요');
+            return;
+        }
+
+        if (comment === '') {
+            alert('코멘트를 입력해 주세요');
+            return;
+        }
+
+        // let url=`/boot/comment/insert?boardnum=${boardnum}&nickname=${nickname}&comment=${comment}`;
+        // axios.get(url)
+        // .then(res=>{
+        //     commentListEvent();//댓글 다시 출력
+        //     //입력란 초기화
+        //     setNickname('');
+        //     setComment('');
+        // });
+
+        axios.post("/boot/comment/insert", { boardnum, nickname, comment })
+            .then(res => {
+                commentListEvent();//댓글 다시 출력
+                //입력값 초기화
+                setNickname('');
+                setComment('');
+            });
+
+
+    }
+
+    const [commentList, setCommentList] = useState([]);
+
+    //댓글 출력 함수
+    const commentListEvent = () => {
+        axios.get(`/boot/comment/list?boardnum=${boardnum}`)
+            .then(res => {
+                setCommentList(res.data);
+            })
+    }
+
+    //댓글 삭제 함수
+    const deleteComment=(idx)=>
+    {
+        let url=`/boot/comment/delete?idx=${idx}`;
+        axios.delete(url)
+        .then(res=>{
+            //댓글 삭제 후 목록 다시 출력
+            commentListEvent();
+        })
+    }
+
+    // useEffect(()=>{
+    //     addCommentEvent();
+    // },[comment]);//comment 값이 변경된 후 함수 호출
+
+    //=====================================================
 
     return (
         <div style={{ width: '500px', marginLeft: '30px' }}>
@@ -144,18 +210,70 @@ const BoardDetail = () => {
                             </td>
                         </tr>
                     </tbody>
-                    
+
                     {/* 댓글 */}
                     <tfoot>
                         {/* 댓글 목록 */}
                         {/* 닉네임 / 코멘트 / 날짜 / 삭제아이콘 / 수정아이콘 */}
                         <tr>
+                            <td>
+                                <div>
+                                    {/* 댓글 리스트가 들어오기 전 출력 방지 */}
+                                    {
+                                        commentList &&
+                                        commentList.map((item, idx) =>
+                                            <div key={idx}>
+                                                {item.nickname} : {item.comment}
+                                                <span style={{ fontSize: '13px', color: 'gray', marginLeft: '30px' }}>{item.writeday}</span>
+                                                &nbsp;&nbsp;
+                                                <EditNote style={{cursor:'pointer', color:'gray'}} onClick={()=>{
+                                                    let comment=window.prompt("댓글수정", item.comment);
+                                                    
+                                                    let url=`/boot/comment/update?idx=${item.idx}&comment=${comment}`;
+                                                    axios.get(url)
+                                                    .then(res=>{
+                                                        commentListEvent();
+                                                    })
 
+                                                }}>    
+                                                </EditNote>
+                                                &nbsp;
+                                                <HighlightOff style={{cursor:'pointer', color:'gray'}} onClick={()=>{
+                                                        let conf = window.confirm("해당 댓글을 삭제하시겠습니까?");
+                                                        if(conf)
+                                                        {
+                                                            deleteComment(item.idx);//주의
+                                                        }
+                                                    }}>    
+                                                </HighlightOff>
+                                            </div>)
+                                    }
+                                </div>
+                            </td>
                         </tr>
 
                         {/* 댓글 입력 */}
                         <tr>
+                            <td>
+                                <div className='input-group'>
+                                    <input type='text' className='form-control' style={{ width: '120px' }} placeholder='닉네임 입력'
+                                        value={nickname} onChange={(e) => setNickname(e.target.value)}></input>
+                                    &nbsp;&nbsp;
+                                    {/* <InputEmojiWithRef style={{width:'300px'}}
+                                    placeholder='댓글을 입력 후 엔터를 눌러주세요'
+                                    cleanOnEnter
+                                    onEnter={(text)=>{
+                                        console.log(text);
+                                        setComment(text);
+                                    }}>
+                                    </InputEmojiWithRef> */}
+                                    <input type='text' className='form-control' style={{ width: '250px' }}
+                                        value={comment} onChange={(e) => setComment(e.target.value)}></input>
+                                    &nbsp;&nbsp;
+                                    <Button variant='contained' size="small" color='error' onClick={addCommentEvent}>저장</Button>
 
+                                </div>
+                            </td>
                         </tr>
 
                     </tfoot>
