@@ -2,7 +2,7 @@ import { EditNote, HighlightOff } from '@mui/icons-material';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import InputEmojiWithRef from 'react-input-emoji';
+//import InputEmojiWithRef from 'react-input-emoji';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const BoardDetail = () => {
@@ -95,10 +95,6 @@ const BoardDetail = () => {
             commentListEvent();
         })
     }
-
-    // useEffect(()=>{
-    //     addCommentEvent();
-    // },[comment]);//comment 값이 변경된 후 함수 호출
 
     //=====================================================
 
@@ -233,8 +229,7 @@ const BoardDetail = () => {
                                                     axios.get(url)
                                                     .then(res=>{
                                                         commentListEvent();
-                                                    })
-
+                                                    });
                                                 }}>    
                                                 </EditNote>
                                                 &nbsp;
