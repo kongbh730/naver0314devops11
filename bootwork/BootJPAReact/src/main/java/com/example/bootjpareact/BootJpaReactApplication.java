@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"bit.*.*","naver.storage","com.example.bootjpareact"})
+@ComponentScan({"bit.*.*","naver.storage","com.example.bootjpareact", "jwt.setting"})
 @EntityScan({"bit.data.*"})
 @EnableJpaRepositories({"bit.repository.*"})
 public class BootJpaReactApplication
